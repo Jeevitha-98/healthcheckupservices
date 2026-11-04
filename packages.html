@@ -1,0 +1,1440 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Health - Initializing Diagnostics</title>
+    <!-- Font Awesome for clean clinical vector icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Absolute Preloader Component Overlay -->
+    <div class="preloader-overlay" id="preloaderPortal">
+        
+        <!-- Vector Radar Scanner Grid -->
+        <div class="scanner-matrix">
+            <div class="pulse-aura"></div>
+            <div class="pulse-aura delay-pulse"></div>
+            <div class="rotating-grid"></div>
+            <div class="vector-target" id="statusIcon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+        </div>
+
+        <!-- Typography Cluster -->
+        <h1 class="brand-title">Stackly<span>Health</span></h1>
+        <div class="status-microtext" id="statusString">Calibrating system metrics...</div>
+        
+        <!-- Tabular Metrics Count -->
+        <div class="metric-counter"><span id="liveCounter">0</span>%</div>
+        
+        <!-- Progress Bar Track -->
+        <div class="loading-track-wrapper">
+            <div class="loading-fill-bar" id="liveProgressBar"></div>
+        </div>
+    </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const liveCounter = document.getElementById("liveCounter");
+    const liveProgressBar = document.getElementById("liveProgressBar");
+    const statusString = document.getElementById("statusString");
+    const statusIcon = document.getElementById("statusIcon");
+    const preloaderPortal = document.getElementById("preloaderPortal");
+
+    const totalDuration = 2000; // Perfect 2-second timing lifecycle
+    const refreshTickRate = 20; 
+    const totalSteps = totalDuration / refreshTickRate; 
+    
+    let currentStep = 0;
+
+    const loadingProgressInterval = setInterval(() => {
+        currentStep++;
+        let completionPercentage = Math.floor((currentStep / totalSteps) * 100);
+
+        if (completionPercentage >= 100) {
+            completionPercentage = 100;
+            clearInterval(loadingProgressInterval);
+
+            // Set final finished confirmation states visually
+            statusIcon.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--neon-emerald)"></i>`;
+            statusString.innerText = "Access Granted";
+            liveCounter.innerText = "100";
+            liveProgressBar.style.width = "100%";
+
+            // Optional fade exit trigger action after full execution load
+            setTimeout(() => {
+                preloaderPortal.classList.add("terminate-flow");
+            }, 300);
+        } else {
+            liveCounter.innerText = completionPercentage;
+            liveProgressBar.style.width = completionPercentage + "%";
+
+            // Stage shifting message arrays cleanly inside runtime parameters
+            if (completionPercentage === 35) {
+                statusString.innerText = "Synchronizing diagnostic pipelines...";
+            } else if (completionPercentage === 70) {
+                statusString.innerText = "Verifying secure systems interface...";
+            }
+        }
+    }, refreshTickRate);
+});
+
+  </script>
+
+  <!-- Continuous Infinite Top Bar Carousel Component -->
+<div class="top-carousel-bar">
+    <div class="carousel-infinite-wrapper">
+        
+        <!-- Primary Content Group Track -->
+        <div class="carousel-track">
+            <div class="carousel-item">
+                <i class="fa-solid fa-phone-flip phone-ringer"></i> 
+                Emergency Desk: <a href="tel:+18005557822" class="call-link">+1 (800) 555-STACK</a>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-calendar-check"></i> 
+                Appointment Timings: <span class="highlight-text">Mon - Sat: 8:00 AM - 8:00 PM</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-circle-nodes"></i> 
+                Booking Status: <span id="realtimeStatus" class="status-badge checking">Verifying...</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-file-waveform"></i> 
+                OPD Schedule: <span class="highlight-text">Online Bookings Open 24/7</span>
+            </div>
+        </div>
+        
+        <!-- Duplicate Clone Track (Essential for infinite seamless visual loop) -->
+        <div class="carousel-track" aria-hidden="true">
+            <div class="carousel-item">
+                <i class="fa-solid fa-phone-flip phone-ringer"></i> 
+                Emergency Desk: <a href="tel:+18005557822" class="call-link">+1 (800) 555-STACK</a>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-calendar-check"></i> 
+                Appointment Timings: <span class="highlight-text">Mon - Sat: 8:00 AM - 8:00 PM</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-circle-nodes"></i> 
+                Booking Status: <span id="realtimeStatusClone" class="status-badge checking">Verifying...</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-file-waveform"></i> 
+                OPD Schedule: <span class="highlight-text">Online Bookings Open 24/7</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    function updateLiveAppointmentStatus() {
+        const badgeElements = [
+            document.getElementById("realtimeStatus"),
+            document.getElementById("realtimeStatusClone")
+        ];
+        
+        const systemTime = new Date();
+        const activeDay = systemTime.getDay();   // 0 = Sunday, 1 = Monday ... 6 = Saturday
+        const activeHour = systemTime.getHours(); // 24-hour clock index tracker format
+
+        // Operational Rules Setup: Monday (1) through Saturday (6), from 8:00 AM to 8:00 PM (Hour 20)
+        const isWorkingDay = activeDay >= 1 && activeDay <= 6;
+        const isWorkingHour = activeHour >= 8 && activeHour < 20;
+
+        badgeElements.forEach(badge => {
+            if (!badge) return;
+            
+            if (isWorkingDay && isWorkingHour) {
+                badge.textContent = "Open Now";
+                badge.className = "status-badge open";
+            } else {
+                badge.textContent = "Closed";
+                badge.className = "status-badge closed";
+            }
+        });
+    }
+
+    // Call state mapping routine immediately on runtime instantiation
+    updateLiveAppointmentStatus();
+
+    // Check system time parameters every 30 seconds to support active updates
+    setInterval(updateLiveAppointmentStatus, 30000);
+});
+
+</script>
+
+<!-- Main Header Portal Navigation Section -->
+<header class="main-header-navbar">
+    <div class="nav-container-wrapper">
+        
+        <!-- Brand Logo Element Frame (Refresh trigger enabled) -->
+        <div class="brand-logo-frame" onclick="refreshPagePortal()" role="button" aria-label="Stackly Home & Refresh">
+            <img src="https://unsplash.com" alt="Stackly Health Logo" class="logo-asset">
+            
+        </div>
+
+        <!-- Desktop Screen Center Aligned Menu List Navigation -->
+        <nav class="center-navigation-menu">
+            <ul class="nav-link-list">
+                <li><a href="index.html" class="nav-menu-item active" onclick="setActiveLink(this)">Home</a></li>
+                <li><a href="packages.html" class="nav-menu-item" onclick="setActiveLink(this)">Checkup Packages</a></li>
+                <li><a href="specialities.html" class="nav-menu-item" onclick="setActiveLink(this)">Specialties</a></li>
+                <li><a href="about.html" class="nav-menu-item" onclick="setActiveLink(this)">About Us</a></li>
+                <li><a href="contact.html" class="nav-menu-item" onclick="setActiveLink(this)">Contact Portal</a></li>
+            </ul>
+        </nav>
+
+        <!-- Right Side Corner Authentication Anchor Action Block -->
+        <div class="right-auth-corner">
+            <button class="btn-auth-portal" onclick="triggerAuthFlow()"><i class="fa-solid fa-user-shield"></i> Patient Login</button>
+        </div>
+
+        <!-- Interactive Mobile Hamburger Grid Vector Activation Node -->
+        <button class="mobile-hamburger-trigger" id="hamburgerMenuNode" aria-label="Toggle Portal Menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+
+    </div>
+</header>
+
+<!-- Global Blurring Overlay Matrix Cover for Mobile Airflow Layer Drawer Display -->
+<div class="portal-blur-backdrop" id="drawerBlurOverlay"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerMenuNode = document.getElementById("hamburgerMenuNode");
+    const drawerBlurOverlay = document.getElementById("drawerBlurOverlay");
+    
+    // --- 1. Toggle Mobile Menu Drawer & Background Blur Overlay ---
+    if (hamburgerMenuNode && drawerBlurOverlay) {
+        const toggleMobileNavigation = () => {
+            document.body.classList.toggle("mobile-nav-expanded");
+            
+            // Toggle screen scroll-lock to prevent underlying background leaks
+            if (document.body.classList.contains("mobile-nav-expanded")) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        // Attach action events to both trigger nodes
+        hamburgerMenuNode.addEventListener("click", toggleMobileNavigation);
+        drawerBlurOverlay.addEventListener("click", toggleMobileNavigation);
+    }
+});
+
+// --- 2. Dynamic Menu Active Status State Tracker Function ---
+function setActiveLink(clickedElement) {
+    // Remove active styles from all structural links across layout tree
+    const menuItems = document.querySelectorAll(".nav-menu-item");
+    menuItems.forEach(item => item.classList.remove("active"));
+    
+    // Apply highlight active styling to current node path item context
+    clickedElement.classList.add("active");
+
+    // Auto-dismiss open mobile navigation drawers smoothly on selection click actions
+    if (document.body.classList.contains("mobile-nav-expanded")) {
+        document.body.classList.remove("mobile-nav-expanded");
+        document.body.style.overflow = "auto";
+    }
+}
+
+// --- 3. Core Brand Image Click Refresh Action Routine ---
+function refreshPagePortal() {
+    window.location.reload(); // Instantly triggers an active refresh on current page viewport context
+}
+
+// --- 4. Placeholder for Authorization Actions ---
+function triggerAuthFlow() {
+    alert("Redirecting securely to Stackly Patient Identity & Records Portal...");
+}
+
+</script>
+
+
+<!-- High-End Clinical Packages Header Core -->
+<section class="stackly-packages-hero-arena" id="packages-top">
+    
+    <!-- Background Widescreen Asset Underlay -->
+    <div class="packages-hero-ambient-layer">
+        <img src="https://pexels.com" alt="Stackly Automated Laboratory Core" class="packages-hero-bg-img">
+        <div class="packages-hero-dark-shield"></div>
+    </div>
+
+    <!-- Active Grid Layout Wrapper Container -->
+    <div class="packages-hero-arena-wrapper">
+        
+        <!-- Left Wing: Core Content Narrative System -->
+        <div class="packages-hero-narrative">
+            <div class="packages-upper-pill-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-pill-asset"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Accredited Biomarker Profiles
+            </div>
+
+            <!-- Fixed Radiant White Headline -->
+            <h2 class="radiant-white-packages-title">
+                Precision Laboratory Screening Packages Tailored For <span class="accent-neon">Longevity.</span>
+            </h2>
+
+            <p class="packages-hero-supporting-copy">
+                Explore our diagnostic configurations. Stackly converges automated blood morphology arrays, metabolic microfluidic metrics, and custom cellular risk calculators into clear, actionable health tracking dossiers.
+            </p>
+
+            <div class="packages-hero-actions-group">
+                <button class="btn-packages-hero-primary" onclick="routeToErrorPortal('custom-assay-builder')">
+                    Configure Custom Package
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="btn-packages-hero-secondary" onclick="routeToErrorPortal('insurance-verification-vault')">
+                    Check Insurance Coverage
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Wing: Floating Asymmetric Diagnostic Console -->
+        <div class="packages-hero-visual-matrix">
+            <div class="matrix-ambient-glow"></div>
+            
+            <div class="glass-diagnostic-badge-stack">
+                <!-- Node 1 -->
+                <div class="diagnostic-badge-item item-stagger-1">
+                    <div class="item-icon-nest nest-teal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <div class="item-text-nest">
+                        <h5>Hematology Array</h5>
+                        <p>Complete CBC & Morphology</p>
+                    </div>
+                </div>
+
+                <!-- Node 2 -->
+                <div class="diagnostic-badge-item item-stagger-2">
+                    <div class="item-icon-nest nest-emerald">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <div class="item-text-nest">
+                        <h5>Metabolic Index</h5>
+                        <p>HbA1c & Fasting Glucose</p>
+                    </div>
+                </div>
+
+                <!-- Node 3 -->
+                <div class="diagnostic-badge-item item-stagger-3">
+                    <div class="item-icon-nest nest-cyan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                    </div>
+                    <div class="item-text-nest">
+                        <h5>Cardio Profile</h5>
+                        <p>Lipid Screening Matrix</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Hero Arena Section Viewport Box */
+.stackly-packages-hero-arena {
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    min-height: calc(80vh - 114px);
+    height: auto;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+}
+
+/* Background Systems Layer */
+.packages-hero-ambient-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.packages-hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.packages-hero-dark-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(9, 19, 21, 0.96) 0%, rgba(9, 19, 21, 0.88) 50%, rgba(5, 11, 12, 0.98) 100%);
+    z-index: 2;
+}
+
+/* Outer layout capsule framework grid */
+.packages-hero-arena-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Left Content Stack Layout Rules */
+.packages-hero-narrative {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.packages-upper-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 229, 193, 0.08);
+    border: 1px solid rgba(0, 229, 193, 0.25);
+    color: var(--neon-emerald);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.svg-pill-asset { width: 14px; height: 14px; }
+
+/* --- Fixed: Title is now locked to pure vibrant white instantly on load --- */
+.radiant-white-packages-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff; /* Explicit pure high-clarity white override code */
+    line-height: 1.15;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.radiant-white-packages-title .accent-neon {
+    color: var(--neon-emerald);
+    text-shadow: 0 0 20px rgba(0, 229, 193, 0.25);
+}
+
+/* Paragraph and supporting copy rules */
+.packages-hero-supporting-copy {
+    color: var(--text-dimmed);
+    font-size: 16.5px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+    max-width: 680px;
+    transition: color 0.3s ease;
+}
+
+.packages-hero-arena-wrapper:hover .packages-hero-supporting-copy {
+    color: #ffffff;
+}
+
+/* Interaction Call-To-Action Button Matrix */
+.packages-hero-actions-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-packages-hero-primary {
+    background: linear-gradient(135deg, var(--clinical-teal), #00bfa3);
+    color: var(--text-pure);
+    border: none;
+    padding: 15px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 229, 193, 0.25);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-packages-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 229, 193, 0.45);
+}
+
+.svg-btn-arrow { width: 15px; height: 15px; transition: transform 0.3s ease; }
+.btn-packages-hero-primary:hover .svg-btn-arrow { transform: translateX(4px); }
+
+.btn-packages-hero-secondary {
+    background: transparent;
+    color: var(--text-pure);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-packages-hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --- Right Wing: Glassmorphic Floating Diagnostic Stack --- */
+.packages-hero-visual-matrix {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.matrix-ambient-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 229, 193, 0.1) 0%, transparent 70%);
+    top: -50px;
+    right: -50px;
+    pointer-events: none;
+}
+
+.glass-diagnostic-badge-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 340px;
+}
+
+.diagnostic-badge-item {
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.2);
+    padding: 18px 24px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    
+    opacity: 0;
+    transform: translateY(20px);
+    animation: badgeItemEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-stagger-1 { animation-delay: 0.1s; }
+.item-stagger-2 { animation-delay: 0.25s; }
+.item-stagger-3 { animation-delay: 0.4s; }
+
+.item-icon-nest {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.item-icon-nest svg { width: 20px; height: 24px; display: block; }
+
+.nest-teal { background: rgba(10, 132, 145, 0.15); color: #0a8491; }
+.nest-emerald { background: rgba(0, 229, 193, 0.1); color: var(--neon-emerald); }
+.nest-cyan { background: rgba(0, 180, 216, 0.12); color: #00b4d8; }
+
+.item-text-nest h5 { color: var(--text-pure); font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.item-text-nest p { color: var(--text-dimmed); font-size: 12px; font-weight: 500; }
+
+.diagnostic-badge-item:hover {
+    border-color: rgba(0, 229, 193, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes badgeItemEntrance {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Robust Fluid Screen Response Parameter Media Breakpoints --- */
+@media (max-width: 1200px) {
+    .radiant-white-packages-title { font-size: 42px; }
+    .packages-hero-arena-wrapper { gap: 40px; }
+}
+
+@media (max-width: 992px) {
+    .packages-hero-arena-wrapper { grid-template-columns: 1fr; gap: 50px; padding: 60px 30px; text-align: center; }
+    .packages-hero-narrative { align-items: center; }
+    .btn-packages-hero-actions-group { justify-content: center; }
+    .packages-hero-visual-matrix { justify-content: center; }
+    .glass-diagnostic-badge-stack { max-width: 450px; }
+}
+
+@media (max-width: 550px) {
+    .packages-hero-arena-wrapper { padding: 40px 20px; }
+    .radiant-white-packages-title { font-size: 30px; }
+    .packages-hero-supporting-copy { font-size: 14.5px; }
+    .btn-packages-hero-primary, .btn-packages-hero-secondary { width: 100%; justify-content: center; }
+    .diagnostic-badge-item { padding: 14px 18px; }
+}
+
+</style>
+
+<script>
+    /**
+ * secure 404 alert shield routing mechanism
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting securely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Diagnostic Sub-Grid Offline</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference link gateway parameter [<strong>${targetContextCode}</strong>] points to an offline database node currently undergoing scheduled calibration checks.</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 24px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.2); transition: transform 0.15s ease;">Return to Portal</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+
+<!-- Premium Diagnostic Labs Packages Section -->
+<section class="stackly-slabs-arena" id="packages-catalog">
+    <div class="slabs-section-wrapper">
+        
+        <!-- Header row with scroll kinetic text title -->
+        <div class="slabs-header-row">
+            <h3 class="scroll-kinetic-slabs-title" id="kineticSlabsTitle">
+                <span>Select</span> <span>Your</span> <span>Expertly</span> <span>Calibrated</span> <span>Diagnostic</span> <span class="accent-node">Modality.</span>
+            </h3>
+        </div>
+
+        <!-- Asymmetric Widescreen Slab Columns Stack Container -->
+        <div class="slabs-stack-container" id="packagesSlabsGrid">
+            
+            <!-- Slab 1: Essential Health Check -->
+            <div class="diagnostic-widescreen-slab">
+                <div class="slab-media-capsule">
+                    <img src="https://pexels.com" alt="Hematology Assay Pipelines" class="slab-panel-img">
+                    <div class="slab-badge-overlay">Popular</div>
+                </div>
+                <div class="slab-content-core">
+                    <div class="slab-upper-meta">
+                        <span class="slab-tests-count">Includes 45 Vital Assays</span>
+                        <div class="slab-price-tag">₹1,999</div>
+                    </div>
+                    <h4 class="slab-package-title">Essential Health Profile</h4>
+                    <p class="slab-package-desc">Consists of automated blood morphology, complete lipid screening matrix, fasting glucose assessment rules, and basic hepatic/renal clearance biomarkers.</p>
+                    <div class="slab-actions-footer">
+                        <button class="btn-slab-action primary-gradient" onclick="routeToErrorPortal('essential-pack-checkout')">Select Profile</button>
+                        <button class="btn-slab-action secondary-outline" onclick="routeToErrorPortal('essential-pack-specs')">View Test Directory</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slab 2: Comprehensive Advanced Check -->
+            <div class="diagnostic-widescreen-slab featured-slab">
+                <div class="slab-media-capsule">
+                    <img src="https://pexels.com" alt="Molecular Diagnostic Assays" class="slab-panel-img">
+                    <div class="slab-badge-overlay neon-badge">Best Value</div>
+                </div>
+                <div class="slab-content-core">
+                    <div class="slab-upper-meta">
+                        <span class="slab-tests-count spec-green">Includes 72 Comprehensive Assays</span>
+                        <div class="slab-price-tag spec-green">₹3,499</div>
+                    </div>
+                    <h4 class="slab-package-title">Comprehensive Advanced Dossier</h4>
+                    <p class="slab-package-desc">Our flagship evaluation tracking path. Expands the basic structure to include full thyroid metrics (T3, T4, TSH), high-clarity Vitamin D3/B12 indexes, and HbA1c average glycemic timelines.</p>
+                    <div class="slab-actions-footer">
+                        <button class="btn-slab-action primary-gradient" onclick="routeToErrorPortal('advanced-pack-checkout')">Select Profile</button>
+                        <button class="btn-slab-action secondary-outline" onclick="routeToErrorPortal('advanced-pack-specs')">View Test Directory</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slab 3: Senior Citizen Special -->
+            <div class="diagnostic-widescreen-slab">
+                <div class="slab-media-capsule">
+                    <img src="https://pexels.com" alt="Longevity Biological Monitoring" class="slab-panel-img">
+                    <div class="slab-badge-overlay">Specialized</div>
+                </div>
+                <div class="slab-content-core">
+                    <div class="slab-upper-meta">
+                        <span class="slab-tests-count">Includes 58 Longevity Assays</span>
+                        <div class="slab-price-tag">₹2,999</div>
+                    </div>
+                    <h4 class="slab-package-title">Senior Citizen Vitality Screen</h4>
+                    <p class="slab-package-desc">Customized around age-related risk metrics. Focuses on bone densitometry markers, advanced rheumatoid tracking factors, cardiovascular stress markers, and includes a free follow-up consult link.</p>
+                    <div class="slab-actions-footer">
+                        <button class="btn-slab-action primary-gradient" onclick="routeToErrorPortal('senior-pack-checkout')">Select Profile</button>
+                        <button class="btn-slab-action secondary-outline" onclick="routeToErrorPortal('senior-pack-specs')">View Test Directory</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Clear Block Section Container Frame */
+.stackly-slabs-arena {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    padding: 100px 30px;
+    box-sizing: border-box;
+    z-index: 15;
+    clear: both;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.slabs-section-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.slabs-header-row {
+    margin-bottom: 60px;
+}
+
+/* Scroll Responsive Word-By-Word Headline */
+.scroll-kinetic-slabs-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--text-pure);
+    line-height: 1.25;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12px;
+}
+
+.scroll-kinetic-slabs-title span {
+    opacity: 0.15;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: inline-block;
+}
+
+.scroll-kinetic-slabs-title span.word-active { opacity: 1; transform: translateY(0); }
+.scroll-kinetic-slabs-title span.accent-node.word-active { color: var(--neon-emerald); }
+
+/* --- Vertical Widescreen Slab Columns Stack Layout --- */
+.slabs-stack-container {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Asymmetrical Widescreen Slate Panels Construction */
+.diagnostic-widescreen-slab {
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.18);
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 320px 1fr; /* Image locks to a strict horizontal wing block */
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    
+    /* Scroll Entrance Initialization parameters */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Class triggered programmatically via scroll intersection entries script */
+.diagnostic-widescreen-slab.slab-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.featured-slab {
+    border-color: rgba(0, 229, 193, 0.3);
+    box-shadow: 0 25px 55px rgba(0, 229, 193, 0.05);
+}
+
+/* Media Capsule Wing Frame */
+.slab-media-capsule {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #050b0c;
+}
+
+.slab-panel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.slab-badge-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(14, 30, 33, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.neon-badge {
+    border-color: var(--neon-emerald);
+    color: var(--neon-emerald);
+}
+
+/* Content Core Text Matrix Block */
+.slab-content-core {
+    padding: 35px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.slab-upper-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.slab-tests-count {
+    color: var(--clinical-teal);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.slab-tests-count.spec-green { color: var(--neon-emerald); }
+
+.slab-price-tag {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.slab-price-tag.spec-green { color: var(--neon-emerald); }
+
+.slab-package-title {
+    color: var(--text-pure);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* --- Requested Fix: Interactive Copy Description Paragraph with Custom Hover States --- */
+.slab-package-desc {
+    color: var(--text-dimmed);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 900px;
+    transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Paragraph updates text color seamlessly to pure radiant white on item box focus */
+.diagnostic-widescreen-slab:hover .slab-package-desc {
+    color: #ffffff;
+}
+
+/* Action Redirect Controls Row */
+.slab-actions-footer {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: auto; /* Always pins interaction controls row flush to base margins */
+}
+
+.btn-slab-action {
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.primary-gradient {
+    background: linear-gradient(135deg, var(--clinical-teal), #00bfa3);
+    color: var(--text-pure);
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 229, 193, 0.2);
+}
+
+.primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 229, 193, 0.4);
+}
+
+.secondary-outline {
+    background: transparent;
+    color: var(--text-pure);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.secondary-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* General Layout Card Hovers Modifications */
+.diagnostic-widescreen-slab:hover {
+    border-color: rgba(0, 229, 193, 0.35);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    transform: translateY(-3px);
+}
+
+.diagnostic-widescreen-slab:hover .slab-panel-img {
+    transform: scale(1.03);
+}
+
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 992px) {
+    .stackly-slabs-arena { padding: 70px 20px; }
+    .scroll-kinetic-slabs-title { font-size: 34px; }
+    .diagnostic-widescreen-slab { grid-template-columns: 1fr; } /* Drop down into vertical row panels stack layout */
+    .slab-media-capsule { height: 240px; }
+    .slab-content-core { padding: 30px; }
+    .slab-package-title { font-size: 22px; }
+}
+
+@media (max-width: 550px) {
+    .scroll-kinetic-slabs-title { font-size: 26px; }
+    .slab-upper-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .slab-price-tag { font-size: 24px; }
+    .slab-package-title { font-size: 20px; }
+    .slab-package-desc { font-size: 14px; }
+    .btn-slab-action { width: 100%; justify-content: center; } /* Fully fluid elements on smartphone views */
+}
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initializePackagesCatalogEngine();
+});
+
+function initializePackagesCatalogEngine() {
+    const slabsTitle = document.getElementById('kineticSlabsTitle');
+    const catalogSlabs = document.querySelectorAll('.diagnostic-widescreen-slab');
+
+    if (!slabsTitle || catalogSlabs.length === 0) return;
+    const titleWordsArray = slabsTitle.querySelectorAll('span');
+
+    // --- 1. Scroll-Linked Word Reveal Engine for Headline ---
+    window.addEventListener('scroll', () => {
+        const titleBounds = slabsTitle.getBoundingClientRect();
+        const screenViewportHeight = window.innerHeight;
+
+        const revealBoundStart = screenViewportHeight * 0.88;
+        const revealBoundEnd = screenViewportHeight * 0.22;
+        
+        const trackDistancePixels = revealBoundStart - revealBoundEnd;
+        const totalScrolledOffset = revealBoundStart - titleBounds.top;
+        
+        let percentageTrackRatio = totalScrolledOffset / trackDistancePixels;
+        percentageTrackRatio = Math.max(0, Math.min(1, percentageTrackRatio));
+
+        const activeWordsLimit = Math.floor(percentageTrackRatio * titleWordsArray.length * 1.15);
+
+        titleWordsArray.forEach((word, index) => {
+            if (index < activeWordsLimit) {
+                word.classList.add('word-active');
+            } else {
+                word.classList.remove('word-active');
+            }
+        });
+    });
+
+    // --- 2. Staggered Vertical One-by-One Entrance Observer ---
+    const slabObserverOptions = {
+        root: null,
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px"
+    };
+
+    const catalogGridObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, sequenceIdx) => {
+            if (entry.isIntersecting) {
+                // Progressive timeline delay loop pops horizontal slate rows one-by-one from bottom
+                setTimeout(() => {
+                    entry.target.classList.add('slab-revealed');
+                }, sequenceIdx * 90);
+                
+                catalogGridObserver.unobserve(entry.target);
+            }
+        });
+    }, slabObserverOptions);
+
+    catalogSlabs.forEach(slab => {
+        catalogGridObserver.observe(slab);
+    });
+}
+
+/**
+ * 3. secure 404 alert shield routing mechanism
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting securely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Assay Pipeline Offline</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference catalog checkout target [<strong>${targetContextCode}</strong>] points to an unlinked laboratory network node undergoing diagnostic tuning checks.</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.2); transition: transform 0.15s ease;">Return to Catalog</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+
+<!-- Core Clinical Action Triptych Grid Arena -->
+<section class="stackly-triptych-arena" id="action-gateways">
+    <div class="triptych-wrapper">
+        
+        <!-- Header row with scroll kinetic text title -->
+        <div class="triptych-header-row">
+            <h3 class="scroll-kinetic-triptych-title" id="kineticTriptychTitle">
+                <span>Streamlined</span> <span>Gateways</span> <span>To</span> <span>Your</span> <span>Biomarker</span> <span class="accent-node">Intelligence.</span>
+            </h3>
+        </div>
+
+        <!-- 3-Column Action Container Grid (Matches Image Layout) -->
+        <div class="triptych-cards-container" id="triptychGrid">
+            
+            <!-- Gateway Card 1: Find a Doctor -->
+            <div class="triptych-display-card">
+                <div class="triptych-icon-circle-nest">
+                    <!-- SVG Stethoscope -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2a3 3 0 0 1-3 3v12a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5v-4A3 3 0 0 1 19 8V5a3 3 0 0 1-3-3h-2"></path><circle cx="12" cy="18" r="2"></circle><line x1="12" y1="2" x2="12" y2="6"></line></svg>
+                </div>
+                <div class="triptych-content-stack">
+                    <h4 class="triptych-card-title">Find a Specialist</h4>
+                    <p class="triptych-card-desc">Our medical panel is dedicated to pairing your health screening reports with certified diagnostic feedback channels.</p>
+                    <button class="btn-triptych-link" onclick="routeToErrorPortal('find-specialist-directory')">
+                        View All Doctors 
+                        <svg class="svg-inline-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gateway Card 2: 24/7 Hours Support -->
+            <div class="triptych-display-card highlighted-center-node">
+                <div class="triptych-icon-circle-nest">
+                    <!-- SVG Headset / Phone Operator -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                </div>
+                <div class="triptych-content-stack">
+                    <h4 class="triptych-card-title">24/7 Live Desk</h4>
+                    <p class="triptych-card-desc">We are committed to delivering immediate healthcare consultation pathways and urgent laboratory tracking support metrics.</p>
+                    <button class="btn-triptych-link" onclick="routeToErrorPortal('connect-live-desk')">
+                        Contact Us 
+                        <svg class="svg-inline-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gateway Card 3: Book an Appointment -->
+            <div class="triptych-display-card">
+                <div class="triptych-icon-circle-nest">
+                    <!-- SVG Calendar Cross / Clinic Slot -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M12 14v4M10 16h4"></path></svg>
+                </div>
+                <div class="triptych-content-stack">
+                    <h4 class="triptych-card-title">Book a Checkup</h4>
+                    <p class="triptych-card-desc">Reserve your diagnostic screening window instantly inside a secure, fully automated laboratory cleanroom space.</p>
+                    <button class="btn-triptych-link" onclick="routeToErrorPortal('reserve-screening-slot')">
+                        Request Appointment 
+                        <svg class="svg-inline-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.75);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Grid Outer Container Section */
+.stackly-triptych-arena {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    padding: 50px 30px;
+    box-sizing: border-box;
+    z-index: 20;
+    clear: both;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.triptych-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.triptych-header-row {
+    margin-bottom: 55px;
+}
+
+/* Scroll Kinetic Headline Settings */
+.scroll-kinetic-triptych-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--text-pure);
+    line-height: 1.25;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12px;
+}
+
+.scroll-kinetic-triptych-title span {
+    opacity: 0.15;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: inline-block;
+}
+
+.scroll-kinetic-triptych-title span.word-active { opacity: 1; transform: translateY(0); }
+.scroll-kinetic-triptych-title span.accent-node.word-active { color: var(--neon-emerald); }
+
+/* --- 3-Column Linear Row Layout (Matches Reference Structure Exactly) --- */
+.triptych-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Premium Glassmorphic Card Elements */
+.triptych-display-card {
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.15);
+    border-radius: 18px;
+    padding: 35px 30px;
+    display: flex;
+    align-items: flex-start; /* Aligns circle leftwards side-by-side as shown in image */
+    gap: 22px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    
+    /* Scroll Entrance Initialization parameters */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Appended dynamically via scroll entry observer script */
+.triptych-display-card.card-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.highlighted-center-node {
+    border-color: rgba(0, 229, 193, 0.25);
+    box-shadow: 0 25px 50px rgba(0, 229, 193, 0.03);
+}
+
+/* Pure Geometric Icon Nest Ring */
+.triptych-icon-circle-nest {
+    width: 54px;
+    height: 54px;
+    background: rgba(10, 132, 145, 0.12);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--neon-emerald);
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.triptych-icon-circle-nest svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+/* Content Columns Text Stack */
+.triptych-content-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.triptych-card-title {
+    color: var(--text-pure);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.2px;
+}
+
+.triptych-card-desc {
+    color: var(--text-dimmed);
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Interactive Text Links Redirects Controllers */
+.btn-triptych-link {
+    background: transparent;
+    border: none;
+    color: var(--neon-emerald);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    font-family: inherit;
+    transition: color 0.2s ease;
+}
+
+.svg-inline-arrow { width: 14px; height: 14px; transition: transform 0.3s ease; }
+
+/* --- High-Fidelity Active Hover Transitions Matrix --- */
+.triptych-display-card:hover {
+    border-color: rgba(0, 229, 193, 0.35);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+}
+
+.triptych-display-card:hover .triptych-icon-circle-nest {
+    background: var(--neon-emerald);
+    color: var(--bg-clinical-dark);
+    box-shadow: 0 0 14px var(--neon-emerald);
+}
+
+.triptych-display-card:hover .btn-triptych-link {
+    color: #ffffff;
+}
+
+.triptych-display-card:hover .svg-inline-arrow {
+    transform: translate(2px, -2px); /* Scales cleanly along the 45-degree corner arrow vector */
+}
+
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 1200px) {
+    .triptych-cards-container { grid-template-columns: 1fr; gap: 24px; } /* Stack completely onto single column rows on smaller devices */
+}
+
+@media (max-width: 992px) {
+    .stackly-triptych-arena { padding: 70px 20px; }
+    .scroll-kinetic-triptych-title { font-size: 34px; }
+}
+
+@media (max-width: 550px) {
+    .scroll-kinetic-triptych-title { font-size: 26px; justify-content: center; text-align: center; }
+    .triptych-display-card { flex-direction: column; align-items: center; text-align: center; padding: 35px 24px; }
+    .triptych-content-stack { align-items: center; }
+    .btn-triptych-link { width: 100%; justify-content: center; margin-top: 5px; }
+}
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initializeTriptychArenaMechanics();
+});
+
+function initializeTriptychArenaMechanics() {
+    const triptychTitle = document.getElementById('kineticTriptychTitle');
+    const triptychCards = document.querySelectorAll('.triptych-display-card');
+
+    if (!triptychTitle || triptychCards.length === 0) return;
+    const titleTextWords = triptychTitle.querySelectorAll('span');
+
+    // --- 1. Scroll-Linked Word Reveal Engine for Header ---
+    window.addEventListener('scroll', () => {
+        const titleBounds = triptychTitle.getBoundingClientRect();
+        const screenViewportHeight = window.innerHeight;
+
+        const revealBoundStart = screenViewportHeight * 0.88;
+        const revealBoundEnd = screenViewportHeight * 0.22;
+        
+        const trackDistancePixels = revealBoundStart - revealBoundEnd;
+        const totalScrolledOffset = revealBoundStart - titleBounds.top;
+        
+        let percentageTrackRatio = totalScrolledOffset / trackDistancePixels;
+        percentageTrackRatio = Math.max(0, Math.min(1, percentageTrackRatio));
+
+        const activeWordsLimit = Math.floor(percentageTrackRatio * titleTextWords.length * 1.12);
+
+        titleTextWords.forEach((word, index) => {
+            if (index < activeWordsLimit) {
+                word.classList.add('word-active');
+            } else {
+                word.classList.remove('word-active');
+            }
+        });
+    });
+
+    // --- 2. Staggered One-by-One Entrance Intersection Observer ---
+    const gridEntranceObserverOptions = {
+        root: null,
+        threshold: 0.05,
+        rootMargin: "0px 0px -20px 0px"
+    };
+
+    const triptychGridObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, sequenceIndex) => {
+            if (entry.isIntersecting) {
+                // Generates progressive inline execution delay timeline to pop cells one-by-one from bottom
+                setTimeout(() => {
+                    entry.target.classList.add('card-revealed');
+                }, sequenceIndex * 80);
+                
+                triptychGridObserver.unobserve(entry.target);
+            }
+        });
+    }, gridEntranceObserverOptions);
+
+    triptychCards.forEach(card => {
+        triptychGridObserver.observe(card);
+    });
+}
+
+</script>
+

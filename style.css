@@ -1,0 +1,703 @@
+/* Unique Clinical Colors System */
+:root {
+    --bg-clinical-dark: #091315;
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #7fa4a8;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-clinical-dark);
+    font-family: var(--font-stack);
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Master Fixed Layout Container */
+.preloader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-clinical-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    z-index: 999999;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Creative Vector Element Framework */
+.scanner-matrix {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pulse-aura {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--clinical-teal);
+    border-radius: 50%;
+    opacity: 0;
+    animation: diagnosticRadar 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+.delay-pulse { 
+    animation-delay: 0.66s; 
+}
+
+.rotating-grid {
+    width: 96px;
+    height: 96px;
+    border: 3px dashed var(--neon-emerald);
+    border-radius: 50%;
+    animation: clinicalSpin 7s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(0, 229, 195, 0.3));
+}
+
+.vector-target {
+    position: absolute;
+    color: var(--neon-emerald);
+    font-size: 36px;
+    animation: heartbeatSync 1.3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(0, 229, 195, 0.6));
+}
+
+/* Branding & Status Info */
+.brand-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-pure);
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    animation: fadeElementUp 0.5s ease forwards;
+}
+
+.brand-title span { 
+    color: var(--neon-emerald); 
+}
+
+.status-microtext {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--text-dimmed);
+    margin-bottom: 20px;
+    height: 16px;
+    text-align: center;
+    animation: fadeElementUp 0.5s ease forwards 0.15s;
+}
+
+.metric-counter {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--neon-emerald);
+    margin-bottom: 25px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Linear Tracking Sub-system */
+.loading-track-wrapper {
+    width: 85%;
+    max-width: 320px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.loading-fill-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--clinical-teal), var(--neon-emerald));
+    box-shadow: 0 0 8px var(--neon-emerald);
+    border-radius: 20px;
+    transition: width 0.05s linear;
+}
+
+/* Optional exit state class */
+.preloader-overlay.terminate-flow {
+    opacity: 0;
+    transform: scale(0.97);
+    pointer-events: none;
+}
+
+/* --- Core Keyframes Matrix --- */
+@keyframes diagnosticRadar {
+    0% { transform: scale(0.6); opacity: 0.9; }
+    100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes clinicalSpin { 
+    100% { transform: rotate(360deg); } 
+}
+
+@keyframes heartbeatSync {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.15); }
+    45% { transform: scale(1.05); }
+    70% { transform: scale(1.22); }
+}
+
+@keyframes fadeElementUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Fully Fluid Responsive Controls --- */
+@media (max-width: 768px) {
+    .brand-title { font-size: 28px; }
+    .scanner-matrix { width: 120px; height: 120px; }
+    .rotating-grid { width: 80px; height: 80px; }
+    .vector-target { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+    .brand-title { font-size: 24px; }
+    .status-microtext { font-size: 11px; letter-spacing: 1.5px; }
+    .loading-track-wrapper { width: 95%; }
+}
+
+/* Unique Clinical Styling Palette */
+:root {
+    --carousel-bg: #050b0c;          /* Deep dark clinical space background */
+    --text-silver: #e2f1f2;          /* Clean premium white-silver text */
+    --neon-emerald: #00e5c1;         /* Stackly Signature Highlight Green */
+    --coral-alert: #ff5c75;          /* Closed/Alert State Color */
+    --clinical-teal: #0a8491;        /* Secondary clinical accent color */
+}
+
+/* Base Body Adjustment to support top pinning alignment context */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 42px; /* Prevent underlying elements from hiding behind fixed bar */
+}
+
+/* Master Fixed Ticker Container pinned flush to the viewport top boundary */
+.top-carousel-bar {
+    position: fixed;   /* Force structural lock to the absolute viewport window layout */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--carousel-bg);
+    color: var(--text-silver);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 11px 0;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(10, 132, 145, 0.15);
+    z-index: 99999;     /* Ensuring higher layer placement index context than headers */
+}
+
+/* Flex Container holding both layout tracks */
+.carousel-infinite-wrapper {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+}
+
+/* Hardware accelerated sliding track layers */
+.carousel-track {
+    display: flex;
+    align-items: center;
+    animation: continuousGlide 26s linear infinite;
+    will-change: transform; /* Hint to browser to enable GPU layer scaling rendering speeds */
+}
+
+/* Content Cell Modules */
+.carousel-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 45px;
+    letter-spacing: 0.5px;
+}
+
+.carousel-item i {
+    color: var(--neon-emerald);
+    margin-right: 8px;
+    font-size: 14px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Link Actions Styling */
+.call-link {
+    color: var(--text-silver);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-left: 4px;
+    border-bottom: 1px dotted transparent;
+}
+
+.call-link:hover {
+    color: var(--neon-emerald);
+    border-bottom-color: var(--neon-emerald);
+}
+
+.highlight-text {
+    color: #ffffff;
+    margin-left: 4px;
+}
+
+/* Dynamic Live Status Badge Element */
+.status-badge {
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 6px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.status-badge.open {
+    background-color: rgba(0, 229, 193, 0.1);
+    color: var(--neon-emerald);
+    border-color: var(--neon-emerald);
+}
+
+.status-badge.closed {
+    background-color: rgba(255, 92, 117, 0.1);
+    color: var(--coral-alert);
+    border-color: var(--coral-alert);
+}
+
+/* User Gestures Interactions */
+.top-carousel-bar:hover .carousel-track {
+    animation-play-state: paused; /* Pauses loop track instantly on user hover */
+}
+
+.carousel-item:hover i {
+    transform: scale(1.2);
+}
+
+/* Telephone icon subtle shake rotation */
+.phone-ringer {
+    animation: dynamicRingtone 3.5s ease infinite;
+}
+
+/* Linear Loop Translate Animation Function */
+@keyframes continuousGlide {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes dynamicRingtone {
+    0%, 90%, 100% { transform: rotate(0); }
+    92% { transform: rotate(-12deg); }
+    94% { transform: rotate(12deg); }
+    96% { transform: rotate(-12deg); }
+    98% { transform: rotate(12deg); }
+}
+
+/* --- Robust Mobile Responsive Viewports Breakpoints --- */
+@media (max-width: 992px) {
+    .carousel-item {
+        padding: 0 35px; /* Squeeze spacing gap sizes out slightly on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .top-carousel-bar {
+        padding: 9px 0;
+        font-size: 12px;
+    }
+    body {
+        padding-top: 38px; /* Recalibrate layout alignment padding gap height offset metrics */
+    }
+    .carousel-item {
+        padding: 0 25px; /* Restrict excess dead blank layout spaces on phone viewports */
+    }
+    .carousel-track {
+        animation-duration: 18s; /* Balances carousel scroll speed across limited horizontal space */
+    }
+}
+
+/* Core Layout Accent Bindings variables */
+:root {
+    --navbar-bg: rgba(9, 19, 21, 0.95);
+    --bg-clinical-dark: #091315;
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #7fa4a8;
+    --font-family-core: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Master Fixed Positioning Header layout directly below the 42px top bar */
+.main-header-navbar {
+    position: fixed;
+    top: 42px; /* Flushes beneath your top-carousel-bar container offset padding */
+    left: 0;
+    width: 100%;
+    height: 72px;
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid rgba(10, 132, 145, 0.15);
+    backdrop-filter: blur(8px); /* Subtle glass feel on layout content pass-through */
+    z-index: 9999;
+    font-family: var(--font-family-core);
+    display: flex;
+    align-items: center;
+}
+
+/* Outer layout alignment grid boundaries */
+.nav-container-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Brand Logo Group Styling --- */
+.brand-logo-frame {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s ease;
+}
+
+.brand-logo-frame:hover {
+    opacity: 0.9;
+}
+
+.logo-asset {
+    height: 34px;
+    width: auto;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.logo-brand-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-pure);
+    letter-spacing: 0.5px;
+}
+
+.logo-brand-text span {
+    color: var(--neon-emerald);
+}
+
+/* --- Center Menu Grid Layout Rules --- */
+.nav-link-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-menu-item {
+    text-decoration: none;
+    color: var(--text-dimmed);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Interactive Menu Item Underline Hover & Active Animations Matrix */
+.nav-menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--neon-emerald);
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 0 6px var(--neon-emerald);
+}
+
+.nav-menu-item:hover, .nav-menu-item.active {
+    color: var(--text-pure);
+}
+
+.nav-menu-item:hover::after, .nav-menu-item.active::after {
+    width: 100%;
+}
+
+/* --- Right Side Authentication Styling Component --- */
+.btn-auth-portal {
+    background: transparent;
+    color: var(--neon-emerald);
+    border: 1px solid var(--neon-emerald);
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-auth-portal:hover {
+    background: linear-gradient(135deg, var(--clinical-teal), var(--neon-emerald));
+    color: var(--bg-clinical-dark);
+    border-color: transparent;
+    box-shadow: 0 0 14px rgba(0, 229, 193, 0.4);
+    transform: translateY(-1px);
+}
+
+/* --- Mobile Viewport Hamburger Vector Elements Layout Trigger Rules --- */
+.mobile-hamburger-trigger {
+    display: none; /* Hidden on normal desktop layout structures */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px;
+    z-index: 10001;
+}
+
+.hamburger-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-pure);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Absolute Mobile Blur Layer Backing Shield Container --- */
+.portal-blur-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(5, 11, 12, 0.6);
+    backdrop-filter: blur(0px); /* Smooth zero dynamic initialization framework parameter */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* State Triggering Actions for active Mobile blur modal canvas overlays */
+body.mobile-nav-expanded .portal-blur-backdrop {
+    opacity: 1;
+    backdrop-filter: blur(12px); /* Deep premium system structural backdrop blur filter rendering */
+    pointer-events: auto;
+}
+
+
+/* --- Robust Fluid Responsive Structural Media Breakpoint Controls --- */
+@media (max-width: 992px) {
+    .main-header-navbar {
+        top: 38px; /* Sync alignment parameters with mobile top-carousel-bar shrinkage height */
+    }
+    
+    .mobile-hamburger-trigger {
+        display: flex; /* Unleash mobile interactive anchor cell view */
+    }
+
+    /* Transform Central Horizontal Menus into a Clean Vertical Right Slide Drawer Box Matrix */
+    .center-navigation-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hides completely out of frame limits rightwise */
+        width: 280px;
+        height: 100vh;
+        background-color: #0c1a1d;
+        border-left: 1px solid rgba(10, 132, 145, 0.2);
+        padding: 100px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        z-index: 10000;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.4);
+    }
+
+    .nav-link-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .nav-menu-item {
+        font-size: 18px;
+        display: block;
+        width: 100%;
+    }
+
+    /* Move auth block right inside sliding navigation drawer container stack limits */
+    .right-auth-corner {
+        width: 100%;
+    }
+    .btn-auth-portal {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    /* --- JS Active Frame Toggle Drawer Execution Rules --- */
+    body.mobile-nav-expanded .center-navigation-menu {
+        right: 0; /* Slide drawer panel directly into focus layout space viewport metrics */
+    }
+
+    /* Hamburger vector bar animation shifts to geometric vector closing cross shape */
+    body.mobile-nav-expanded .mobile-hamburger-trigger .hamburger-bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    body.mobile-nav-expanded .mobile-hamburger-trigger .hamburger-bar:nth-child(2) {
+        opacity: 0;
+    }
+    body.mobile-nav-expanded .mobile-hamburger-trigger .hamburger-bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container-wrapper { padding: 0 20px; }
+    .logo-brand-text { font-size: 19px; }
+    .center-navigation-menu { width: 85%; } /* Maximize navigation ease target area bounds */
+}
+
+
+/* =========================================
+   STACKLY HEALTH - SECTION OVERLAP FIX
+   ADD-ON CSS ONLY
+========================================= */
+
+/* Keep all main sections in normal document flow */
+body {
+    display: block;
+    overflow-x: hidden;
+}
+
+.stackly-hero-arena,
+.stackly-trust-banner {
+    position: relative !important;
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    float: none;
+    clear: both;
+    flex-shrink: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Hero section height */
+.stackly-hero-arena {
+    min-height: 650px;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Keep video behind hero content */
+.video-ambient-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-arena-wrapper {
+    position: relative;
+    z-index: 2;
+    flex: 1 0 auto;
+}
+
+.hero-stats-dock-bar {
+    position: relative;
+    z-index: 3;
+    flex-shrink: 0;
+}
+
+/* Trust section starts below hero */
+.stackly-trust-banner {
+    z-index: 1;
+    padding: 40px 30px;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.trust-banner-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Prevent accidental horizontal overflow */
+.stackly-hero-arena *,
+.stackly-trust-banner * {
+    box-sizing: border-box;
+}
+
+/* Responsive alignment */
+@media (max-width: 768px) {
+    .stackly-hero-arena {
+        min-height: auto;
+    }
+
+    .hero-arena-wrapper {
+        flex: 1 0 auto;
+    }
+
+    .stackly-trust-banner {
+        padding: 30px 15px;
+    }
+}
+
+/* Restore page scrolling */
+html,
+body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+body {
+    position: relative !important;
+}
+
+/* Ensure sections don't block scrolling */
+.stackly-hero-arena,
+.stackly-trust-banner {
+    overflow: hidden;
+}
