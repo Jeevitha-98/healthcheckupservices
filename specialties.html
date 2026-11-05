@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Health - Initializing Diagnostics</title>
+    <!-- Font Awesome for clean clinical vector icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Absolute Preloader Component Overlay -->
+    <div class="preloader-overlay" id="preloaderPortal">
+        
+        <!-- Vector Radar Scanner Grid -->
+        <div class="scanner-matrix">
+            <div class="pulse-aura"></div>
+            <div class="pulse-aura delay-pulse"></div>
+            <div class="rotating-grid"></div>
+            <div class="vector-target" id="statusIcon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+        </div>
+
+        <!-- Typography Cluster -->
+        <h1 class="brand-title">Stackly<span>Health</span></h1>
+        <div class="status-microtext" id="statusString">Calibrating system metrics...</div>
+        
+        <!-- Tabular Metrics Count -->
+        <div class="metric-counter"><span id="liveCounter">0</span>%</div>
+        
+        <!-- Progress Bar Track -->
+        <div class="loading-track-wrapper">
+            <div class="loading-fill-bar" id="liveProgressBar"></div>
+        </div>
+    </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const liveCounter = document.getElementById("liveCounter");
+    const liveProgressBar = document.getElementById("liveProgressBar");
+    const statusString = document.getElementById("statusString");
+    const statusIcon = document.getElementById("statusIcon");
+    const preloaderPortal = document.getElementById("preloaderPortal");
+
+    const totalDuration = 2000; // Perfect 2-second timing lifecycle
+    const refreshTickRate = 20; 
+    const totalSteps = totalDuration / refreshTickRate; 
+    
+    let currentStep = 0;
+
+    const loadingProgressInterval = setInterval(() => {
+        currentStep++;
+        let completionPercentage = Math.floor((currentStep / totalSteps) * 100);
+
+        if (completionPercentage >= 100) {
+            completionPercentage = 100;
+            clearInterval(loadingProgressInterval);
+
+            // Set final finished confirmation states visually
+            statusIcon.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--neon-emerald)"></i>`;
+            statusString.innerText = "Access Granted";
+            liveCounter.innerText = "100";
+            liveProgressBar.style.width = "100%";
+
+            // Optional fade exit trigger action after full execution load
+            setTimeout(() => {
+                preloaderPortal.classList.add("terminate-flow");
+            }, 300);
+        } else {
+            liveCounter.innerText = completionPercentage;
+            liveProgressBar.style.width = completionPercentage + "%";
+
+            // Stage shifting message arrays cleanly inside runtime parameters
+            if (completionPercentage === 35) {
+                statusString.innerText = "Synchronizing diagnostic pipelines...";
+            } else if (completionPercentage === 70) {
+                statusString.innerText = "Verifying secure systems interface...";
+            }
+        }
+    }, refreshTickRate);
+});
+
+  </script>
+
+  <!-- Continuous Infinite Top Bar Carousel Component -->
+<div class="top-carousel-bar">
+    <div class="carousel-infinite-wrapper">
+        
+        <!-- Primary Content Group Track -->
+        <div class="carousel-track">
+            <div class="carousel-item">
+                <i class="fa-solid fa-phone-flip phone-ringer"></i> 
+                Emergency Desk: <a href="tel:+18005557822" class="call-link">+1 (800) 555-STACK</a>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-calendar-check"></i> 
+                Appointment Timings: <span class="highlight-text">Mon - Sat: 8:00 AM - 8:00 PM</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-circle-nodes"></i> 
+                Booking Status: <span id="realtimeStatus" class="status-badge checking">Verifying...</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-file-waveform"></i> 
+                OPD Schedule: <span class="highlight-text">Online Bookings Open 24/7</span>
+            </div>
+        </div>
+        
+        <!-- Duplicate Clone Track (Essential for infinite seamless visual loop) -->
+        <div class="carousel-track" aria-hidden="true">
+            <div class="carousel-item">
+                <i class="fa-solid fa-phone-flip phone-ringer"></i> 
+                Emergency Desk: <a href="tel:+18005557822" class="call-link">+1 (800) 555-STACK</a>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-calendar-check"></i> 
+                Appointment Timings: <span class="highlight-text">Mon - Sat: 8:00 AM - 8:00 PM</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-circle-nodes"></i> 
+                Booking Status: <span id="realtimeStatusClone" class="status-badge checking">Verifying...</span>
+            </div>
+            <div class="carousel-item">
+                <i class="fa-solid fa-file-waveform"></i> 
+                OPD Schedule: <span class="highlight-text">Online Bookings Open 24/7</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    function updateLiveAppointmentStatus() {
+        const badgeElements = [
+            document.getElementById("realtimeStatus"),
+            document.getElementById("realtimeStatusClone")
+        ];
+        
+        const systemTime = new Date();
+        const activeDay = systemTime.getDay();   // 0 = Sunday, 1 = Monday ... 6 = Saturday
+        const activeHour = systemTime.getHours(); // 24-hour clock index tracker format
+
+        // Operational Rules Setup: Monday (1) through Saturday (6), from 8:00 AM to 8:00 PM (Hour 20)
+        const isWorkingDay = activeDay >= 1 && activeDay <= 6;
+        const isWorkingHour = activeHour >= 8 && activeHour < 20;
+
+        badgeElements.forEach(badge => {
+            if (!badge) return;
+            
+            if (isWorkingDay && isWorkingHour) {
+                badge.textContent = "Open Now";
+                badge.className = "status-badge open";
+            } else {
+                badge.textContent = "Closed";
+                badge.className = "status-badge closed";
+            }
+        });
+    }
+
+    // Call state mapping routine immediately on runtime instantiation
+    updateLiveAppointmentStatus();
+
+    // Check system time parameters every 30 seconds to support active updates
+    setInterval(updateLiveAppointmentStatus, 30000);
+});
+
+</script>
+
+<!-- Main Header Portal Navigation Section -->
+<header class="main-header-navbar">
+    <div class="nav-container-wrapper">
+        
+        <!-- Brand Logo Element Frame (Refresh trigger enabled) -->
+        <div class="brand-logo-frame" onclick="refreshPagePortal()" role="button" aria-label="Stackly Home & Refresh">
+            <img src="https://unsplash.com" alt="Stackly Health Logo" class="logo-asset">
+            
+        </div>
+
+        <!-- Desktop Screen Center Aligned Menu List Navigation -->
+        <nav class="center-navigation-menu">
+            <ul class="nav-link-list">
+                <li><a href="index.html" class="nav-menu-item " onclick="setActiveLink(this)">Home</a></li>
+                <li><a href="packages.html" class="nav-menu-item" onclick="setActiveLink(this)">Checkup Packages</a></li>
+                <li><a href="specialities.html" class="nav-menu-item active" onclick="setActiveLink(this)">Specialties</a></li>
+                <li><a href="about.html" class="nav-menu-item" onclick="setActiveLink(this)">About Us</a></li>
+                <li><a href="contact.html" class="nav-menu-item" onclick="setActiveLink(this)">Contact Portal</a></li>
+            </ul>
+        </nav>
+
+        <!-- Right Side Corner Authentication Anchor Action Block -->
+        <div class="right-auth-corner">
+            <button class="btn-auth-portal" onclick="triggerAuthFlow()"><i class="fa-solid fa-user-shield"></i> Patient Login</button>
+        </div>
+
+        <!-- Interactive Mobile Hamburger Grid Vector Activation Node -->
+        <button class="mobile-hamburger-trigger" id="hamburgerMenuNode" aria-label="Toggle Portal Menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+
+    </div>
+</header>
+
+<!-- Global Blurring Overlay Matrix Cover for Mobile Airflow Layer Drawer Display -->
+<div class="portal-blur-backdrop" id="drawerBlurOverlay"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerMenuNode = document.getElementById("hamburgerMenuNode");
+    const drawerBlurOverlay = document.getElementById("drawerBlurOverlay");
+    
+    // --- 1. Toggle Mobile Menu Drawer & Background Blur Overlay ---
+    if (hamburgerMenuNode && drawerBlurOverlay) {
+        const toggleMobileNavigation = () => {
+            document.body.classList.toggle("mobile-nav-expanded");
+            
+            // Toggle screen scroll-lock to prevent underlying background leaks
+            if (document.body.classList.contains("mobile-nav-expanded")) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        // Attach action events to both trigger nodes
+        hamburgerMenuNode.addEventListener("click", toggleMobileNavigation);
+        drawerBlurOverlay.addEventListener("click", toggleMobileNavigation);
+    }
+});
+
+// --- 2. Dynamic Menu Active Status State Tracker Function ---
+function setActiveLink(clickedElement) {
+    // Remove active styles from all structural links across layout tree
+    const menuItems = document.querySelectorAll(".nav-menu-item");
+    menuItems.forEach(item => item.classList.remove("active"));
+    
+    // Apply highlight active styling to current node path item context
+    clickedElement.classList.add("active");
+
+    // Auto-dismiss open mobile navigation drawers smoothly on selection click actions
+    if (document.body.classList.contains("mobile-nav-expanded")) {
+        document.body.classList.remove("mobile-nav-expanded");
+        document.body.style.overflow = "auto";
+    }
+}
+
+// --- 3. Core Brand Image Click Refresh Action Routine ---
+function refreshPagePortal() {
+    window.location.reload(); // Instantly triggers an active refresh on current page viewport context
+}
+
+// --- 4. Placeholder for Authorization Actions ---
+function triggerAuthFlow() {
+    alert("Redirecting securely to Stackly Patient Identity & Records Portal...");
+}
+
+</script>
+
+
+<!-- Main Clinical Specialties Page Hero Core -->
+<section class="stackly-specialties-hero-arena" id="specialties-top">
+    
+    <!-- Background Widescreen Depth Grid Underlay -->
+    <div class="specialties-hero-ambient-layer">
+        <img src="https://pexels.com" alt="Stackly Diagnostic Core Cleanroom" class="specialties-hero-bg-img">
+        <div class="specialties-hero-dark-shield"></div>
+    </div>
+
+    <!-- Active Content Workspace Grid Wrapper -->
+    <div class="specialties-hero-arena-wrapper">
+        
+        <!-- Left Column: Core Narrative & Action Controls -->
+        <div class="specialties-hero-narrative">
+            <div class="specialties-upper-pill-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-pill-asset"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Real-Time Biomarker Calibration
+            </div>
+
+            <!-- Solid Highly Legible Colored Headline -->
+            <h2 class="colored-specialties-title">
+                Advanced Diagnostic Modality Specialties Engineered For <span class="accent-neon">Longevity.</span>
+            </h2>
+
+            <p class="specialties-hero-supporting-copy">
+                Explore our specialized care panels. Stackly converges targeted microfluidic hematology, ultra-precision cardiovascular rhythm profiling, and automated pathology screening layers into a unified diagnostic network.
+            </p>
+
+            <div class="specialties-hero-actions-group">
+                <button class="btn-specialties-hero-primary" onclick="routeToErrorPortal('initialize-panel-screening')">
+                    Consult Care Panel
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="btn-specialties-hero-secondary" onclick="routeToErrorPortal('assay-methodology-vault')">
+                    View Lab Methodology
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Column: Immersive Geometric Lens & Floating Modality Badges -->
+        <div class="specialties-hero-visual-matrix">
+            <div class="matrix-ambient-glow"></div>
+            
+            <!-- Circular Laboratory Focal Lens -->
+            <div class="clinical-lens-frame">
+                <img src="https://pexels.com" alt="Microfluidic Testing Lens" class="lens-asset-img">
+                <div class="lens-neon-ring"></div>
+            </div>
+
+            <!-- Floating Translucent Status Nodes Array -->
+            <div class="floating-modality-node node-pos-cardio">
+                <span class="node-pulse-indicator pulse-teal"></span>
+                <span class="node-label-text">Cardiology Index</span>
+            </div>
+
+            <div class="floating-modality-node node-pos-pathology">
+                <span class="node-pulse-indicator pulse-emerald"></span>
+                <span class="node-label-text">Pathology Assays</span>
+            </div>
+
+            <div class="floating-modality-node node-pos-derma">
+                <span class="node-pulse-indicator pulse-cyan"></span>
+                <span class="node-label-text">Dermal Genetics</span>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Hero Section Arena Layout Block */
+.stackly-specialties-hero-arena {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    min-height: calc(85vh - 114px);
+    height: auto;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    padding-top:100px;
+}
+
+/* Background Image Shield Configuration */
+.specialties-hero-ambient-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.specialties-hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.specialties-hero-dark-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(9, 19, 21, 0.96) 0%, rgba(9, 19, 21, 0.88) 50%, rgba(5, 11, 12, 0.98) 100__);
+    z-index: 2;
+}
+
+/* Center Aligned Core Grid Wrapper Limits */
+.specialties-hero-arena-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 90px 40px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 70px;
+    align-items: center;
+}
+
+/* Left Column Layout Framework */
+.specialties-hero-narrative {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.specialties-upper-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 229, 193, 0.08);
+    border: 1px solid rgba(0, 229, 193, 0.25);
+    color: var(--neon-emerald);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.svg-pill-asset { width: 14px; height: 14px; }
+
+/* --- Fixed: Title is now bright white instantly by default --- */
+.colored-specialties-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff; /* Crisp high-visibility text override */
+    line-height: 1.15;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.colored-specialties-title .accent-neon {
+    color: var(--neon-emerald);
+    text-shadow: 0 0 25px rgba(0, 229, 193, 0.3);
+}
+
+.specialties-hero-supporting-copy {
+    color: var(--text-dimmed);
+    font-size: 16.5px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+    max-width: 680px;
+    transition: color 0.3s ease;
+}
+
+.stackly-specialties-hero-arena:hover .specialties-hero-supporting-copy {
+    color: #ffffff;
+}
+
+/* Call to Actions Controls */
+.specialties-hero-actions-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-specialties-hero-primary {
+    background: linear-gradient(135deg, var(--clinical-teal), #00bfa3);
+    color: var(--text-pure);
+    border: none;
+    padding: 15px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 229, 193, 0.25);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-specialties-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 229, 193, 0.45);
+}
+
+.svg-btn-arrow { width: 15px; height: 15px; transition: transform 0.3s ease; }
+.btn-specialties-hero-primary:hover .svg-btn-arrow { transform: translateX(4px); }
+
+.btn-specialties-hero-secondary {
+    background: transparent;
+    color: var(--text-pure);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-specialties-hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Right Column Visual Layout */
+.specialties-hero-visual-matrix {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matrix-ambient-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(0, 229, 193, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.clinical-lens-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(10, 132, 145, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    background-color: #050b0c;
+}
+
+.lens-asset-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lens-neon-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px rgba(0, 229, 193, 0.2);
+    pointer-events: none;
+}
+
+.floating-modality-node {
+    position: absolute;
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.25);
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+    transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+.node-pos-cardio { top: 30px; left: 0; }
+.node-pos-pathology { bottom: 40px; right: -20px; }
+.node-pos-derma { top: 50%; left: -40px; transform: translateY(-50%); }
+
+.node-pulse-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    display: block;
+}
+
+.node-pulse-indicator::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 0 2px currentColor;
+    animation: indicatorRingPulse 2s infinite;
+    opacity: 0;
+}
+
+.pulse-teal { background: #0a8491; color: #0a8491; }
+.pulse-emerald { background: var(--neon-emerald); color: var(--neon-emerald); }
+.pulse-cyan { background: #00b4d8; color: #00b4d8; }
+
+.node-label-text {
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.specialties-hero-visual-matrix:hover .lens-asset-img {
+    transform: scale(1.06) rotate(2deg);
+}
+
+.floating-modality-node:hover {
+    border-color: var(--neon-emerald);
+    box-shadow: 0 12px 30px rgba(0, 229, 193, 0.15);
+}
+
+.node-pos-cardio:hover { transform: translateY(-3px); }
+.node-pos-pathology:hover { transform: translateY(-3px); }
+.node-pos-derma:hover { transform: translate(-3px, -50%); }
+
+@keyframes indicatorRingPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* Fluid Media Queries Breakpoints */
+@media (max-width: 1200px) {
+    .colored-specialties-title { font-size: 42px; }
+    .specialties-hero-arena-wrapper { gap: 40px; }
+    .clinical-lens-frame { width: 240px; height: 280px; }
+}
+
+@media (max-width: 992px) {
+    .specialties-hero-arena-wrapper { grid-template-columns: 1fr; gap: 50px; padding: 60px 30px; text-align: center; }
+    .specialties-hero-narrative { align-items: center; }
+    .btn-specialties-hero-actions-group { justify-content: center; }
+    .specialties-hero-visual-matrix { max-width: 500px; margin: 0 auto; }
+}
+
+@media (max-width: 550px) {
+    .specialties-hero-arena-wrapper { padding: 40px 20px; }
+    .colored-specialties-title { font-size: 30px; }
+    .specialties-hero-supporting-copy { font-size: 14.5px; }
+    .btn-specialties-hero-primary, .btn-specialties-hero-secondary { width: 100%; justify-content: center; }
+    .clinical-lens-frame { width: 200px; height: 200px; }
+    .node-pos-cardio { top: 0; left: 10px; }
+    .node-pos-pathology { bottom: 0; right: 10px; }
+    .node-pos-derma { display: none; }
+}
+
+</style>
+
+<script>
+    /**
+ * secure 404 alert shield routing mechanism
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting securely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Specialty Pathway Locked</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference panel specialty route [<strong>${targetContextCode}</strong>] points to an offline diagnostic cleanroom directory currently undergoing system audits.</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.2); transition: transform 0.15s ease;">Return to Panel</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+
+<!-- Stackly Clinical Infrastructure Showcase Section -->
+<section class="stackly-facilities-arena" id="lab-facilities">
+    <div class="facilities-wrapper">
+        
+        <!-- Header row with scroll kinetic text title -->
+        <div class="facilities-header-row">
+            <h3 class="scroll-kinetic-facilities-title" id="kineticFacilitiesTitle">
+                <span>Next-Gen</span> <span>Clinical</span> <span>Infrastructure</span> <span>&</span> <span>Bio-Secure</span> <span class="accent-node">Cleanrooms.</span>
+            </h3>
+        </div>
+
+        <!-- Alternating Grid Slabs Stack -->
+        <div class="facilities-grid-stack">
+            
+            <!-- Facility Slab 1: Molecular Pathology Center -->
+            <div class="facility-asymmetric-slab">
+                <div class="facility-media-wing">
+                    <div class="lens-glow-layer"></div>
+                    <div class="circular-lens-frame">
+                        <img src="https://pexels.com" alt="Molecular Screening Automation Panel" class="facility-asset-img">
+                    </div>
+                </div>
+                <div class="facility-narrative-wing">
+                    <span class="facility-meta-tag">Bio-Secure Tier 1</span>
+                    <h4 class="facility-title">Molecular Pathology Center</h4>
+                    <p class="facility-desc">Our flagship automation cell is equipped with high-throughput microfluidic assays to sequence genetic biomarker variants with maximum precision.</p>
+                    
+                    <ul class="facility-specs-checklist">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> HEPA-Filtered Iso-Cleanroom</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Automated Liquid Handlers</li>
+                    </ul>
+
+                    <button class="btn-facility-cta" onclick="routeToErrorPortal('molecular-facility-tour')">
+                        Explore cleanroom 
+                        <svg class="svg-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Facility Slab 2: Cardiovascular Diagnostic Cell (Alternating Order) -->
+            <div class="facility-asymmetric-slab slab-row-reverse">
+                <div class="facility-media-wing">
+                    <div class="lens-glow-layer"></div>
+                    <div class="circular-lens-frame">
+                        <img src="https://pexels.com" alt="Cardiology Screening Equipment" class="facility-asset-img">
+                    </div>
+                </div>
+                <div class="facility-narrative-wing">
+                    <span class="facility-meta-tag">Imaging Tier 1</span>
+                    <h4 class="facility-title">Cardiovascular Imaging Matrix</h4>
+                    <p class="facility-desc">Houses high-fidelity echocardiogram telemetry blocks and algorithmic pulse stress tracking sensors to monitor cardiac strain levels instantly.</p>
+                    
+                    <ul class="facility-specs-checklist">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Real-Time Telemetry Arrays</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Algorithmic Stress Maps</li>
+                    </ul>
+
+                    <button class="btn-facility-cta" onclick="routeToErrorPortal('cardio-facility-tour')">
+                        Explore cleanroom 
+                        <svg class="svg-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Facilities Section Outer Flow Container */
+.stackly-facilities-arena {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    padding: 100px 30px;
+    box-sizing: border-box;
+    z-index: 15;
+    clear: both;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.facilities-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.facilities-header-row {
+    margin-bottom: 60px;
+}
+
+/* Scroll Responsive Word-By-Word Headline */
+.scroll-kinetic-facilities-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--text-pure);
+    line-height: 1.25;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12px;
+}
+
+.scroll-kinetic-facilities-title span {
+    opacity: 0.15;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: inline-block;
+}
+
+.scroll-kinetic-facilities-title span.word-active { opacity: 1; transform: translateY(0); }
+.scroll-kinetic-facilities-title span.accent-node.word-active { color: var(--neon-emerald); }
+
+/* --- Alternating Grid Slabs Stack Layout --- */
+.facilities-grid-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* Asymmetrical Row Configurations */
+.facility-asymmetric-slab {
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.16);
+    border-radius: 24px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr; /* Separates the circle lens from our text blocks */
+    gap: 50px;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+    
+    /* Scroll Entrance Initialization Parameters */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Added programmatically via scroll view intersection script handlers */
+.facility-asymmetric-slab.slab-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slab-row-reverse {
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.slab-row-reverse .facility-media-wing {
+    order: 2; /* Inverts layout column order dynamically on desktop screen views */
+}
+
+/* --- Left Wing Image Media Core: Circular Lens Framework --- */
+.facility-media-wing {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lens-glow-layer {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(0, 229, 193, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.circular-lens-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(10, 132, 145, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background-color: #050b0c;
+}
+
+.facility-asset-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Right Wing Narrative Text Block --- */
+.facility-narrative-wing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.facility-meta-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--clinical-teal);
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+}
+
+.facility-title {
+    color: var(--text-pure);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* --- Requested Fix: Interactive Description Paragraph with Custom Hover States --- */
+.facility-desc {
+    color: var(--text-dimmed);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Paragraph updates color cleanly to pure radiant white on item box hover focus */
+.facility-asymmetric-slab:hover .facility-desc {
+    color: #ffffff;
+}
+
+/* Checklist Stack */
+.facility-specs-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.facility-specs-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-pure);
+    font-weight: 500;
+}
+
+.facility-specs-checklist li svg {
+    width: 14px;
+    height: 14px;
+    color: var(--neon-emerald);
+    flex-shrink: 0;
+}
+
+/* Interaction Redirect CTA Button Framework */
+.btn-facility-cta {
+    background: transparent;
+    color: var(--neon-emerald);
+    border: 1px solid rgba(0, 229, 193, 0.25);
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-facility-cta:hover {
+    background: rgba(0, 229, 193, 0.05);
+    border-color: var(--neon-emerald);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 229, 193, 0.15);
+}
+
+.svg-btn-arrow { width: 14px; height: 14px; transition: transform 0.3s ease; }
+.btn-facility-cta:hover .svg-btn-arrow { transform: translateX(3px); }
+
+/* Core Section Hovers Matrix Changes */
+.facility-asymmetric-slab:hover {
+    border-color: rgba(0, 229, 193, 0.3);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+.facility-asymmetric-slab:hover .facility-asset-img {
+    transform: scale(1.04) rotate(1deg); /* Smoothly zooms and rotates image inside the circular frame */
+}
+
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 992px) {
+    .stackly-facilities-arena { padding: 70px 20px; }
+    .scroll-kinetic-facilities-title { font-size: 34px; }
+    .facility-asymmetric-slab { grid-template-columns: 1fr; padding: 30px; gap: 35px; } /* Drop safely down into single stacked columns rows */
+    .slab-row-reverse { grid-template-columns: 1fr; }
+    .slab-row-reverse .facility-media-wing { order: unset; } /* Reset column order values */
+    .circular-lens-frame { width: 220px; height: 220px; }
+    .facility-narrative-wing { align-items: center; text-align: center; }
+    .facility-specs-checklist { align-items: flex-start; }
+    .btn-facility-cta { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 550px) {
+    .scroll-kinetic-facilities-title { font-size: 26px; justify-content: center; text-align: center; }
+    .facility-title { font-size: 20px; }
+    .facility-desc { font-size: 14px; }
+}
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initializeFacilitiesEngine();
+});
+
+function initializeFacilitiesEngine() {
+    const facilitiesTitle = document.getElementById('kineticFacilitiesTitle');
+    const facilitySlabs = document.querySelectorAll('.facility-asymmetric-slab');
+
+    if (!facilitiesTitle || facilitySlabs.length === 0) return;
+    const titleWordsArray = facilitiesTitle.querySelectorAll('span');
+
+    // --- 1. Scroll-Linked Word Reveal Engine for Headline ---
+    window.addEventListener('scroll', () => {
+        const titleBounds = facilitiesTitle.getBoundingClientRect();
+        const screenViewportHeight = window.innerHeight;
+
+        const revealBoundStart = screenViewportHeight * 0.88;
+        const revealBoundEnd = screenViewportHeight * 0.22;
+        
+        const trackDistancePixels = revealBoundStart - revealBoundEnd;
+        const totalScrolledOffset = revealBoundStart - titleBounds.top;
+        
+        let percentageTrackRatio = totalScrolledOffset / trackDistancePixels;
+        percentageTrackRatio = Math.max(0, Math.min(1, percentageTrackRatio));
+
+        const activeWordsLimit = Math.floor(percentageTrackRatio * titleWordsArray.length * 1.15);
+
+        titleWordsArray.forEach((word, index) => {
+            if (index < activeWordsLimit) {
+                word.classList.add('word-active');
+            } else {
+                word.classList.remove('word-active');
+            }
+        });
+    });
+
+    // --- 2. Vertical One-by-One Slab Entrance Intersection Observer ---
+    const gridObserverOptions = {
+        root: null,
+        threshold: 0.05,
+        rootMargin: "0px 0px -20px 0px"
+    };
+
+    const facilitiesGridObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, sequenceIndex) => {
+            if (entry.isIntersecting) {
+                // Progressive timeline delay loop pops cells one-by-one from bottom
+                setTimeout(() => {
+                    entry.target.classList.add('facility-asymmetric-slab', 'slab-revealed');
+                }, sequenceIndex * 85);
+                
+                facilitiesGridObserver.unobserve(entry.target);
+            }
+        });
+    }, gridObserverOptions);
+
+    facilitySlabs.forEach(slab => {
+        facilitiesGridObserver.observe(slab);
+    });
+}
+
+/**
+ * 3. secure 404 alert shield routing mechanism
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting securely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Cleanroom Core Offline</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference facility tour target [<strong>${targetContextCode}</strong>] points to an offline laboratory network node undergoing diagnostic tuning checks.</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.2); transition: transform 0.15s ease;">Return to Specialties</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+
+<!-- Stackly Clinical Infrastructure & Machinery Section -->
+<section class="stackly-machinery-arena" id="lab-machinery">
+    <div class="machinery-wrapper">
+        
+        <!-- Header row with scroll kinetic text title -->
+        <div class="machinery-header-block">
+            <h3 class="scroll-kinetic-machinery-title" id="kineticMachineryTitle">
+                <span>Next-Gen</span> <span>Automated</span> <span>Pathology</span> <span>Systems</span> <span>&</span> <span>Precision</span> <span class="accent-node">Hardware.</span>
+            </h3>
+        </div>
+
+        <!-- Alternating Grid Slabs Stack -->
+        <div class="machinery-grid-stack">
+            
+            <!-- System Slab 1: Bio-Secure Flow Cytometry -->
+            <div class="machinery-asymmetric-slab">
+                <div class="machinery-media-wing">
+                    <div class="lens-glow-layer"></div>
+                    <div class="circular-lens-frame">
+                        <img src="https://pexels.com" alt="High-Throughput Flow Cytometry Hardware" class="machinery-asset-img">
+                    </div>
+                </div>
+                <div class="machinery-narrative-wing">
+                    <span class="machinery-meta-tag">Hardware Deck Tier 1</span>
+                    <h4 class="machinery-title">Microfluidic Cytometry Infrastructure</h4>
+                    <p class="machinery-desc">Our flagship automation cell is engineered with laser-assisted counting arrays to analyze over 50,000 active blood biomarker metrics per second with perfect precision [14].</p>
+                    
+                    <ul class="machinery-specs-checklist">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> HEPA-Filtered Enclosed Matrix</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Spectral Sorting Diagnostics</li>
+                    </ul>
+
+                    <button class="btn-machinery-cta" onclick="routeToErrorPortal('cytometry-cleanroom-vault')">
+                        System Schematics
+                        <svg class="svg-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- System Slab 2: Automated Immunoassay Matrix (Alternating Order) -->
+            <div class="machinery-asymmetric-slab slab-row-reverse">
+                <div class="machinery-media-wing">
+                    <div class="lens-glow-layer"></div>
+                    <div class="circular-lens-frame">
+                        <img src="https://pexels.com" alt="Automated Immunoassay Systems Deck" class="machinery-asset-img">
+                    </div>
+                </div>
+                <div class="machinery-narrative-wing">
+                    <span class="machinery-meta-tag">Hardware Deck Tier 2</span>
+                    <h4 class="machinery-title">Robotic Chemiluminescence Tracker</h4>
+                    <p class="machinery-desc">Houses continuous fluidic verification loops that process endocrine biomarkers, hormone maps, and advanced lipid tracking sets completely hands-free [14].</p>
+                    
+                    <ul class="machinery-specs-checklist">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> 24/7 Thermal Calibration Systems</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Closed-Tube Sample Management</li>
+                    </ul>
+
+                    <button class="btn-machinery-cta" onclick="routeToErrorPortal('immunoassay-hardware-vault')">
+                        System Schematics
+                        <svg class="svg-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Master Machinery Section Outer Flow Container Layout */
+.stackly-machinery-arena {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    padding: 30px 30px;
+    box-sizing: border-box;
+    z-index: 15;
+    clear: both;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.machinery-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.machinery-header-block {
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Scroll Responsive Word-By-Word Headline */
+.scroll-kinetic-machinery-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--text-pure);
+    line-height: 1.25;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 12px;
+    max-width: 950px;
+}
+
+.scroll-kinetic-machinery-title span {
+    opacity: 0.15;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: inline-block;
+}
+
+.scroll-kinetic-machinery-title span.word-active { opacity: 1; transform: translateY(0); }
+.scroll-kinetic-machinery-title span.accent-node.word-active { color: var(--neon-emerald); }
+
+/* --- Alternating Grid Slabs Stack Layout --- */
+.machinery-grid-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* Asymmetrical Row Configurations */
+.machinery-asymmetric-slab {
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.16);
+    border-radius: 24px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr; /* Separates the circle lens frame from text blocks */
+    gap: 50px;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.slab-row-reverse {
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.slab-row-reverse .machinery-media-wing {
+    order: 2; /* Inverts layout column order dynamically on widescreen monitors */
+}
+
+/* --- Left Wing Image Media Core: Circular Lens Framework --- */
+.machinery-media-wing {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lens-glow-layer {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(0, 229, 193, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.circular-lens-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(10, 132, 145, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background-color: #050b0c;
+}
+
+.machinery-asset-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Right Wing Narrative Text Block --- */
+.machinery-narrative-wing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.machinery-meta-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--clinical-teal);
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+}
+
+.machinery-title {
+    color: var(--text-pure);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Interactive Description Paragraph with Custom Hover States [14] */
+.machinery-desc {
+    color: var(--text-dimmed);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Paragraph updates text color cleanly to pure radiant white on item box focus [14] */
+.machinery-asymmetric-slab:hover .machinery-desc {
+    color: #ffffff;
+}
+
+/* Specs checklist track */
+.machinery-specs-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.machinery-specs-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-pure);
+    font-weight: 500;
+}
+
+.machinery-specs-checklist li svg {
+    width: 14px;
+    height: 14px;
+    color: var(--neon-emerald);
+    flex-shrink: 0;
+}
+
+/* Interaction Redirect CTA Button Framework */
+.btn-machinery-cta {
+    background: transparent;
+    color: var(--neon-emerald);
+    border: 1px solid rgba(0, 229, 193, 0.25);
+    padding: 12px 28px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-machinery-cta:hover {
+    background: rgba(0, 229, 193, 0.05);
+    border-color: var(--neon-emerald);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 229, 193, 0.15);
+}
+
+.svg-btn-arrow { width: 14px; height: 14px; transition: transform 0.3s ease; }
+.btn-machinery-cta:hover .svg-btn-arrow { transform: translateX(3px); }
+
+/* Core Section Hovers Matrix Changes */
+.machinery-asymmetric-slab:hover {
+    border-color: rgba(0, 229, 193, 0.3);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+.machinery-asymmetric-slab:hover .machinery-asset-img {
+    transform: scale(1.04); /* Zooms hardware photo slightly inside the circular frame mask */
+}
+
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 992px) {
+    .stackly-machinery-arena { padding: 70px 20px; }
+    .scroll-kinetic-machinery-title { font-size: 34px; }
+    .machinery-asymmetric-slab { grid-template-columns: 1fr; padding: 30px; gap: 35px; } /* Stacks components cleanly vertically on mobile screens [14] */
+    .slab-row-reverse { grid-template-columns: 1fr; }
+    .slab-row-reverse .machinery-media-wing { order: unset; }
+    .circular-lens-frame { width: 220px; height: 220px; }
+    .machinery-narrative-wing { align-items: center; text-align: center; }
+    .machinery-specs-checklist { align-items: flex-start; }
+    .btn-machinery-cta { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 550px) {
+    .scroll-kinetic-machinery-title { font-size: 26px; }
+    .machinery-title { font-size: 20px; }
+    .machinery-desc { font-size: 14px; }
+}
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initializeMachineryEngine();
+});
+
+function initializeMachineryEngine() {
+    const machineryTitle = document.getElementById('kineticMachineryTitle');
+    const systemSlabs = document.querySelectorAll('.machinery-asymmetric-slab');
+
+    if (!machineryTitle || systemSlabs.length === 0) return;
+    const titleWordsArray = machineryTitle.querySelectorAll('span');
+
+    // --- 1. Scroll-Linked Word Reveal Engine for Headline ---
+    window.addEventListener('scroll', () => {
+        const titleBounds = machineryTitle.getBoundingClientRect();
+        const screenViewportHeight = window.innerHeight;
+
+        const revealBoundStart = screenViewportHeight * 0.88;
+        const revealBoundEnd = screenViewportHeight * 0.22;
+        
+        const trackDistancePixels = revealBoundStart - revealBoundEnd;
+        const totalScrolledOffset = revealBoundStart - titleBounds.top;
+        
+        let percentageTrackRatio = totalScrolledOffset / trackDistancePixels;
+        percentageTrackRatio = Math.max(0, Math.min(1, percentageTrackRatio));
+
+        const activeWordsLimit = Math.floor(percentageTrackRatio * titleWordsArray.length * 1.15);
+
+        titleWordsArray.forEach((word, index) => {
+            if (index < activeWordsLimit) {
+                word.classList.add('word-active');
+            } else {
+                word.classList.remove('word-active');
+            }
+        });
+    });
+}
+
+/**
+ * 2. secure 404 alert shield routing mechanism [14]
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting securely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Hardware Blueprint Locked</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The system schematic target ledger entry [<strong>${targetContextCode}</strong>] points to an offline internal hardware blueprint database currently undergoing security updates [14].</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.2); transition: transform 0.15s ease;">Return to Panel</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+
+<!-- Who We Are / Clinical Intelligence Section -->
+<section id="about-intelligence" class="about-intelligence">
+    <div class="container architecture-grid">
+        
+        <!-- Left Column: Interactive System Telemetry Matrix -->
+        <div class="intelligence-visuals">
+            <div class="matrix-box">
+                <div class="matrix-header">
+                    <span class="status-indicator pulse-animation"></span>
+                    <span class="panel-label">CORE DIAGNOSTIC ENGINE</span>
+                </div>
+                <div class="matrix-body">
+                    <!-- Circular Mask Frame inspired by your console interface UI -->
+                    <div class="center-radar-container">
+                        <div class="radar-circle">
+                            <!-- Image tag for your clinical specialist picture -->
+                            <img src="https://unsplash.com" alt="Clinical Specialist Profile" class="intelligence-img">
+                        </div>
+                        <div class="orbiting-dot"></div>
+                    </div>
+                    
+                    <!-- System telemetry output logs -->
+                    <div class="telemetry-log">
+                        <div class="log-line"><span>SYS_INTEGRITY</span> <span class="teal-text">99.98%</span></div>
+                        <div class="log-line"><span>LAB_AUTOMATION</span> <span class="teal-text">TIER_4</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="intelligence-content">
+            <span class="hardware-tier">CLINICAL OPERATIVE IDENTITY</span>
+            
+            <!-- Dynamic Headline: Words in brackets [...] will render in high-contrast mint teal -->
+            <h2 class="scroll-word-title" data-title="Architects of Next-Gen Automated Pathology Systems & Precision [Hardware.]"></h2>
+            
+            <p class="manifesto-paragraph">
+                We operate as a decentralized clinical diagnostic infrastructure engineered to remove human error tolerances completely. By shifting medical analysis from reactive treatment structures into proactive biomarker tracking metrics, we map cellular realities with continuous precision calibration loops.
+            </p>
+
+            <!-- Architectural Statistics Grid Matrix -->
+            <div class="data-pillars">
+                <div class="pillar-item">
+                    <div class="pillar-num">250+</div>
+                    <div class="pillar-lbl">Automated Bio-Assays</div>
+                </div>
+                <div class="pillar-item">
+                    <div class="pillar-num">15M+</div>
+                    <div class="pillar-lbl">Telemetry Data Evaluated</div>
+                </div>
+            </div>
+
+            <!-- Validation Credentials Tray -->
+            <div class="certifications-tray">
+                <span class="cert-tag"><i class="fa-solid fa-shield-halved"></i> NABL Certified</span>
+                <span class="cert-tag"><i class="fa-solid fa-microscope"></i> ILAC-MRA Aligned</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- High-Tech Dark Theme Elements --- */
+.about-intelligence {
+    background-color: #05090a; /* Deep system terminal black background */
+    padding: 7rem 0;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    color: #e2e8f0;
+}
+
+.architecture-grid {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    gap: 5rem;
+    align-items: center;
+}
+
+/* Left Telemetry Panel Console UI Layout */
+.intelligence-visuals {
+    position: relative;
+    width: 100%;
+}
+
+.matrix-box {
+    background: #0b1416; /* Dark container block matching your deck */
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+}
+
+.matrix-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #00e6b8;
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-indicator.pulse-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    animation: diagnosticPulse 2.5s infinite ease-out;
+}
+
+@keyframes diagnosticPulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+
+.panel-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #819499;
+    letter-spacing: 1.5px;
+}
+
+/* Centralized Circular Radar Frame */
+.center-radar-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 2.5rem;
+}
+
+.radar-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 230, 184, 0.3);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0, 230, 184, 0.04) 0%, transparent 75%);
+}
+
+.intelligence-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    opacity: 0.45; /* Clean integrated system screen depth overlay style */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: opacity 0.3s ease;
+}
+
+.matrix-box:hover .intelligence-img {
+    opacity: 0.75;
+}
+
+/* Orbit Animation Ring Track effect */
+.orbiting-dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background-color: #00e6b8;
+    border-radius: 50%;
+    transform-origin: 0 110px;
+    animation: radarOrbit 5s linear infinite;
+}
+
+@keyframes radarOrbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.telemetry-log {
+    display: flex;
+    justify-content: space-between;
+    background: #070d0f;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #647d82;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.teal-text {
+    color: #00e6b8;
+    font-weight: 700;
+}
+
+/* Right Content Column Layout styling */
+.intelligence-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.hardware-tier {
+    color: #00e6b8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+
+/* Reusable Word-by-Word Animation Structure Styles */
+.scroll-word-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.55rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+.scroll-word-title .word {
+    opacity: 0;
+    color: #ffffff; /* Default base white font */
+    transform: translateY(15px);
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-word-title .word.highlighted-word {
+    color: #00e6b8; /* Mint teal injection highlight marker matching the provided image */
+}
+
+.scroll-word-title .word.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.manifesto-paragraph {
+    color: #819499;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 650px;
+}
+
+/* Metrics Pillars Component */
+.data-pillars {
+    display: flex;
+    gap: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.pillar-num {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.pillar-lbl {
+    font-size: 0.85rem;
+    color: #647d82;
+    font-weight: 500;
+}
+
+/* Trust Badges bottom row tray */
+.certifications-tray {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cert-tag {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cert-tag i {
+    color: #00e6b8;
+}
+
+/* --- Robust Adaptive Media Fluid Breakpoints --- */
+@media (max-width: 1100px) {
+    .architecture-grid {
+        gap: 3rem;
+    }
+    .scroll-word-title { font-size: 2.2rem; }
+    .data-pillars { gap: 2.5rem; }
+}
+
+@media (max-width: 900px) {
+    .architecture-grid {
+        grid-template-columns: 1fr; /* Switch automatically to linear stack view */
+        gap: 4rem;
+    }
+    .intelligence-visuals {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .scroll-word-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-intelligence { padding: 5rem 0; }
+    .data-pillars {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    .matrix-box { padding: 1.5rem 1rem; }
+    .center-radar-container { width: 180px; height: 180px; }
+    .orbiting-dot { transform-origin: 0 90px; }
+}
+
+</style>
+
+<script>
+    // --- Advanced Highlighting Multi-Section Scroll Reveal Engine ---
+const initScrollTitleReveal = () => {
+    const titleElements = document.querySelectorAll('.scroll-word-title');
+    if (titleElements.length === 0) return;
+
+    // Use a light observer config instead of windows scroll tracking loops
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const targetSpans = entry.target.querySelectorAll('.word');
+                
+                targetSpans.forEach((span, index) => {
+                    setTimeout(() => {
+                        span.classList.add('revealed');
+                    }, index * 90); // 90ms fluid tracking cadence interval 
+                });
+
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    titleElements.forEach(titleElement => {
+        const rawText = titleElement.getAttribute('data-title') || "";
+        const wordsArray = rawText.split(" ");
+        
+        // Map elements array structural tokens matching data targets
+        const structuralHTML = wordsArray.map(word => {
+            // Check if string token encapsulates opening or closing brackets matching layout requests
+            if (word.startsWith('[') || word.endsWith(']')) {
+                const cleanWord = word.replace('[', '').replace(']', '');
+                return `<span class="word highlighted-word">${cleanWord}</span>`;
+            }
+            return `<span class="word">${word}</span>`;
+        }).join(" ");
+
+        titleElement.innerHTML = structuralHTML;
+        observer.observe(titleElement);
+    });
+};
+
+// Initialize execution queue stacks correctly
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollTitleReveal();
+});
+
+</script>
+
+<!-- Speciality Telemetry Stream Carousel Section -->
+<section id="specialities-stream" class="specialities-stream">
+    <div class="container">
+        <div class="section-header">
+            <span class="hardware-tier">LIVE DIAGNOSTICS STREAM</span>
+            <!-- Brackets highlight the target words in mint-teal via your JS Engine -->
+            <h2 class="scroll-word-title" data-title="Continuous Stream of Specialized Diagnostic [Modules.]"></h2>
+            <p class="section-subtitle">Real-time analytical pipelines parsing complex biomarkers across modular testing architectures.</p>
+        </div>
+    </div>
+
+    <!-- Infinite Carousel Track Container -->
+    <div class="carousel-viewport-container">
+        <div class="carousel-infinite-track" id="carouselTrack">
+            
+            <!-- Module Card 1: Neurology -->
+            <div class="stream-card staggered-entrance">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Neurology Diagnostics" class="stream-img">
+                    <div class="stream-card-badge">MOD_01</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Neurology Matrix</h3>
+                    <p>Automated neuro-marker assessment tracking central nervous system baseline indicators.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-brain status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Card 2: Oncology -->
+            <div class="stream-card staggered-entrance">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Oncology Assays" class="stream-img">
+                    <div class="stream-card-badge">MOD_02</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Oncology Assays</h3>
+                    <p>High-sensitivity liquid biopsy tracking for early screening or recurrence surveillance profiles.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-dna status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Card 3: Immunological -->
+            <div class="stream-card staggered-entrance">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Immunology Panels" class="stream-img">
+                    <div class="stream-card-badge">MOD_03</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Immunology Panels</h3>
+                    <p>Detailed analysis of allergen interactions, auto-antibodies, and systemic defensive markers.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-shield-virus status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Card 4: Genetic Codes -->
+            <div class="stream-card staggered-entrance">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Genomics Architecture" class="stream-img">
+                    <div class="stream-card-badge">MOD_04</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Genomics Array</h3>
+                    <p>Comprehensive hereditary mapping sequences decoding precise baseline functional traits.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-helix status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── DUPLICATE CARDS FOR SEAMLESS INFINITE LOOP ── -->
+            <!-- Duplicate Card 1 -->
+            <div class="stream-card staggered-entrance" aria-hidden="true">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Neurology" class="stream-img">
+                    <div class="stream-card-badge">MOD_01</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Neurology Matrix</h3>
+                    <p>Automated neuro-marker assessment tracking central nervous system baseline indicators.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-brain status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicate Card 2 -->
+            <div class="stream-card staggered-entrance" aria-hidden="true">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Oncology" class="stream-img">
+                    <div class="stream-card-badge">MOD_02</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Oncology Assays</h3>
+                    <p>High-sensitivity liquid biopsy tracking for early screening or recurrence surveillance profiles.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-dna status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicate Card 3 -->
+            <div class="stream-card staggered-entrance" aria-hidden="true">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Immunology" class="stream-img">
+                    <div class="stream-card-badge">MOD_03</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Immunology Panels</h3>
+                    <p>Detailed analysis of allergen interactions, auto-antibodies, and systemic defensive markers.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-shield-virus status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicate Card 4 -->
+            <div class="stream-card staggered-entrance" aria-hidden="true">
+                <div class="stream-img-wrapper">
+                    <img src="https://unsplash.com" alt="Genomics" class="stream-img">
+                    <div class="stream-card-badge">MOD_04</div>
+                </div>
+                <div class="stream-card-body">
+                    <h3>Genomics Array</h3>
+                    <p>Comprehensive hereditary mapping sequences decoding precise baseline functional traits.</p>
+                    <div class="stream-card-footer">
+                        <span class="sensor-status">ACTIVE</span>
+                        <i class="fa-solid fa-helix status-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<style>
+/* --- Speciality Telemetry Stream Section Styles --- */
+.specialities-stream {
+    background-color: #070d0f; /* Matches your core console background */
+    padding: 6rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* Horizontal Viewport Window */
+.carousel-viewport-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+/* Continuously Moving Inner Track running on CSS engine */
+.carousel-infinite-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: continuousStream 30s linear infinite;
+}
+
+/* Pause track motion instantly on active element hover focus */
+.carousel-infinite-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes continuousStream {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 1rem)); } /* Shifts exactly past unique items block half */
+}
+
+/* Individual Module Streaming Card Layout */
+.stream-card {
+    width: 320px;
+    background: #0b1416;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    
+    /* One-by-One sequential entrance animation defaults */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Revealed entrance state class handled by the intersection observer engine */
+.stream-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card Visual Header Box */
+.stream-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #05090a;
+}
+
+.stream-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.stream-card-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(7, 13, 15, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #819499;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-family: monospace;
+    font-weight: 700;
+}
+
+/* Card Body Content Panel */
+.stream-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.stream-card-body h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.stream-card-body p {
+    font-size: 0.85rem;
+    color: #819499;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.stream-card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 1rem;
+}
+
+.sensor-status {
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: #00e6b8;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sensor-status::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #00e6b8;
+    border-radius: 50%;
+}
+
+.status-icon {
+    color: #647d82;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+/* ── Interactive Card Hover Effects ── */
+.stream-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 230, 184, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 230, 184, 0.05);
+}
+
+.stream-card:hover .stream-img {
+    opacity: 0.75;
+    transform: scale(1.06);
+}
+
+.stream-card:hover .status-icon {
+    color: #00e6b8;
+}
+
+/* --- Responsive Media Adjustments --- */
+@media (max-width: 768px) {
+    .carousel-infinite-track {
+        animation-duration: 20s; /* Moves slightly quicker through screen constraints on smaller views */
+    }
+    .stream-card {
+        width: 280px; /* Slims down the cards slightly on viewport crunch */
+    }
+}
+
+</style>
+
+<script>
+    // --- One-by-One Sequential Elements Stagger Entrance Controller ---
+const initCardStaggerObserver = () => {
+    const trackContainer = document.querySelector('.carousel-viewport-container');
+    if (!trackContainer) return;
+
+    // Target the modular cards inside this section container
+    const cards = trackContainer.querySelectorAll('.stream-card');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate elements one after another cleanly using modular looping index multiply parameters
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, index * 150); // 150ms incremental sequence gap between card reveals
+                });
+                
+                // Disengage observation tracking so animations lock in place permanently
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    observer.observe(trackContainer);
+};
+
+// Mount runtime execution array elements safely
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollTitleReveal(); // Your active global title text script
+    initCardStaggerObserver(); // Mounted sequence execution engine
+});
+
+</script>
+
+<section class="stackly-testimonials-arena" id="testimonials">
+    <div class="testimonials-wrapper">
+
+        <!-- Section Heading -->
+        <div class="testimonials-header-block">
+            <h3 class="scroll-kinetic-testimonials-title" id="kineticTestimonialsTitle">
+                <span>Verified</span>
+                <span>Patient</span>
+                <span>Experiences</span>
+                <span>&</span>
+                <span>Diagnostic</span>
+                <span class="accent-node">Success.</span>
+            </h3>
+        </div>
+
+        <!-- Testimonial Grid -->
+        <div class="testimonials-grid-matrix" id="testimonialsCardsGrid">
+
+            <!-- Testimonial 1 -->
+            <div class="testimonial-display-card">
+
+                <div class="card-upper-meta">
+                    <div class="patient-avatar-frame">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop"
+                             alt="Aarav Sharma"
+                             class="patient-img">
+                    </div>
+
+                    <div class="patient-identity-stack">
+                        <h4>Aarav Sharma</h4>
+                        <span class="checked-package">Comprehensive Advanced Check</span>
+                    </div>
+                </div>
+
+                <div class="rating-stars-row">
+                    <span>★</span><span>★</span><span>★</span>
+                    <span>★</span><span>★</span>
+                </div>
+
+                <p class="patient-review-text">
+                    "The speed of the report delivery was incredible. I got my complete metabolic diagnostics file right inside the secure portal within 8 hours. Stackly has completely updated the checkup experience."
+                </p>
+
+                <div class="verification-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Verified Health Record
+                </div>
+
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-display-card">
+
+                <div class="card-upper-meta">
+                    <div class="patient-avatar-frame">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop"
+                             alt="Priya Patel"
+                             class="patient-img">
+                    </div>
+
+                    <div class="patient-identity-stack">
+                        <h4>Priya Patel</h4>
+                        <span class="checked-package">Essential Health Check</span>
+                    </div>
+                </div>
+
+                <div class="rating-stars-row">
+                    <span>★</span><span>★</span><span>★</span>
+                    <span>★</span><span>★</span>
+                </div>
+
+                <p class="patient-review-text">
+                    "The laboratory facilities are spotless and highly automated. I especially appreciated how clear and legible the biomarker text readouts were. The font sizes and dashboard formatting are very professional."
+                </p>
+
+                <div class="verification-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Verified Health Record
+                </div>
+
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-display-card">
+
+                <div class="card-upper-meta">
+                    <div class="patient-avatar-frame">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop"
+                             alt="Rohan Das"
+                             class="patient-img">
+                    </div>
+
+                    <div class="patient-identity-stack">
+                        <h4>Rohan Das</h4>
+                        <span class="checked-package">Senior Citizen Special</span>
+                    </div>
+                </div>
+
+                <div class="rating-stars-row">
+                    <span>★</span><span>★</span><span>★</span>
+                    <span>★</span><span>★</span>
+                </div>
+
+                <p class="patient-review-text">
+                    "Booked a senior profile for my father. The testing procedure was completely comfortable and stress-free. The post-screening doctor consultation helped clear out all our tracking concerns."
+                </p>
+
+                <div class="verification-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Verified Health Record
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+ :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.7);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+}
+
+/* Main Section */
+.stackly-testimonials-arena {
+    width: 100%;
+    position: relative;
+    display: block;
+    background: var(--bg-clinical-dark);
+    padding: 100px 30px;
+    box-sizing: border-box;
+    clear: both;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.testimonials-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Heading */
+.testimonials-header-block {
+    margin-bottom: 55px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.scroll-kinetic-testimonials-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 12px;
+    max-width: 900px;
+}
+
+.scroll-kinetic-testimonials-title span {
+    opacity: 0.15;
+    transform: translateY(4px);
+    transition: all 0.4s ease;
+    display: inline-block;
+}
+
+.scroll-kinetic-testimonials-title span.word-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-kinetic-testimonials-title span.accent-node.word-active {
+    color: var(--neon-emerald);
+}
+
+/* Testimonial Grid */
+.testimonials-grid-matrix {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+/* Individual Cards */
+.testimonial-display-card {
+    width: 100%;
+    min-width: 0;
+    min-height: 310px;
+    box-sizing: border-box;
+
+    background: var(--card-glass);
+    border: 1px solid rgba(10, 132, 145, 0.2);
+    border-radius: 18px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.65s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.testimonial-display-card.card-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.testimonial-display-card:hover {
+    border-color: rgba(0, 229, 193, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+/* Patient Profile */
+.card-upper-meta {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.patient-avatar-frame {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(0, 229, 193, 0.35);
+    background: #050b0c;
+    flex-shrink: 0;
+}
+
+.patient-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.patient-identity-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+.patient-identity-stack h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.checked-package {
+    color: var(--clinical-teal);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* Star Ratings */
+.rating-stars-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--neon-emerald);
+    margin-bottom: 18px;
+}
+
+.rating-stars-row span {
+    font-size: 21px;
+    line-height: 1;
+    filter: drop-shadow(0 0 4px rgba(0, 229, 193, 0.4));
+}
+
+/* Review */
+.patient-review-text {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.8;
+    font-style: italic;
+    margin: 0 0 25px;
+    flex-grow: 1;
+}
+
+/* Verification Badge */
+.verification-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--neon-emerald);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    background: rgba(0, 229, 193, 0.05);
+    border: 1px solid rgba(0, 229, 193, 0.2);
+    padding: 7px 13px;
+    border-radius: 20px;
+
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.verification-badge svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* Responsive Layout */
+@media (max-width: 1200px) {
+    .testimonials-grid-matrix {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+}
+
+@media (max-width: 992px) {
+    .stackly-testimonials-arena {
+        padding: 70px 20px;
+    }
+
+    .scroll-kinetic-testimonials-title {
+        font-size: 34px;
+    }
+
+    .testimonial-display-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid-matrix {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .testimonial-display-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-kinetic-testimonials-title {
+        font-size: 26px;
+    }
+
+    .card-upper-meta {
+        gap: 12px;
+    }
+
+    .patient-avatar-frame {
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+    }
+
+    .patient-identity-stack h4 {
+        font-size: 16px;
+    }
+
+    .checked-package {
+        font-size: 12px;
+    }
+
+    .testimonial-display-card {
+        padding: 22px;
+    }
+
+    .patient-review-text {
+        font-size: 14px;
+    }
+}
+
+</style>
+
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+    initializeTestimonialsSectionMechanics();
+});
+
+function initializeTestimonialsSectionMechanics() {
+
+    const testimonialsTitle = document.getElementById('kineticTestimonialsTitle');
+
+    const testimonialCards = document.querySelectorAll(
+        '.testimonial-display-card'
+    );
+
+    if (!testimonialsTitle || testimonialCards.length === 0) return;
+
+    const titleTextWords = testimonialsTitle.querySelectorAll('span');
+
+    // 1. Scroll-based heading animation
+    function updateTestimonialsTitle() {
+
+        const titleBounds = testimonialsTitle.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        const revealStart = viewportHeight * 0.88;
+        const revealEnd = viewportHeight * 0.22;
+
+        const progress = Math.max(
+            0,
+            Math.min(
+                1,
+                (revealStart - titleBounds.top) /
+                (revealStart - revealEnd)
+            )
+        );
+
+        const wordsToActiveCount = Math.floor(
+            progress * titleTextWords.length * 1.15
+        );
+
+        titleTextWords.forEach((word, index) => {
+            word.classList.toggle(
+                'word-active',
+                index < wordsToActiveCount
+            );
+        });
+    }
+
+    window.addEventListener('scroll', updateTestimonialsTitle, {
+        passive: true
+    });
+
+    updateTestimonialsTitle();
+
+    // 2. Staggered testimonial card animation
+    const testimonialsGridObserver = new IntersectionObserver(
+        (entries, observer) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    const cardIndex = Array.from(testimonialCards)
+                        .indexOf(entry.target);
+
+                    setTimeout(() => {
+                        entry.target.classList.add('card-revealed');
+                    }, cardIndex * 150);
+
+                    observer.unobserve(entry.target);
+                }
+            });
+
+        },
+        {
+            root: null,
+            threshold: 0.05,
+            rootMargin: "0px 0px -25px 0px"
+        }
+    );
+
+    testimonialCards.forEach(card => {
+        testimonialsGridObserver.observe(card);
+    });
+}
+</script>
+
+<!-- Secure Premium Newsletter Sync Gate Section -->
+<section class="stackly-subscribe-gate" id="newsletter-portal">
+    
+    <!-- Deep Layered Background Media Asset Frame -->
+    <div class="subscribe-asset-background">
+        <img src="https://pexels.com" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
+        <div class="subscribe-dark-shield"></div>
+    </div>
+
+    <!-- Active Center Workspace Wrapper -->
+    <div class="subscribe-arena-wrapper">
+        <div class="subscribe-glass-card">
+            
+            <div class="subscribe-tag-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-pill-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Encrypted Newsletter Feed
+            </div>
+
+            <h3 class="subscribe-main-title">Subscribe to Secure <span>Wellness Intelligence</span></h3>
+            <p class="subscribe-supporting-copy">Get the latest preventative laboratory updates, deep biomass profile analysis, and critical longevity trends delivered directly to your inbox.</p>
+
+            <!-- Subscription Validation Form Matrix Container -->
+            <form id="stacklySubscribeForm" class="subscribe-form-control-row" novalidate>
+                <div class="input-field-nest">
+                    <input type="email" id="subscriberEmailInput" placeholder="Enter secure email address..." required aria-label="Subscriber Email Field">
+                    <!-- Inline Custom Validation Warning Error Tag Banner -->
+                    <div class="field-error-notice" id="fieldWarningNode">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>Please fill in the email field</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-subscribe-submit">
+                    Sync Intelligence
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    :root {
+    --bg-clinical-dark: #091315;
+    --card-glass: rgba(14, 30, 33, 0.8);
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+    --coral-alert: #ff5c75;
+}
+
+/* Master Subscription Ribbon Flow Clear Container */
+.stackly-subscribe-gate {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    padding: 100px 30px;
+    box-sizing: border-box;
+    z-index: 35;
+    clear: both;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Background Image Layer Sub-System --- */
+.subscribe-asset-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.subscribe-backing-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+}
+
+.subscribe-dark-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(5, 11, 12, 0.94) 0%, rgba(9, 19, 21, 0.88) 100%);
+    z-index: 2;
+}
+
+/* --- Glassmorphic Content Card Console --- */
+.subscribe-arena-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Aligns neatly with accordion center frameworks */
+    margin: 0 auto;
+    z-index: 3;
+}
+
+.subscribe-glass-card {
+    background: var(--card-glass);
+    border: 1px solid rgba(0, 229, 193, 0.15);
+    border-radius: 24px;
+    padding: 60px 50px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscribe-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 229, 193, 0.08);
+    border: 1px solid rgba(0, 229, 193, 0.25);
+    color: var(--neon-emerald);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+}
+
+.svg-pill-icon { width: 14px; height: 14px; }
+
+.subscribe-main-title {
+    color: var(--text-pure);
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    max-width: 700px;
+}
+
+.subscribe-main-title span {
+    color: var(--neon-emerald);
+}
+
+.subscribe-supporting-copy {
+    color: var(--text-dimmed);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 650px;
+}
+
+/* --- Inline Input Matrix and Verification Field Controllers --- */
+.subscribe-form-control-row {
+    display: flex;
+    width: 100%;
+    max-width: 620px;
+    gap: 15px;
+    align-items: flex-start;
+    position: relative;
+}
+
+.input-field-nest {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#subscriberEmailInput {
+    width: 100%;
+    background: rgba(5, 11, 12, 0.7);
+    border: 1px solid rgba(10, 132, 145, 0.3);
+    padding: 16px 24px;
+    font-size: 15px;
+    color: #ffffff;
+    border-radius: 30px;
+    outline: none;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#subscriberEmailInput:focus {
+    border-color: var(--neon-emerald);
+    box-shadow: 0 0 15px rgba(0, 229, 193, 0.15);
+    background: rgba(5, 11, 12, 0.9);
+}
+
+/* --- Inline Dynamic Validation Notification Banner Layout --- */
+.field-error-notice {
+    position: absolute;
+    bottom: -32px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--coral-alert);
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+}
+
+.field-error-notice svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Dynamic display trigger flag attached via validation runtime script */
+.field-error-notice.display-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Submission Sync Controller Button */
+.btn-subscribe-submit {
+    background: linear-gradient(135deg, var(--clinical-teal), #00bfa3);
+    color: var(--text-pure);
+    border: none;
+    padding: 16px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 229, 193, 0.25);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-subscribe-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 229, 193, 0.45);
+}
+
+.svg-btn-arrow { width: 15px; height: 15px; transition: transform 0.3s ease; }
+.btn-subscribe-submit:hover .svg-btn-arrow { transform: translateX(4px); }
+
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 992px) {
+    .stackly-subscribe-gate { padding: 70px 20px; }
+    .subscribe-glass-card { padding: 45px 30px; }
+    .subscribe-main-title { font-size: 32px; }
+    .subscribe-supporting-copy { font-size: 14.5px; }
+}
+
+@media (max-width: 650px) {
+    .subscribe-main-title { font-size: 26px; }
+    .subscribe-form-control-row { flex-direction: column; gap: 32px; width: 100%; } /* Stacks layout elements completely */
+    .input-field-nest { width: 100%; }
+    .btn-subscribe-submit { width: 100%; justify-content: center; }
+    .field-error-notice { bottom: unset; top: -24px; left: 15px; } /* Repositions alert tag inside layout blocks */
+}
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initializeSubscriptionGateEngine();
+});
+
+function initializeSubscriptionGateEngine() {
+    const subscribeForm = document.getElementById('stacklySubscribeForm');
+    const emailInput = document.getElementById('subscriberEmailInput');
+    const errorNotice = document.getElementById('fieldWarningNode');
+
+    if (!subscribeForm || !emailInput || !errorNotice) return;
+
+    // Remove any active error notice display while the user keys in text characters
+    emailInput.addEventListener('input', () => {
+        if (errorNotice.classList.contains('display-active')) {
+            errorNotice.classList.remove('display-active');
+            emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
+        }
+    });
+
+    subscribeForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop standard immediate page reload tracking parameters
+
+        const enteredValue = emailInput.value.trim();
+
+        // --- 1. Programmatic Field Completion Checks ---
+        if (enteredValue === "") {
+            // Field is completely empty
+            errorNotice.querySelector('span').innerText = "Please fill in the email field";
+            errorNotice.classList.add('display-active');
+            emailInput.style.borderColor = "var(--coral-alert)";
+            emailInput.focus();
+            return;
+        }
+
+        // Basic structural email regex validation pattern
+        const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegexPattern.test(enteredValue)) {
+            // Input string doesn't follow typical email address properties
+            errorNotice.querySelector('span').innerText = "Please enter a valid email address";
+            errorNotice.classList.add('display-active');
+            emailInput.style.borderColor = "var(--coral-alert)";
+            emailInput.focus();
+            return;
+        }
+
+        // --- 2. Valid Input Form Path: Fire secure medical 404 redirect overlay simulation loop ---
+        executeSecure404Redirect(enteredValue);
+        subscribeForm.reset(); // Clear memory values inside structural fields
+    });
+}
+
+/**
+ * Custom 404 Viewport Layer Launcher
+ * Generates an absolute blocking layer over document body frames to safely mirror requested parameters
+ */
+function executeSecure404Redirect(validatedEmailAddress) {
+    const fullScreen404Layer = document.createElement('div');
+    
+    // Core Layout Styling Definitions
+    Object.assign(fullScreen404Layer.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    fullScreen404Layer.innerHTML = `
+        <div style="max-width: 520px; background: #0e1e21; border: 1px solid #ff5c75; padding: 50px 40px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
+            <svg style="width: 56px; height: 56px; color: #ff5c75; margin-bottom: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 64px; font-weight: 800; color: #ff5c75; margin: 0 0 10px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 22px; color: #ffffff; margin-bottom: 15px; font-weight: 700;">Subscription Loop Encrypted</h3>
+            <p style="color: #7fa4a8; font-size: 14.5px; line-height: 1.6; margin-bottom: 30px;">The data verification portal path for [<strong>${validatedEmailAddress}</strong>] compiled successfully, but has completed a safety route onto a localized 404 security shield loop.</p>
+            <button id="close404PortalBtn" style="background: #00e5c1; color: #091315; border: none; padding: 14px 28px; font-size: 14px; font-weight: 700; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.2s ease;">Return to Control Panel</button>
+        </div>
+    `;
+
+    document.body.appendChild(fullScreen404Layer);
+    document.body.style.overflow = 'hidden'; // Lock root window scroll trackers completely
+
+    // Dismissal controller wire path
+    document.getElementById('close404PortalBtn').addEventListener('click', () => {
+        fullScreen404Layer.remove();
+        document.body.style.overflow = 'auto'; // Unlock root viewport elements
+    });
+}
+
+</script>
+
+<!-- Master Premium Footer Navigation Arena -->
+<footer class="stackly-portal-footer">
+    <div class="footer-arena-wrapper">
+        
+        <!-- Column 1: Brand Info Column -->
+        <div class="footer-column-cell brand-summary-cell">
+            <div class="footer-logo-node" onclick="scrollToTopAndRefresh()" role="button" aria-label="Stackly Logo - Back to Top">
+                <img src="https://unsplash.com" alt="Stackly Health Logo" class="footer-logo-img">
+                
+            </div>
+            <p class="footer-brand-pitch">
+                Pioneering premium health checkups and next-generation clinical diagnostics tailored beautifully to monitor your biomass data and protect your family's vital health milestones.
+            </p>
+            <!-- SVG Vector Social Icons -->
+            <div class="footer-social-row">
+                <a href="#404" onclick="routeToErrorPortal('social-instagram')" class="social-icon-vector" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#404" onclick="routeToErrorPortal('social-facebook')" class="social-icon-vector" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#404" onclick="routeToErrorPortal('social-x')" class="social-icon-vector" aria-label="X Twitter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16z M4 20l6.768-6.768M20 4l-6.768 6.768"></path></svg>
+                </a>
+                <a href="#404" onclick="routeToErrorPortal('social-linkedin')" class="social-icon-vector" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="#404" onclick="routeToErrorPortal('social-youtube')" class="social-icon-vector" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Column 2: Explore Concepts Menu Link List (Domain Swapped) -->
+        <div class="footer-column-cell links-list-cell">
+            <h4 class="footer-heading-label">Checkup Packages</h4>
+            <ul class="footer-nav-links-stack">
+                <li><a href="#404" onclick="routeToErrorPortal('pkg-essential')">Essential Health Check</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('pkg-comprehensive')">Comprehensive Advanced</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('pkg-senior')">Senior Citizen Panels</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('pkg-cardiac')">Bespoke Cardiac Risk</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Styling Support Menu Link List (Domain Swapped) -->
+        <div class="footer-column-cell links-list-cell">
+            <h4 class="footer-heading-label">Clinical Support</h4>
+            <ul class="footer-nav-links-stack">
+                <li><a href="#404" onclick="routeToErrorPortal('support-lab-parameters')">Assay Parameters</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('support-report-tracking')">Report Tracking Nodes</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('support-faq')">Patient Help & FAQ</a></li>
+                <li><a href="#404" onclick="routeToErrorPortal('support-accreditation')">Lab Certifications</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Headquarters Physical Address Card Location -->
+        <div class="footer-column-cell contact-details-cell">
+            <h4 class="footer-heading-label">Medical Center</h4>
+            <div class="contact-card-info-stack">
+                <div class="contact-info-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-inline-marker"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span class="contact-text-address">MMR Complex, Periyakollapatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</span>
+                </div>
+                <div class="contact-info-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-inline-marker"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <a href="tel:+917010792745" class="contact-phone-anchor">+91 7010792745</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Baseline Subfooter Credit Ribbon Row -->
+    <div class="footer-bottom-baseline-strip">
+        <div class="baseline-strip-wrapper">
+            <span class="copyright-legal-text">&copy; 2026 Stackly Health Industries. All diagnostic rights reserved.</span>
+            <div class="baseline-legal-links">
+                <a href="#404" onclick="routeToErrorPortal('legal-privacy')">Privacy Policy</a>
+                <a href="#404" onclick="routeToErrorPortal('legal-terms')">Terms of Service</a>
+                <a href="#404" onclick="routeToErrorPortal('legal-cookies')">Data Management</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    :root {
+    --bg-footer-dark: #050b0c;       /* Deepest health dark tone background */
+    --text-pure: #ffffff;
+    --text-muted-gray: #94b2b5;      /* Clean medical text gray-cyan */
+    --neon-emerald: #00e5c1;         /* Stackly Health Highlight Theme */
+    --clinical-teal: #0a8491;
+    --font-core: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Master Footer Container Section Outer Base */
+.stackly-portal-footer {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-footer-dark);
+    padding: 80px 0 0 0;
+    box-sizing: border-box;
+    z-index: 40;
+    clear: both;
+    font-family: var(--font-core);
+    border-top: 1px solid rgba(10, 132, 145, 0.15);
+}
+
+/* Outer layout capsule framework grid */
+.footer-arena-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px 60px 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+    gap: 50px;
+}
+
+/* --- Column 1: Brand Summary Metrics --- */
+.brand-summary-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    user-select: none;
+}
+
+.footer-logo-img {
+    height: 32px;
+    width: auto;
+    border-radius: 6px;
+}
+
+.footer-logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-pure);
+    letter-spacing: 1px;
+}
+
+.footer-logo-text span {
+    color: var(--neon-emerald);
+}
+
+.footer-brand-pitch {
+    color: var(--text-muted-gray);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 30px;
+    max-width: 320px;
+}
+
+/* SVG Vector Social Rows Nest Configs */
+.footer-social-row {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon-vector {
+    width: 38px;
+    height: 38px;
+    background-color: rgba(10, 132, 145, 0.05);
+    border: 1px solid rgba(10, 132, 145, 0.15);
+    color: var(--text-muted-gray);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-icon-vector svg {
+    width: 16px;
+    height: 16px;
+}
+
+.social-icon-vector:hover {
+    color: var(--bg-footer-dark);
+    background-color: var(--neon-emerald);
+    border-color: transparent;
+    box-shadow: 0 0 12px var(--neon-emerald);
+    transform: translateY(-2px);
+}
+
+/* --- Columns 2 & 3: Navigation Menu Lists Structures --- */
+.footer-heading-label {
+    color: var(--text-pure);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Custom Emerald Line Accent Decoration */
+.footer-heading-label::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background-color: var(--neon-emerald);
+    box-shadow: 0 0 6px var(--neon-emerald);
+}
+
+.footer-nav-links-stack {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-nav-links-stack li a {
+    color: var(--text-muted-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer-nav-links-stack li a:hover {
+    color: var(--neon-emerald);
+}
+
+/* --- Column 4: Headquarters Contact Location Blocks --- */
+.contact-card-info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.svg-inline-marker {
+    width: 16px;
+    height: 16px;
+    color: var(--neon-emerald);
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.contact-text-address {
+    color: var(--text-muted-gray);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.contact-phone-anchor {
+    color: var(--text-muted-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.contact-phone-anchor:hover {
+    color: var(--neon-emerald);
+}
+
+/* --- Bottom Subfooter Legal Ribbon Strip Section Layout --- */
+.footer-bottom-baseline-strip {
+    width: 100%;
+    border-top: 1px solid rgba(10, 132, 145, 0.1);
+    background-color: rgba(5, 11, 12, 0.4);
+    padding: 24px 0;
+}
+
+.baseline-strip-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.copyright-legal-text {
+    color: var(--text-muted-gray);
+    opacity: 0.6;
+    font-size: 13.5px;
+    font-weight: 500;
+}
+
+.baseline-legal-links {
+    display: flex;
+    gap: 25px;
+}
+
+.baseline-legal-links a {
+    color: var(--text-muted-gray);
+    opacity: 0.6;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.baseline-legal-links a:hover {
+    color: var(--neon-emerald);
+    opacity: 1;
+}
+
+/* --- Robust Fluid Media Queries Breakpoints Layout Parameters --- */
+@media (max-width: 1200px) {
+    .footer-arena-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-arena-wrapper {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 0 24px 45px 24px;
+    }
+    .baseline-strip-wrapper {
+        padding: 0 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .baseline-legal-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-brand-pitch {
+        max-width: 100%;
+    }
+}
+
+</style>
+
+<script>
+    /**
+ * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
+ */
+function scrollToTopAndRefresh() {
+    if (window.scrollY === 0) {
+        window.location.reload(); 
+    } else {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        const refreshHandlerScrollCheck = () => {
+            if (window.scrollY === 0) {
+                window.removeEventListener('scroll', refreshHandlerScrollCheck);
+                window.location.reload();
+            }
+        };
+        window.addEventListener('scroll', refreshHandlerScrollCheck);
+    }
+}
+
+/**
+ * 2. 404 Security Simulation Overlay Shield Gate Routing Routine
+ */
+function routeToErrorPortal(targetContextCode) {
+    console.warn(`Redirecting link token sequence safely down to fallback node path: [${targetContextCode}]`);
+
+    const secureErrorMask = document.createElement('div');
+    
+    Object.assign(secureErrorMask.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#050b0c',
+        color: '#ffffff',
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: '1000000',
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+    });
+
+    secureErrorMask.innerHTML = `
+        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
+            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
+            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Diagnostic Sub-Route Locked</h3>
+            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference link parameter [<strong>${targetContextCode}</strong>] points to an offline diagnostic directory that is currently undergoing security audits.</p>
+            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.15s ease;">Return to Control Panel</button>
+        </div>
+    `;
+
+    document.body.appendChild(secureErrorMask);
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
+        secureErrorMask.remove();
+        document.body.style.overflow = 'auto';
+    });
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Uplink Portal - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CORE WRAPPER CONTAINER -->
+  <main class="portal-main-wrapper">
+    <div class="portal-card-layout">
+      
+      <!-- LEFT DESIGN GRAPHIC FRAME PANEL -->
+      <section class="portal-branding-side">
+        <div class="brand-top-row">
+          <div class="brand-pill-tag">
+            <span class="pulse-tracker-dot"></span>
+            SECURE DECRYPTION LAYER
+          </div>
+          <div class="shield-vector-badge">🛡️</div>
+        </div>
+
+        <div class="brand-center-content">
+          <h1 class="brand-headline">Map Health.<br><span class="neon-teal-text">Live Better.</span></h1>
+          <p class="brand-paragraph">
+            Access your secure computational sequencing mainframe. Synchronize biometric sensor telemetry streams, review historical hematology layers, and configure diagnostic assets instantly.
+          </p>
+        </div>
+
+        <div class="brand-media-frame">
+          <img src="https://unsplash.com" alt="Clinical Engineering Control Room Terminal Interface" class="brand-showcase-image">
+        </div>
+      </section>
+
+      <!-- RIGHT DATA ENTRY FORM PANEL -->
+      <section class="portal-form-side">
+        <div class="form-scroll-container">
+          
+          <a href="/404" class="back-home-link">&larr; Back to Home</a>
+          
+          <h2 class="form-main-heading">Welcome Back</h2>
+          <p class="form-subtext">Sign in to calibrate your diagnostic panels, track processing orders, and manage authentication credentials.</p>
+
+          <form id="portal-login-form" novalidate>
+            
+            <!-- Select Account Type Role Selector Dropdown -->
+            <div class="input-element-block">
+              <label class="element-label">Login As</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">👥</span>
+                <select id="user-role-dropdown" required class="custom-select-element">
+                  <option value="" disabled selected hidden>Select account type</option>
+                  <option value="client">Client Longevity Panel</option>
+                  <option value="partner">Partner Analytics Core</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Email Text Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">Email Address</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">✉️</span>
+                <input type="email" id="portal-user-email" placeholder="Enter your email" autocomplete="off" required>
+              </div>
+            </div>
+
+            <!-- Password Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">Password</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">🔒</span>
+                <input type="password" id="portal-user-password" placeholder="Enter your password" required>
+                <button type="button" id="toggle-password-visibility" class="view-hide-btn">👁️</button>
+              </div>
+            </div>
+
+            <!-- Inline Telemetry Validation Tracking Alert Bar -->
+            <div id="portal-status-notifier" class="status-alert-bar hidden-mode">
+              <span class="alert-indicator-dot"></span>
+              <span id="notifier-text-field">Please fill out all terminal entry fields.</span>
+            </div>
+
+            <!-- Recovery Forgot Password Router Link -->
+            <div class="forgot-wrapper">
+              <a href="/404" class="forgot-password-link">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Portal Button Action -->
+            <button type="submit" class="portal-submit-trigger-btn">Sign In</button>
+
+            <!-- Social OAuth Divider Framework -->
+            <div class="oauth-divider-block">
+              <span class="divider-line"></span>
+              <span class="divider-label">OR CONTINUE WITH</span>
+              <span class="divider-line"></span>
+            </div>
+
+            <!-- Social Uplink Buttons Group Matrix -->
+            <div class="oauth-buttons-matrix">
+              <a href="/404" class="oauth-btn">
+                <span class="oauth-brand-icon">🌐</span> Google
+              </a>
+              <a href="/404" class="oauth-btn">
+                <span class="oauth-brand-icon">📘</span> Facebook
+              </a>
+            </div>
+
+            <!-- Footer Conversion Segment -->
+            <p class="portal-register-prompt">
+              Don't have an account? <a href="login.html" class="registration-link">Create Account</a>
+            </p>
+
+          </form>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+ 
+  <style>
+    /* Core Structural Tokens & Theme Variables Alignment */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark-core: #051315;
+  --panel-dark-fill: #091a1d;
+  --neon-teal-bright: #00f0c2;
+  --border-cyber-teal: #162f33;
+  --text-main-bright: #ffffff;
+  --text-muted-teal: #a4b7ba;
+  --input-box-bg: #0d2326;
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark-core);
+  color: var(--text-main-bright);
+  font-family: var(--font-system);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fullscreen Responsive Adaptive Main Matrix Layout Wrapper */
+.portal-main-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .portal-main-wrapper {
+    padding: 2.5rem;
+  }
+}
+
+.portal-card-layout {
+  width: 100%;
+  max-width: 1180px;
+  background-color: var(--panel-dark-fill);
+  border: 1px solid var(--border-cyber-teal);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 992px) {
+  .portal-card-layout {
+    grid-template-columns: 1fr 1.1fr;
+    min-height: 720px;
+  }
+}
+
+/* LEFT HOVER BRANDING INFORMATION SIDE PANEL */
+.portal-branding-side {
+  background: linear-gradient(145deg, #06181b 0%, #030d0e 100%);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  position: relative;
+  border-bottom: 1px solid var(--border-cyber-teal);
+}
+
+@media (min-width: 992px) {
+  .portal-branding-side {
+    border-bottom: none;
+    border-right: 1px solid var(--border-cyber-teal);
+    padding: 3.5rem;
+  }
+}
+
+.brand-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 240, 194, 0.2);
+  background: rgba(0, 240, 194, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--neon-teal-bright);
+}
+
+.pulse-tracker-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon-teal-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--neon-teal-bright);
+}
+
+.shield-vector-badge {
+  font-size: 1.25rem;
+  opacity: 0.8;
+}
+
+.brand-center-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brand-headline {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.neon-teal-text {
+  color: var(--neon-teal-bright);
+  text-shadow: 0 0 20px rgba(0, 240, 194, 0.25);
+}
+
+.brand-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted-teal);
+  max-w: 440px;
+}
+
+.brand-media-frame {
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 992px) {
+  .brand-media-frame {
+    height: 240px;
+  }
+}
+
+.brand-showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  filter: contrast(1.1) brightness(0.9);
+}
+
+/* RIGHT USER INTERACTION FORM SIDE PANEL */
+.portal-form-side {
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .portal-form-side {
+    padding: 3.5rem;
+  }
+}
+
+.form-scroll-container {
+  width: 100%;
+}
+
+.back-home-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-muted-teal);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.back-home-link:hover {
+  color: var(--neon-teal-bright);
+}
+
+.form-main-heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.form-subtext {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted-teal);
+  margin-bottom: 2rem;
+}
+
+/* Form Input Control Arrays Components */
+.input-element-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.element-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main-bright);
+  letter-spacing: 0.5px;
+}
+
+.interactive-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.element-prefix-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 0.95rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.interactive-input-container input,
+.custom-select-element {
+  width: 100%;
+  background-color: var(--input-box-bg);
+  border: 1px solid var(--border-cyber-teal);
+  border-radius: 12px;
+  padding: 1rem 1rem 1rem 2.75rem;
+  color: var(--text-main-bright);
+  font-size: 0.95rem;
+  font-family: var(--font-system);
+  appearance: none; /* Strip native dropdown layouts formatting styling */
+  -webkit-appearance: none;
+  transition: all 0.3s ease;
+}
+
+.interactive-input-container input:focus,
+.custom-select-element:focus {
+  outline: none;
+  border-color: var(--neon-teal-bright);
+  box-shadow: 0 0 12px rgba(0, 240, 194, 0.15);
+}
+
+/* Password and Select Tweaks */
+.view-hide-btn {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted-teal);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.custom-select-element {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a4b7ba' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+}
+
+/* State Notification Tracker Error Display layout bars */
+.status-alert-bar {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: #ff6b6b;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.alert-indicator-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #ff6b6b;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff6b6b;
+}
+
+.hidden-mode {
+  display: none !important;
+}
+
+.forgot-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.forgot-password-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--neon-teal-bright);
+  text-decoration: none;
+}
+
+/* Form Action Submission Buttons */
+.portal-submit-trigger-btn {
+  width: 100%;
+  background-color: #00a887;
+  color: var(--text-main-bright);
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.portal-submit-trigger-btn:hover {
+  background-color: var(--neon-teal-bright);
+  color: var(--bg-dark-core);
+  box-shadow: 0 0 20px rgba(0, 240, 194, 0.3);
+}
+
+/* OAuth Matrix Layout blocks */
+.oauth-divider-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-cyber-teal);
+}
+
+.divider-label {
+  font-family: monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: #526b6f;
+}
+
+.oauth-buttons-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.oauth-btn {
+  background: transparent;
+  border: 1px solid var(--border-cyber-teal);
+  border-radius: 12px;
+  padding: 0.85rem;
+  color: var(--text-main-bright);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.oauth-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Footer elements prompts toggles */
+.portal-register-prompt {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted-teal);
+}
+
+.registration-link {
+  color: var(--neon-teal-bright);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("portal-login-form");
+  const roleDropdown = document.getElementById("user-role-dropdown");
+  const emailInput = document.getElementById("portal-user-email");
+  const passwordInput = document.getElementById("portal-user-password");
+  const statusNotifier = document.getElementById("portal-status-notifier");
+  const notifierText = document.getElementById("notifier-text-field");
+  const togglePasswordBtn = document.getElementById("toggle-password-visibility");
+
+  // Toggle Password Hidden Field Visibility State Masking
+  togglePasswordBtn.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      togglePasswordBtn.textContent = "🙈";
+    } else {
+      passwordInput.type = "password";
+      togglePasswordBtn.textContent = "👁️";
+    }
+  });
+
+  // Main Form Event Submission Lifecycle Execution Thread
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const selectedRole = roleDropdown.value;
+    const emailValue = emailInput.value.trim();
+    const passwordValue = passwordInput.value;
+
+    // 1. Mandatory Fields Validation Checking Loop
+    if (!selectedRole || !emailValue || !passwordValue) {
+      statusNotifier.classList.remove("hidden-mode");
+      notifierText.textContent = "Please fill out all terminal entry fields.";
+      return;
+    }
+
+    // 2. Email Structural Pattern Integrity Validation Check
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(emailValue)) {
+      statusNotifier.classList.remove("hidden-mode");
+      notifierText.textContent = "Invalid terminal network trace: Please declare a standard email layout.";
+      return;
+    }
+
+    // Hide status bars if everything checks out initially
+    statusNotifier.classList.add("hidden-mode");
+
+    // 3. Local Storage Pipeline Data Cache Write Operations
+    // Persist identity metadata tokens across browser page loads
+    localStorage.setItem("authenticatedUserEmail", emailValue);
+    localStorage.setItem("authenticatedUserRole", selectedRole);
+
+    // 4. Role-based Conditional Dashboard Routing Engine Link
+    if (selectedRole === "partner") {
+      window.location.href = "partner-dashboard.html";
+    } else if (selectedRole === "client") {
+      window.location.href = "client-dashboard.html";
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

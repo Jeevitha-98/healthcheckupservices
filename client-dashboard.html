@@ -1,0 +1,7696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Health - Client Care Console</title>
+    <link rel="stylesheet" href="client-dashboard.css">
+</head>
+<body class="client-dashboard-frame">
+
+    <!-- Top Navigation Header Panel -->
+    <header class="client-top-navbar">
+        <div class="header-left-wing">
+            <!-- Mobile Hamburger Trigger Vector -->
+            <button class="mobile-sidebar-hamburger" id="clientSidebarToggle" aria-label="Toggle Navigation Sidebar">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            
+            <div class="client-brand-logo" onclick="refreshDashboardPortal()" role="button" aria-label="Stackly Home & Refresh">
+                <img src="https://unsplash.com" alt="Stackly Health Logo" class="brand-logo-asset">
+              
+            </div>
+        </div>
+
+        <div class="header-right-wing">
+            <!-- Alert Notification Bell -->
+            <button class="header-action-bell" onclick="triggerBellAlert()" aria-label="View notifications">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span class="notification-indicator-dot"></span>
+            </button>
+            
+            <!-- Dynamic Client Profile Name Module -->
+            <div class="client-profile-capsule">
+                <div class="avatar-placeholder-circle" id="clientAvatarInitial">C</div>
+                <div class="profile-text-labels">
+                    <span class="welcome-micro-prefix">Welcome back,</span>
+                    <span class="client-extracted-name" id="headerClientName">Client User</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Outer Layout Container Workspace -->
+    <div class="client-workspace-container">
+        
+        <!-- Sliding Responsive Sidebar Drawer Panel -->
+        <aside class="client-sidebar-drawer" id="clientSidebarDrawer">
+            <nav class="sidebar-nav-tree">
+                <ul class="sidebar-links-group">
+                    <!-- Nav menus mapped with section wide targets for individual testing -->
+                    <li>
+                        <button class="sidebar-menu-btn active" onclick="switchClientView(this, 'view-medical-profile')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <span>My Medical Profile</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-menu-btn" onclick="switchClientView(this, 'view-lab-reports')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            <span>Diagnostic Reports</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-menu-btn" onclick="switchClientView(this, 'view-appointments')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>My Bookings</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-menu-btn" onclick="switchClientView(this, 'view-billing')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                            <span>Invoices & Billing</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-menu-btn" onclick="switchClientView(this, 'view-settings')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            <span>Portal Settings</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Lower Sign Out Navigation Trigger -->
+                <div class="sidebar-footer-action">
+                <button class="btn-sidebar-logout" onclick="window.location.href='login.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" y1="12" x2="9" y2="12"></line>
+    </svg>
+    <span>Sign Out Portal</span>
+</button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Dynamic Content Canvas Viewing Workspace Panels -->
+        <main class="client-main-canvas" id="clientMainViewport">
+            
+            <!-- SECTION 1: My Medical Profile View -->
+           
+<div class="client-page-view-panel display-visible" id="view-medical-profile">
+
+    <section class="medical-profile-dashboard">
+
+        <!-- Header -->
+        <div class="medical-profile-header">
+            <div>
+                <span class="medical-profile-eyebrow">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    PERSONAL HEALTH RECORDS
+                </span>
+                <h2>My Medical Profile</h2>
+                <p>
+                    Manage your personal health information, monitor vital signs,
+                    and maintain your medical history in one place.
+                </p>
+            </div>
+
+            <button class="medical-profile-primary-btn"
+                onclick="window.location.href='404.html?target=edit-medical-profile'">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit Medical Profile
+            </button>
+        </div>
+
+        <!-- Profile Overview -->
+        <div class="medical-profile-overview">
+
+            <div class="medical-profile-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="medical-profile-identity">
+                <span>PERSONAL HEALTH PROFILE</span>
+                <h3>Patient Health Record</h3>
+                <p>
+                    <i class="fa-solid fa-id-card"></i>
+                    Patient ID: STK-PT-2026-001
+                </p>
+            </div>
+
+            <div class="medical-profile-status">
+                <i class="fa-solid fa-circle-check"></i>
+                Profile Overview
+            </div>
+
+        </div>
+
+        <!-- Vital Statistics -->
+        <div class="medical-profile-section-heading">
+            <div>
+                <h3>Health Overview</h3>
+                <p>Your key health measurements and biological indicators</p>
+            </div>
+
+            <button class="medical-profile-text-btn"
+                onclick="window.location.href='404.html?target=health-metrics-history'">
+                View History <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="medical-vitals-grid">
+
+            <div class="medical-vital-card">
+                <div class="medical-vital-top">
+                    <span>Blood Pressure</span>
+                    <div class="medical-vital-icon teal">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                </div>
+                <h3>120/80 <small>mmHg</small></h3>
+                <span class="medical-vital-description">Sample reading</span>
+            </div>
+
+            <div class="medical-vital-card">
+                <div class="medical-vital-top">
+                    <span>Heart Rate</span>
+                    <div class="medical-vital-icon pink">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+                <h3>72 <small>bpm</small></h3>
+                <span class="medical-vital-description">Sample reading</span>
+            </div>
+
+            <div class="medical-vital-card">
+                <div class="medical-vital-top">
+                    <span>Body Temperature</span>
+                    <div class="medical-vital-icon orange">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                </div>
+                <h3>36.8 <small>°C</small></h3>
+                <span class="medical-vital-description">Sample reading</span>
+            </div>
+
+            <div class="medical-vital-card">
+                <div class="medical-vital-top">
+                    <span>Oxygen Saturation</span>
+                    <div class="medical-vital-icon blue">
+                        <i class="fa-solid fa-lungs"></i>
+                    </div>
+                </div>
+                <h3>98 <small>%</small></h3>
+                <span class="medical-vital-description">Sample reading</span>
+            </div>
+
+        </div>
+
+        <!-- Medical Information -->
+        <div class="medical-profile-main-grid">
+
+            <!-- Personal Information -->
+            <div class="medical-profile-panel">
+                <div class="medical-profile-panel-heading">
+                    <div>
+                        <h3>Personal Health Information</h3>
+                        <p>Basic patient information</p>
+                    </div>
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+
+                <div class="medical-info-list">
+                    <div>
+                        <span>Date of Birth</span>
+                        <strong>Not Provided</strong>
+                    </div>
+                    <div>
+                        <span>Blood Group</span>
+                        <strong>Not Recorded</strong>
+                    </div>
+                    <div>
+                        <span>Height</span>
+                        <strong>Not Recorded</strong>
+                    </div>
+                    <div>
+                        <span>Weight</span>
+                        <strong>Not Recorded</strong>
+                    </div>
+                    <div>
+                        <span>Primary Healthcare Provider</span>
+                        <strong>Not Assigned</strong>
+                    </div>
+                </div>
+
+                <button class="medical-profile-panel-btn"
+                    onclick="window.location.href='404.html?target=personal-health-information'">
+                    Update Health Information
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Medical History -->
+            <div class="medical-profile-panel">
+                <div class="medical-profile-panel-heading">
+                    <div>
+                        <h3>Medical History</h3>
+                        <p>Previous health conditions and records</p>
+                    </div>
+                    <i class="fa-solid fa-file-medical"></i>
+                </div>
+
+                <div class="medical-history-empty">
+                    <div class="medical-empty-icon">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <h4>Medical History Records</h4>
+                    <p>
+                        Review and maintain your previous diagnoses,
+                        treatments, surgeries, and healthcare visits.
+                    </p>
+                    <span class="medical-record-label">No records displayed</span>
+                </div>
+
+                <button class="medical-profile-panel-btn"
+                    onclick="window.location.href='404.html?target=medical-history'">
+                    Manage Medical History
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Allergies -->
+            <div class="medical-profile-panel">
+                <div class="medical-profile-panel-heading">
+                    <div>
+                        <h3>Allergies & Sensitivities</h3>
+                        <p>Important allergy information</p>
+                    </div>
+                    <i class="fa-solid fa-hand-dots"></i>
+                </div>
+
+                <div class="medical-information-highlight">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>Allergy Information</strong>
+                        <span>
+                            Maintain accurate details about medication,
+                            food, and environmental allergies.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="medical-history-empty compact">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <p>No allergy information recorded.</p>
+                </div>
+
+                <button class="medical-profile-panel-btn"
+                    onclick="window.location.href='404.html?target=allergy-management'">
+                    Manage Allergies
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Medications -->
+            <div class="medical-profile-panel">
+                <div class="medical-profile-panel-heading">
+                    <div>
+                        <h3>Medications</h3>
+                        <p>Current prescriptions and medication history</p>
+                    </div>
+                    <i class="fa-solid fa-pills"></i>
+                </div>
+
+                <div class="medical-history-empty">
+                    <div class="medical-empty-icon medication">
+                        <i class="fa-solid fa-capsules"></i>
+                    </div>
+                    <h4>Medication Records</h4>
+                    <p>
+                        Keep track of prescribed medications, dosage details,
+                        and treatment schedules.
+                    </p>
+                    <span class="medical-record-label">No medications displayed</span>
+                </div>
+
+                <button class="medical-profile-panel-btn"
+                    onclick="window.location.href='404.html?target=medication-management'">
+                    Manage Medications
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Family Medical History -->
+        <div class="medical-profile-panel medical-family-panel">
+
+            <div class="medical-profile-panel-heading">
+                <div>
+                    <h3>Family Medical History</h3>
+                    <p>
+                        Maintain relevant hereditary health information
+                        and family medical history.
+                    </p>
+                </div>
+
+                <div class="medical-family-heading-icon">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+            </div>
+
+            <div class="medical-family-grid">
+
+                <div class="medical-family-card">
+                    <div class="medical-family-icon">
+                        <i class="fa-solid fa-person"></i>
+                    </div>
+                    <div>
+                        <strong>Father's Medical History</strong>
+                        <span>Family health information</span>
+                    </div>
+                    <span class="medical-family-status">Not Recorded</span>
+                </div>
+
+                <div class="medical-family-card">
+                    <div class="medical-family-icon">
+                        <i class="fa-solid fa-person-dress"></i>
+                    </div>
+                    <div>
+                        <strong>Mother's Medical History</strong>
+                        <span>Family health information</span>
+                    </div>
+                    <span class="medical-family-status">Not Recorded</span>
+                </div>
+
+                <div class="medical-family-card">
+                    <div class="medical-family-icon">
+                        <i class="fa-solid fa-people-arrows-left-right"></i>
+                    </div>
+                    <div>
+                        <strong>Other Family Members</strong>
+                        <span>Additional hereditary health records</span>
+                    </div>
+                    <span class="medical-family-status">Not Recorded</span>
+                </div>
+
+            </div>
+
+            <button class="medical-profile-panel-btn"
+                onclick="window.location.href='404.html?target=family-medical-history'">
+                Update Family Medical History
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="medical-profile-footer">
+
+            <div>
+                <span class="medical-profile-eyebrow">HEALTH RECORD MANAGEMENT</span>
+                <h3>Keep Your Medical Profile Updated</h3>
+                <p>
+                    Maintain accurate health information to support
+                    better healthcare coordination.
+                </p>
+            </div>
+
+            <div class="medical-profile-footer-actions">
+
+                <button onclick="window.location.href='404.html?target=download-medical-profile'">
+                    <i class="fa-solid fa-download"></i>
+                    Download Profile
+                </button>
+
+                <button onclick="window.location.href='404.html?target=health-records'">
+                    <i class="fa-solid fa-folder-open"></i>
+                    Health Records
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+<style>
+    
+/* ==========================================
+   MY MEDICAL PROFILE - CLIENT PORTAL
+========================================== */
+
+#view-medical-profile {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.medical-profile-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.medical-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.medical-profile-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.medical-profile-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.medical-profile-header p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.medical-profile-primary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 17px;
+    border: none;
+    border-radius: 8px;
+    background: #00d9b0;
+    color: #03201d;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.medical-profile-primary-btn:hover {
+    background: #00f0c2;
+}
+
+/* Profile Overview */
+
+.medical-profile-overview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    margin-bottom: 26px;
+    border: 1px solid #15534b;
+    border-radius: 12px;
+    background: linear-gradient(105deg, #092825, #07191b);
+}
+
+.medical-profile-avatar {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #00e8c01c;
+    color: #00e8c0;
+    font-size: 21px;
+}
+
+.medical-profile-identity {
+    flex: 1;
+    min-width: 0;
+}
+
+.medical-profile-identity > span {
+    color: #00e8c0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.medical-profile-identity h3 {
+    margin: 5px 0;
+    color: #effaf8;
+    font-size: 16px;
+}
+
+.medical-profile-identity p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 11px;
+}
+
+.medical-profile-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 11px;
+    border: 1px solid #20645b;
+    border-radius: 20px;
+    color: #64e5c5;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+/* Section Heading */
+
+.medical-profile-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.medical-profile-section-heading h3 {
+    margin: 0 0 6px;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.medical-profile-section-heading p {
+    margin: 0;
+    color: #82999b;
+    font-size: 11px;
+}
+
+.medical-profile-text-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: #00e8c0;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* Vital Cards */
+
+.medical-vitals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.medical-vital-card {
+    padding: 18px;
+    min-width: 0;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.medical-vital-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.medical-vital-top > span {
+    color: #9badae;
+    font-size: 11px;
+}
+
+.medical-vital-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.medical-vital-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.medical-vital-icon.pink {
+    color: #ff82a2;
+    background: #ff82a21a;
+}
+
+.medical-vital-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.medical-vital-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.medical-vital-card h3 {
+    margin: 17px 0 7px;
+    color: #f0fafa;
+    font-size: 25px;
+    font-weight: 750;
+}
+
+.medical-vital-card h3 small {
+    color: #8da1a3;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.medical-vital-description {
+    color: #82999b;
+    font-size: 10px;
+}
+
+/* Medical Information Panels */
+
+.medical-profile-main-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 20px;
+}
+
+.medical-profile-panel {
+    min-width: 0;
+    padding: 21px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 12px;
+}
+
+.medical-profile-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.medical-profile-panel-heading h3 {
+    margin: 0 0 6px;
+    color: #edfafa;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.medical-profile-panel-heading p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.medical-profile-panel-heading > i {
+    color: #00e8c0;
+    font-size: 20px;
+}
+
+/* Information List */
+
+.medical-info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.medical-info-list > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #142b2d;
+}
+
+.medical-info-list > div:last-child {
+    border-bottom: none;
+}
+
+.medical-info-list span {
+    color: #82999b;
+    font-size: 11px;
+}
+
+.medical-info-list strong {
+    color: #dcebea;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Empty Medical History */
+
+.medical-history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: 18px;
+    text-align: center;
+    background: #0a1e20;
+    border: 1px dashed #254143;
+    border-radius: 9px;
+}
+
+.medical-empty-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    background: #00e8c018;
+    color: #00e8c0;
+    border-radius: 11px;
+    font-size: 17px;
+}
+
+.medical-empty-icon.medication {
+    background: #73baff18;
+    color: #73baff;
+}
+
+.medical-history-empty h4 {
+    margin: 0 0 7px;
+    color: #e3f1ef;
+    font-size: 12px;
+}
+
+.medical-history-empty p {
+    max-width: 280px;
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.medical-record-label {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: #82999b18;
+    color: #a6b6b7;
+    font-size: 9px;
+}
+
+.medical-history-empty.compact {
+    min-height: 100px;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.medical-history-empty.compact > i {
+    color: #ffbd78;
+    font-size: 18px;
+}
+
+.medical-history-empty.compact p {
+    text-align: left;
+}
+
+/* Allergy Highlight */
+
+.medical-information-highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 13px;
+    margin-bottom: 12px;
+    background: #ffb36a0c;
+    border: 1px solid #70432c;
+    border-radius: 8px;
+}
+
+.medical-information-highlight > i {
+    color: #ffbd78;
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.medical-information-highlight div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.medical-information-highlight strong {
+    color: #ffca91;
+    font-size: 11px;
+}
+
+.medical-information-highlight span {
+    color: #b69a7d;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Panel Action Buttons */
+
+.medical-profile-panel-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 11px 13px;
+    background: #0c2525;
+    color: #00e8c0;
+    border: 1px solid #194b46;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.medical-profile-panel-btn:hover {
+    background: #103431;
+    border-color: #00a98e;
+}
+
+/* Family History */
+
+.medical-family-panel {
+    margin-bottom: 20px;
+}
+
+.medical-family-heading-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: #73baff18;
+    color: #73baff;
+}
+
+.medical-family-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.medical-family-card {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-wrap: wrap;
+    padding: 14px;
+    background: #0a1e20;
+    border: 1px solid #173335;
+    border-radius: 9px;
+}
+
+.medical-family-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c018;
+    color: #00e8c0;
+    border-radius: 8px;
+}
+
+.medical-family-card > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.medical-family-card strong {
+    color: #dcebea;
+    font-size: 10px;
+}
+
+.medical-family-card span {
+    color: #82999b;
+    font-size: 9px;
+}
+
+.medical-family-status {
+    width: 100%;
+    padding-top: 9px;
+    border-top: 1px solid #173335;
+}
+
+/* Footer */
+
+.medical-profile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 21px;
+    background: linear-gradient(110deg, #092322, #071618);
+    border: 1px solid #17413e;
+    border-radius: 12px;
+}
+
+.medical-profile-footer .medical-profile-eyebrow {
+    margin-bottom: 8px;
+}
+
+.medical-profile-footer h3 {
+    margin: 0 0 7px;
+    color: #edfafa;
+    font-size: 15px;
+}
+
+.medical-profile-footer p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.medical-profile-footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.medical-profile-footer-actions button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #10292a;
+    color: #b6d1ce;
+    border: 1px solid #1d4545;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.medical-profile-footer-actions button i {
+    color: #00e8c0;
+}
+
+.medical-profile-footer-actions button:hover {
+    border-color: #00bfa0;
+    background: #123332;
+    color: #fff;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .medical-vitals-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .medical-family-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medical-profile-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .medical-profile-footer-actions {
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-medical-profile {
+        padding: 16px;
+    }
+
+    .medical-profile-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .medical-profile-primary-btn {
+        width: 100%;
+    }
+
+    .medical-profile-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medical-profile-overview {
+        flex-wrap: wrap;
+    }
+
+    .medical-profile-status {
+        margin-left: 68px;
+    }
+}
+
+@media (max-width: 480px) {
+    #view-medical-profile {
+        padding: 12px;
+    }
+
+    .medical-vitals-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .medical-profile-panel,
+    .medical-vital-card {
+        padding: 16px;
+    }
+
+    .medical-profile-overview {
+        padding: 15px;
+        gap: 11px;
+    }
+
+    .medical-profile-status {
+        margin-left: 0;
+    }
+
+    .medical-profile-section-heading {
+        align-items: flex-start;
+    }
+
+    .medical-info-list > div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .medical-info-list strong {
+        text-align: left;
+    }
+
+    .medical-family-card {
+        align-items: flex-start;
+    }
+
+    .medical-profile-footer-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .medical-profile-footer-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* ==========================================
+   MEDICAL PROFILE - INCREASED FONT SIZES
+========================================== */
+
+#view-medical-profile {
+    font-size: 16px;
+}
+
+/* Header */
+.medical-profile-eyebrow {
+    font-size: 13px;
+}
+
+.medical-profile-header h2 {
+    font-size: 36px;
+}
+
+.medical-profile-header p {
+    font-size: 16px;
+}
+
+.medical-profile-primary-btn {
+    font-size: 15px;
+}
+
+/* Profile Overview */
+.medical-profile-avatar {
+    font-size: 24px;
+}
+
+.medical-profile-identity > span {
+    font-size: 12px;
+}
+
+.medical-profile-identity h3 {
+    font-size: 21px;
+}
+
+.medical-profile-identity p {
+    font-size: 14px;
+}
+
+.medical-profile-status {
+    font-size: 13px;
+}
+
+/* Section Headings */
+.medical-profile-section-heading h3 {
+    font-size: 21px;
+}
+
+.medical-profile-section-heading p {
+    font-size: 14px;
+}
+
+.medical-profile-text-btn {
+    font-size: 14px;
+}
+
+/* Vital Cards */
+.medical-vital-top > span {
+    font-size: 14px;
+}
+
+.medical-vital-icon {
+    font-size: 18px;
+}
+
+.medical-vital-card h3 {
+    font-size: 30px;
+}
+
+.medical-vital-card h3 small {
+    font-size: 14px;
+}
+
+.medical-vital-description {
+    font-size: 13px;
+}
+
+/* Medical Information Panels */
+.medical-profile-panel-heading h3 {
+    font-size: 19px;
+}
+
+.medical-profile-panel-heading p {
+    font-size: 13px;
+}
+
+.medical-profile-panel-heading > i {
+    font-size: 23px;
+}
+
+/* Information List */
+.medical-info-list span {
+    font-size: 14px;
+}
+
+.medical-info-list strong {
+    font-size: 14px;
+}
+
+/* Empty Medical History */
+.medical-empty-icon {
+    font-size: 20px;
+}
+
+.medical-history-empty h4 {
+    font-size: 16px;
+}
+
+.medical-history-empty p {
+    font-size: 13px;
+}
+
+.medical-record-label {
+    font-size: 12px;
+}
+
+.medical-history-empty.compact > i {
+    font-size: 21px;
+}
+
+/* Allergy Highlight */
+.medical-information-highlight > i {
+    font-size: 18px;
+}
+
+.medical-information-highlight strong {
+    font-size: 14px;
+}
+
+.medical-information-highlight span {
+    font-size: 13px;
+}
+
+/* Panel Action Buttons */
+.medical-profile-panel-btn {
+    font-size: 13px;
+}
+
+/* Family History */
+.medical-family-card strong {
+    font-size: 14px;
+}
+
+.medical-family-card span {
+    font-size: 13px;
+}
+
+.medical-family-icon {
+    font-size: 17px;
+}
+
+/* Footer */
+.medical-profile-footer h3 {
+    font-size: 20px;
+}
+
+.medical-profile-footer p {
+    font-size: 14px;
+}
+
+.medical-profile-footer-actions button {
+    font-size: 13px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .medical-profile-header h2 {
+        font-size: 31px;
+    }
+
+    .medical-profile-section-heading h3 {
+        font-size: 19px;
+    }
+
+    .medical-profile-identity h3 {
+        font-size: 19px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .medical-profile-header h2 {
+        font-size: 27px;
+    }
+
+    .medical-profile-header p {
+        font-size: 14px;
+    }
+
+    .medical-profile-section-heading h3 {
+        font-size: 18px;
+    }
+
+    .medical-profile-panel-heading h3 {
+        font-size: 17px;
+    }
+
+    .medical-vital-card h3 {
+        font-size: 27px;
+    }
+
+    .medical-info-list span,
+    .medical-info-list strong {
+        font-size: 13px;
+    }
+
+    .medical-history-empty h4 {
+        font-size: 15px;
+    }
+
+    .medical-profile-footer h3 {
+        font-size: 18px;
+    }
+
+    .medical-profile-footer p {
+        font-size: 13px;
+    }
+}
+
+
+</style>
+
+            <!-- SECTION 2: Diagnostic Reports View -->
+         
+<div class="client-page-view-panel" id="view-lab-reports">
+
+    <section class="lab-reports-dashboard">
+
+        <!-- Header -->
+        <div class="lab-reports-header">
+            <div>
+                <span class="lab-reports-eyebrow">
+                    <i class="fa-solid fa-flask-vial"></i>
+                    HEALTHCARE DOCUMENT CENTER
+                </span>
+                <h2>Diagnostic Reports</h2>
+                <p>
+                    Access your laboratory reports, review diagnostic results,
+                    and monitor your health assessment history.
+                </p>
+            </div>
+
+            <button class="lab-report-primary-btn"
+                onclick="window.location.href='404.html?target=all-diagnostic-reports'">
+                <i class="fa-solid fa-folder-open"></i>
+                View All Reports
+            </button>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="lab-report-summary-grid">
+
+            <div class="lab-report-summary-card">
+                <div class="lab-summary-icon teal">
+                    <i class="fa-solid fa-file-medical"></i>
+                </div>
+                <div>
+                    <span>Total Reports</span>
+                    <h3>24</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="lab-report-summary-card">
+                <div class="lab-summary-icon blue">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <span>Verified Reports</span>
+                    <h3>18</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="lab-report-summary-card">
+                <div class="lab-summary-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                    <span>Processing</span>
+                    <h3>03</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="lab-report-summary-card">
+                <div class="lab-summary-icon purple">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div>
+                    <span>Last Checkup</span>
+                    <h3>12 Oct</h3>
+                    <small>Sample date</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Report Categories -->
+        <div class="lab-report-section-heading">
+            <div>
+                <h3>Diagnostic Categories</h3>
+                <p>Browse reports by laboratory testing category</p>
+            </div>
+        </div>
+
+        <div class="lab-report-category-grid">
+
+            <div class="lab-report-category-card">
+                <div class="lab-category-icon teal">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <h4>Hematology</h4>
+                <p>Blood counts and related laboratory investigations</p>
+                <button onclick="window.location.href='404.html?target=hematology-reports'">
+                    Explore Reports <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="lab-report-category-card">
+                <div class="lab-category-icon blue">
+                    <i class="fa-solid fa-dna"></i>
+                </div>
+                <h4>Biochemistry</h4>
+                <p>Glucose, lipid profile, liver and kidney assessments</p>
+                <button onclick="window.location.href='404.html?target=biochemistry-reports'">
+                    Explore Reports <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="lab-report-category-card">
+                <div class="lab-category-icon orange">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <h4>Microbiology</h4>
+                <p>Culture testing and microbiological investigations</p>
+                <button onclick="window.location.href='404.html?target=microbiology-reports'">
+                    Explore Reports <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="lab-report-category-card">
+                <div class="lab-category-icon purple">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h4>Biomarker Analysis</h4>
+                <p>Track selected health indicators and test results</p>
+                <button onclick="window.location.href='404.html?target=biomarker-reports'">
+                    Explore Reports <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Recent Reports -->
+        <div class="lab-report-section-heading recent-heading">
+            <div>
+                <h3>Recent Diagnostic Reports</h3>
+                <p>Review your latest laboratory report records</p>
+            </div>
+
+            <button class="lab-report-view-all"
+                onclick="window.location.href='404.html?target=complete-report-history'">
+                Complete History <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="lab-report-table-container">
+
+            <table class="lab-report-table">
+                <thead>
+                    <tr>
+                        <th>Report Details</th>
+                        <th>Report ID</th>
+                        <th>Test Date</th>
+                        <th>Laboratory</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="lab-report-name">
+                                <div class="lab-report-file-icon">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div>
+                                    <strong>Complete Blood Count</strong>
+                                    <span>Hematology</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>LAB-2026-001</td>
+                        <td>12 Oct 2026</td>
+                        <td>Stackly Diagnostics</td>
+                        <td><span class="lab-status verified">Verified</span></td>
+                        <td>
+                            <button class="lab-report-action-btn"
+                                onclick="window.location.href='404.html?target=view-cbc-report'">
+                                <i class="fa-solid fa-eye"></i> View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="lab-report-name">
+                                <div class="lab-report-file-icon">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div>
+                                    <strong>Lipid Profile</strong>
+                                    <span>Biochemistry</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>LAB-2026-002</td>
+                        <td>10 Oct 2026</td>
+                        <td>Stackly Diagnostics</td>
+                        <td><span class="lab-status verified">Verified</span></td>
+                        <td>
+                            <button class="lab-report-action-btn"
+                                onclick="window.location.href='404.html?target=view-lipid-report'">
+                                <i class="fa-solid fa-eye"></i> View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="lab-report-name">
+                                <div class="lab-report-file-icon">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div>
+                                    <strong>Thyroid Profile</strong>
+                                    <span>Hormone Analysis</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>LAB-2026-003</td>
+                        <td>09 Oct 2026</td>
+                        <td>Stackly Diagnostics</td>
+                        <td><span class="lab-status processing">Processing</span></td>
+                        <td>
+                            <button class="lab-report-action-btn"
+                                onclick="window.location.href='404.html?target=view-thyroid-report'">
+                                <i class="fa-solid fa-eye"></i> View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="lab-report-name">
+                                <div class="lab-report-file-icon">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div>
+                                    <strong>Blood Glucose Test</strong>
+                                    <span>Biochemistry</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>LAB-2026-004</td>
+                        <td>05 Oct 2026</td>
+                        <td>Stackly Diagnostics</td>
+                        <td><span class="lab-status verified">Verified</span></td>
+                        <td>
+                            <button class="lab-report-action-btn"
+                                onclick="window.location.href='404.html?target=view-glucose-report'">
+                                <i class="fa-solid fa-eye"></i> View
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- Biomarker Tracking -->
+        <div class="lab-biomarker-panel">
+
+            <div class="lab-biomarker-content">
+                <div class="lab-biomarker-icon">
+                    <i class="fa-solid fa-chart-area"></i>
+                </div>
+
+                <div>
+                    <span>HEALTH MONITORING</span>
+                    <h3>Biomarker Tracking</h3>
+                    <p>
+                        Explore historical laboratory values and monitor
+                        changes in selected health indicators over time.
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=biomarker-tracking'">
+                Explore Health Trends
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </div>
+
+        <!-- Report Security Notice -->
+        <div class="lab-report-security-note">
+            <div class="lab-security-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+                <h4>Secure Medical Document Access</h4>
+                <p>
+                    Your diagnostic reports contain confidential healthcare
+                    information. Access and share medical documents responsibly.
+                </p>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=medical-document-security'">
+                Security Details
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+    </section>
+</div>
+<style>
+    
+/* ==========================================
+   DIAGNOSTIC REPORTS - CLIENT PORTAL
+========================================== */
+
+#view-lab-reports {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.lab-reports-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.lab-reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.lab-reports-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.lab-reports-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.lab-reports-header p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.lab-report-primary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 17px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.lab-report-primary-btn:hover {
+    background: #00f0c2;
+}
+
+/* Summary Cards */
+
+.lab-report-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 27px;
+}
+
+.lab-report-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    padding: 17px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.lab-summary-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.lab-summary-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.lab-summary-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.lab-summary-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.lab-summary-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.lab-report-summary-card span {
+    color: #8da1a3;
+    font-size: 10px;
+}
+
+.lab-report-summary-card h3 {
+    margin: 5px 0 3px;
+    color: #effaf8;
+    font-size: 23px;
+}
+
+.lab-report-summary-card small {
+    color: #6f898b;
+    font-size: 9px;
+}
+
+/* Section Headings */
+
+.lab-report-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.lab-report-section-heading h3 {
+    margin: 0 0 6px;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.lab-report-section-heading p {
+    margin: 0;
+    color: #82999b;
+    font-size: 11px;
+}
+
+.lab-report-view-all {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 0;
+    background: transparent;
+    border: 0;
+    color: #00e8c0;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+/* Categories */
+
+.lab-report-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.lab-report-category-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+    transition: 0.2s ease;
+}
+
+.lab-report-category-card:hover {
+    border-color: #24504c;
+    transform: translateY(-2px);
+}
+
+.lab-category-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.lab-category-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.lab-category-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.lab-category-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.lab-category-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.lab-report-category-card h4 {
+    margin: 0 0 8px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.lab-report-category-card p {
+    min-height: 45px;
+    margin: 0 0 14px;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.lab-report-category-card button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 0 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #183436;
+    color: #00d9b0;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Report Table */
+
+.recent-heading {
+    margin-top: 5px;
+}
+
+.lab-report-table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 22px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+    scrollbar-width: thin;
+    scrollbar-color: #24504c #071618;
+}
+
+.lab-report-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.lab-report-table th {
+    padding: 15px 17px;
+    background: #0a2021;
+    color: #82999b;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid #193436;
+}
+
+.lab-report-table td {
+    padding: 14px 17px;
+    color: #b8c9c7;
+    font-size: 10px;
+    border-bottom: 1px solid #142b2d;
+    white-space: nowrap;
+}
+
+.lab-report-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.lab-report-table tbody tr:hover {
+    background: #0a2021;
+}
+
+.lab-report-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lab-report-file-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #ff85851a;
+    color: #ff8585;
+    font-size: 14px;
+}
+
+.lab-report-name > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.lab-report-name strong {
+    color: #e4f0ee;
+    font-size: 10px;
+}
+
+.lab-report-name span {
+    color: #82999b;
+    font-size: 9px;
+}
+
+.lab-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.lab-status.verified {
+    color: #64e5c5;
+    background: #00d9b018;
+    border: 1px solid #20645b;
+}
+
+.lab-status.processing {
+    color: #ffc47f;
+    background: #ffb36a16;
+    border: 1px solid #704b2c;
+}
+
+.lab-report-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lab-report-action-btn:hover {
+    background: #123b35;
+}
+
+/* Biomarker Panel */
+
+.lab-biomarker-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 21px;
+    margin-bottom: 18px;
+    background: linear-gradient(105deg, #092825, #07191b);
+    border: 1px solid #15534b;
+    border-radius: 12px;
+}
+
+.lab-biomarker-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+.lab-biomarker-icon {
+    width: 47px;
+    height: 47px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c01a;
+    color: #00e8c0;
+    border-radius: 11px;
+    font-size: 19px;
+}
+
+.lab-biomarker-content span {
+    color: #00e8c0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.lab-biomarker-content h3 {
+    margin: 5px 0;
+    color: #edfafa;
+    font-size: 15px;
+}
+
+.lab-biomarker-content p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.lab-biomarker-panel > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 11px 14px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.lab-biomarker-panel > button:hover {
+    background: #00f0c2;
+}
+
+/* Security Notice */
+
+.lab-report-security-note {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    background: #0a1e20;
+    border: 1px solid #173b3b;
+    border-radius: 10px;
+}
+
+.lab-security-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c018;
+    color: #00e8c0;
+    border-radius: 9px;
+}
+
+.lab-report-security-note > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+}
+
+.lab-report-security-note h4 {
+    margin: 0 0 5px;
+    color: #e5f2f0;
+    font-size: 11px;
+}
+
+.lab-report-security-note p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.lab-report-security-note button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 11px;
+    background: transparent;
+    color: #00e8c0;
+    border: 1px solid #1d5550;
+    border-radius: 7px;
+    font-size: 9px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .lab-report-summary-grid,
+    .lab-report-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-lab-reports {
+        padding: 16px;
+    }
+
+    .lab-reports-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .lab-report-primary-btn {
+        width: 100%;
+    }
+
+    .lab-biomarker-panel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .lab-biomarker-panel > button {
+        width: 100%;
+    }
+
+    .lab-report-security-note {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .lab-report-security-note > div:nth-child(2) {
+        flex-basis: calc(100% - 55px);
+    }
+
+    .lab-report-security-note button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #view-lab-reports {
+        padding: 12px;
+    }
+
+    .lab-report-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .lab-report-category-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .lab-report-summary-card {
+        padding: 14px;
+    }
+
+    .lab-report-category-card {
+        padding: 16px;
+    }
+
+    .lab-report-category-card p {
+        min-height: auto;
+    }
+
+    .lab-report-section-heading {
+        align-items: flex-start;
+    }
+
+    .lab-report-view-all {
+        white-space: nowrap;
+    }
+
+    .lab-biomarker-panel {
+        padding: 16px;
+    }
+
+    .lab-biomarker-content {
+        align-items: flex-start;
+    }
+}
+
+
+/* ==========================================
+   DIAGNOSTIC REPORTS - INCREASED FONT SIZES
+========================================== */
+
+/* Header */
+.lab-reports-eyebrow {
+    font-size: 13px;
+}
+
+.lab-reports-header h2 {
+    font-size: 36px;
+}
+
+.lab-reports-header p {
+    font-size: 16px;
+}
+
+.lab-report-primary-btn {
+    font-size: 15px;
+}
+
+/* Summary Cards */
+.lab-report-summary-card span {
+    font-size: 14px;
+}
+
+.lab-report-summary-card h3 {
+    font-size: 29px;
+}
+
+.lab-report-summary-card small {
+    font-size: 12px;
+}
+
+.lab-summary-icon {
+    font-size: 20px;
+}
+
+/* Section Headings */
+.lab-report-section-heading h3 {
+    font-size: 21px;
+}
+
+.lab-report-section-heading p {
+    font-size: 14px;
+}
+
+.lab-report-view-all {
+    font-size: 14px;
+}
+
+/* Categories */
+.lab-category-icon {
+    font-size: 20px;
+}
+
+.lab-report-category-card h4 {
+    font-size: 17px;
+}
+
+.lab-report-category-card p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.lab-report-category-card button {
+    font-size: 14px;
+}
+
+/* Report Table */
+.lab-report-table th {
+    font-size: 13px;
+}
+
+.lab-report-table td {
+    font-size: 13px;
+}
+
+.lab-report-name strong {
+    font-size: 13px;
+}
+
+.lab-report-name span {
+    font-size: 12px;
+}
+
+.lab-report-file-icon {
+    font-size: 17px;
+}
+
+.lab-status {
+    font-size: 12px;
+}
+
+.lab-report-action-btn {
+    font-size: 12px;
+}
+
+/* Biomarker Panel */
+.lab-biomarker-icon {
+    font-size: 22px;
+}
+
+.lab-biomarker-content span {
+    font-size: 12px;
+}
+
+.lab-biomarker-content h3 {
+    font-size: 20px;
+}
+
+.lab-biomarker-content p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.lab-biomarker-panel > button {
+    font-size: 13px;
+}
+
+/* Security Notice */
+.lab-security-icon {
+    font-size: 18px;
+}
+
+.lab-report-security-note h4 {
+    font-size: 15px;
+}
+
+.lab-report-security-note p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.lab-report-security-note button {
+    font-size: 12px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .lab-reports-header h2 {
+        font-size: 31px;
+    }
+
+    .lab-reports-header p {
+        font-size: 15px;
+    }
+
+    .lab-report-section-heading h3 {
+        font-size: 19px;
+    }
+
+    .lab-report-summary-card h3 {
+        font-size: 27px;
+    }
+
+    .lab-report-category-card h4 {
+        font-size: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .lab-reports-header h2 {
+        font-size: 27px;
+    }
+
+    .lab-reports-header p {
+        font-size: 14px;
+    }
+
+    .lab-report-summary-card span {
+        font-size: 13px;
+    }
+
+    .lab-report-summary-card h3 {
+        font-size: 25px;
+    }
+
+    .lab-report-summary-card small {
+        font-size: 12px;
+    }
+
+    .lab-report-section-heading h3 {
+        font-size: 18px;
+    }
+
+    .lab-report-section-heading p {
+        font-size: 13px;
+    }
+
+    .lab-report-category-card h4 {
+        font-size: 16px;
+    }
+
+    .lab-report-category-card p {
+        font-size: 13px;
+    }
+
+    .lab-report-table th,
+    .lab-report-table td {
+        font-size: 12px;
+    }
+
+    .lab-report-name strong {
+        font-size: 12px;
+    }
+
+    .lab-report-name span {
+        font-size: 11px;
+    }
+
+    .lab-biomarker-content h3 {
+        font-size: 18px;
+    }
+
+    .lab-biomarker-content p {
+        font-size: 13px;
+    }
+
+    .lab-report-security-note h4 {
+        font-size: 14px;
+    }
+
+    .lab-report-security-note p {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+            <!-- SECTION 3: My Bookings View -->
+          
+<div class="client-page-view-panel" id="view-appointments">
+
+    <section class="appointments-dashboard">
+
+        <!-- Header -->
+        <div class="appointments-header">
+            <div>
+                <span class="appointments-eyebrow">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    PATIENT APPOINTMENT CENTER
+                </span>
+                <h2>My Bookings</h2>
+                <p>Manage your consultations, diagnostic visits, and home sample collection appointments.</p>
+            </div>
+
+            <button class="appointment-primary-btn"
+                onclick="window.location.href='404.html?target=book-new-appointment'">
+                <i class="fa-solid fa-plus"></i>
+                Book Appointment
+            </button>
+        </div>
+
+        <!-- Summary -->
+        <div class="appointment-summary-grid">
+
+            <div class="appointment-summary-card">
+                <div class="appointment-summary-icon teal">
+                    <i class="fa-solid fa-calendar-day"></i>
+                </div>
+                <div>
+                    <span>Upcoming Appointments</span>
+                    <h3>02</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="appointment-summary-card">
+                <div class="appointment-summary-icon blue">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div>
+                    <span>Completed Visits</span>
+                    <h3>08</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="appointment-summary-card">
+                <div class="appointment-summary-icon orange">
+                    <i class="fa-solid fa-truck-medical"></i>
+                </div>
+                <div>
+                    <span>Home Collections</span>
+                    <h3>01</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+            <div class="appointment-summary-card">
+                <div class="appointment-summary-icon purple">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <div>
+                    <span>Total Bookings</span>
+                    <h3>11</h3>
+                    <small>Sample overview</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="appointment-section-heading">
+            <div>
+                <h3>Upcoming Appointments</h3>
+                <p>Your scheduled healthcare visits and consultations</p>
+            </div>
+
+            <button class="appointment-text-btn"
+                onclick="window.location.href='404.html?target=all-appointments'">
+                View All <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="upcoming-appointment-grid">
+
+            <!-- Appointment 1 -->
+            <div class="upcoming-appointment-card">
+
+                <div class="appointment-card-top">
+                    <span class="appointment-type-label">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        Consultation
+                    </span>
+                    <span class="appointment-status confirmed">Confirmed</span>
+                </div>
+
+                <div class="appointment-doctor-info">
+                    <div class="appointment-doctor-avatar">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+
+                    <div>
+                        <h4>General Physician</h4>
+                        <p>Dr. Sample Name</p>
+                        <span>General Medicine</span>
+                    </div>
+                </div>
+
+                <div class="appointment-date-box">
+                    <div>
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>18 November 2026</span>
+                    </div>
+                    <div>
+                        <i class="fa-regular fa-clock"></i>
+                        <span>10:30 AM – 11:00 AM</span>
+                    </div>
+                </div>
+
+                <div class="appointment-location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Stackly Health Center</span>
+                </div>
+
+                <div class="appointment-card-actions">
+                    <button class="appointment-manage-btn"
+                        onclick="window.location.href='404.html?target=appointment-details-001'">
+                        View Details
+                    </button>
+                    <button class="appointment-icon-btn"
+                        aria-label="Reschedule appointment"
+                        onclick="window.location.href='404.html?target=reschedule-appointment-001'">
+                        <i class="fa-solid fa-calendar-pen"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Appointment 2 -->
+            <div class="upcoming-appointment-card">
+
+                <div class="appointment-card-top">
+                    <span class="appointment-type-label home-collection">
+                        <i class="fa-solid fa-house-medical"></i>
+                        Home Collection
+                    </span>
+                    <span class="appointment-status pending">Scheduled</span>
+                </div>
+
+                <div class="appointment-doctor-info">
+                    <div class="appointment-doctor-avatar collection-avatar">
+                        <i class="fa-solid fa-vial"></i>
+                    </div>
+
+                    <div>
+                        <h4>Blood Sample Collection</h4>
+                        <p>Diagnostic Laboratory</p>
+                        <span>Complete Blood Count</span>
+                    </div>
+                </div>
+
+                <div class="appointment-date-box">
+                    <div>
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>20 November 2026</span>
+                    </div>
+                    <div>
+                        <i class="fa-regular fa-clock"></i>
+                        <span>07:00 AM – 08:00 AM</span>
+                    </div>
+                </div>
+
+                <div class="appointment-location">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home Collection Address</span>
+                </div>
+
+                <div class="appointment-card-actions">
+                    <button class="appointment-manage-btn"
+                        onclick="window.location.href='404.html?target=collection-details-002'">
+                        View Details
+                    </button>
+                    <button class="appointment-icon-btn"
+                        aria-label="Reschedule collection"
+                        onclick="window.location.href='404.html?target=reschedule-collection-002'">
+                        <i class="fa-solid fa-calendar-pen"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Appointment Services -->
+        <div class="appointment-section-heading appointment-services-heading">
+            <div>
+                <h3>Healthcare Services</h3>
+                <p>Quick access to available appointment services</p>
+            </div>
+        </div>
+
+        <div class="appointment-services-grid">
+
+            <div class="appointment-service-card">
+                <div class="appointment-service-icon teal">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <h4>Doctor Consultation</h4>
+                <p>Schedule an appointment with a healthcare professional.</p>
+                <button onclick="window.location.href='404.html?target=doctor-consultation'">
+                    Book Consultation <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="appointment-service-card">
+                <div class="appointment-service-icon blue">
+                    <i class="fa-solid fa-house-medical"></i>
+                </div>
+                <h4>Home Sample Collection</h4>
+                <p>Arrange convenient laboratory sample collection at home.</p>
+                <button onclick="window.location.href='404.html?target=home-sample-collection'">
+                    Schedule Collection <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="appointment-service-card">
+                <div class="appointment-service-icon purple">
+                    <i class="fa-solid fa-hospital"></i>
+                </div>
+                <h4>Health Checkup</h4>
+                <p>Explore preventive health assessments and checkup packages.</p>
+                <button onclick="window.location.href='404.html?target=health-checkup-booking'">
+                    Explore Packages <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Appointment History -->
+        <div class="appointment-section-heading appointment-history-heading">
+            <div>
+                <h3>Recent Booking History</h3>
+                <p>Overview of your previous healthcare appointments</p>
+            </div>
+
+            <button class="appointment-text-btn"
+                onclick="window.location.href='404.html?target=appointment-history'">
+                Full History <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="appointment-history-container">
+
+            <table class="appointment-history-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Booking ID</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="appointment-history-service">
+                                <i class="fa-solid fa-stethoscope"></i>
+                                <span>General Consultation</span>
+                            </div>
+                        </td>
+                        <td>APT-2026-101</td>
+                        <td>05 Oct 2026</td>
+                        <td>In-Clinic</td>
+                        <td><span class="appointment-history-status completed">Completed</span></td>
+                        <td>
+                            <button onclick="window.location.href='404.html?target=history-details-101'">
+                                <i class="fa-solid fa-eye"></i> Details
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="appointment-history-service">
+                                <i class="fa-solid fa-vial"></i>
+                                <span>Blood Test Collection</span>
+                            </div>
+                        </td>
+                        <td>APT-2026-102</td>
+                        <td>28 Sep 2026</td>
+                        <td>Home Visit</td>
+                        <td><span class="appointment-history-status completed">Completed</span></td>
+                        <td>
+                            <button onclick="window.location.href='404.html?target=history-details-102'">
+                                <i class="fa-solid fa-eye"></i> Details
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="appointment-history-service">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span>Annual Health Checkup</span>
+                            </div>
+                        </td>
+                        <td>APT-2026-103</td>
+                        <td>15 Sep 2026</td>
+                        <td>In-Clinic</td>
+                        <td><span class="appointment-history-status cancelled">Cancelled</span></td>
+                        <td>
+                            <button onclick="window.location.href='404.html?target=history-details-103'">
+                                <i class="fa-solid fa-eye"></i> Details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- Support Banner -->
+        <div class="appointment-support-banner">
+            <div class="appointment-support-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <div class="appointment-support-text">
+                <h4>Need help with your booking?</h4>
+                <p>Contact the support team for appointment changes, booking assistance, or collection-related queries.</p>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=appointment-support'">
+                Contact Support <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+    </section>
+</div>
+
+<style>
+    
+/* ==========================================
+   MY BOOKINGS - CLIENT PORTAL
+========================================== */
+
+#view-appointments {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.appointments-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.appointments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.appointments-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.appointments-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.appointments-header p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.appointment-primary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 17px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.appointment-primary-btn:hover {
+    background: #00f0c2;
+}
+
+/* Summary Cards */
+
+.appointment-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.appointment-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    padding: 17px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.appointment-summary-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.appointment-summary-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.appointment-summary-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.appointment-summary-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.appointment-summary-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.appointment-summary-card span {
+    color: #8da1a3;
+    font-size: 10px;
+}
+
+.appointment-summary-card h3 {
+    margin: 5px 0 3px;
+    color: #effaf8;
+    font-size: 23px;
+}
+
+.appointment-summary-card small {
+    color: #6f898b;
+    font-size: 9px;
+}
+
+/* Section Headings */
+
+.appointment-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.appointment-section-heading h3 {
+    margin: 0 0 6px;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.appointment-section-heading p {
+    margin: 0;
+    color: #82999b;
+    font-size: 11px;
+}
+
+.appointment-text-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 0;
+    background: transparent;
+    border: 0;
+    color: #00e8c0;
+    font-size: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Upcoming Appointment Cards */
+
+.upcoming-appointment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 29px;
+}
+
+.upcoming-appointment-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #153335;
+    border-radius: 12px;
+    transition: 0.2s ease;
+}
+
+.upcoming-appointment-card:hover {
+    border-color: #28615a;
+    transform: translateY(-2px);
+}
+
+.appointment-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #193436;
+}
+
+.appointment-type-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.appointment-type-label.home-collection {
+    color: #73baff;
+}
+
+.appointment-status {
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.appointment-status.confirmed {
+    color: #64e5c5;
+    background: #00d9b018;
+    border: 1px solid #20645b;
+}
+
+.appointment-status.pending {
+    color: #ffc47f;
+    background: #ffb36a16;
+    border: 1px solid #704b2c;
+}
+
+.appointment-doctor-info {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px 0;
+}
+
+.appointment-doctor-avatar {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: #00e8c01a;
+    color: #00e8c0;
+    font-size: 20px;
+}
+
+.appointment-doctor-avatar.collection-avatar {
+    background: #73baff1a;
+    color: #73baff;
+}
+
+.appointment-doctor-info h4 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.appointment-doctor-info p {
+    margin: 0 0 4px;
+    color: #a5b9b7;
+    font-size: 10px;
+}
+
+.appointment-doctor-info span {
+    color: #718c8d;
+    font-size: 9px;
+}
+
+.appointment-date-box {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 13px;
+    background: #0a2021;
+    border: 1px solid #183638;
+    border-radius: 8px;
+}
+
+.appointment-date-box div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    color: #b7ccca;
+    font-size: 10px;
+}
+
+.appointment-date-box i {
+    color: #00e8c0;
+    flex-shrink: 0;
+}
+
+.appointment-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0;
+    color: #82999b;
+    font-size: 10px;
+}
+
+.appointment-location i {
+    color: #00d9b0;
+}
+
+.appointment-card-actions {
+    display: flex;
+    gap: 9px;
+    padding-top: 13px;
+    border-top: 1px solid #193436;
+}
+
+.appointment-manage-btn {
+    flex: 1;
+    padding: 10px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.appointment-manage-btn:hover {
+    background: #00f0c2;
+}
+
+.appointment-icon-btn {
+    width: 38px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* Healthcare Services */
+
+.appointment-services-heading {
+    margin-top: 5px;
+}
+
+.appointment-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 29px;
+}
+
+.appointment-service-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+    transition: 0.2s ease;
+}
+
+.appointment-service-card:hover {
+    border-color: #24504c;
+    transform: translateY(-2px);
+}
+
+.appointment-service-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.appointment-service-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.appointment-service-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.appointment-service-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.appointment-service-card h4 {
+    margin: 0 0 8px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.appointment-service-card p {
+    min-height: 43px;
+    margin: 0 0 14px;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.appointment-service-card button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 0 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #183436;
+    color: #00d9b0;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Booking History */
+
+.appointment-history-heading {
+    margin-bottom: 15px;
+}
+
+.appointment-history-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 22px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+    scrollbar-width: thin;
+    scrollbar-color: #24504c #071618;
+}
+
+.appointment-history-table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.appointment-history-table th {
+    padding: 15px 17px;
+    background: #0a2021;
+    color: #82999b;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid #193436;
+}
+
+.appointment-history-table td {
+    padding: 14px 17px;
+    color: #b8c9c7;
+    font-size: 10px;
+    border-bottom: 1px solid #142b2d;
+    white-space: nowrap;
+}
+
+.appointment-history-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.appointment-history-table tbody tr:hover {
+    background: #0a2021;
+}
+
+.appointment-history-service {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #e4f0ee;
+    font-weight: 600;
+}
+
+.appointment-history-service i {
+    color: #00e8c0;
+    font-size: 13px;
+}
+
+.appointment-history-status {
+    display: inline-flex;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.appointment-history-status.completed {
+    color: #64e5c5;
+    background: #00d9b018;
+    border: 1px solid #20645b;
+}
+
+.appointment-history-status.cancelled {
+    color: #ff9696;
+    background: #ff858518;
+    border: 1px solid #714040;
+}
+
+.appointment-history-table td button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 6px;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+/* Support Banner */
+
+.appointment-support-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background: linear-gradient(105deg, #092825, #07191b);
+    border: 1px solid #15534b;
+    border-radius: 11px;
+}
+
+.appointment-support-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c01a;
+    color: #00e8c0;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.appointment-support-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.appointment-support-text h4 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.appointment-support-text p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.appointment-support-banner > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 13px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.appointment-support-banner > button:hover {
+    background: #00f0c2;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .appointment-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .appointment-services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-appointments {
+        padding: 16px;
+    }
+
+    .appointments-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .appointment-primary-btn {
+        width: 100%;
+    }
+
+    .upcoming-appointment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-support-banner {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .appointment-support-text {
+        flex-basis: calc(100% - 60px);
+    }
+
+    .appointment-support-banner > button {
+        width: 100%;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 480px) {
+    #view-appointments {
+        padding: 12px;
+    }
+
+    .appointment-summary-grid,
+    .appointment-services-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .appointment-summary-card {
+        padding: 14px;
+    }
+
+    .upcoming-appointment-card,
+    .appointment-service-card {
+        padding: 15px;
+    }
+
+    .appointment-date-box {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-section-heading {
+        align-items: flex-start;
+    }
+
+    .appointment-support-banner {
+        padding: 14px;
+    }
+}
+
+
+/* ==========================================
+   MY BOOKINGS - INCREASED FONT SIZES
+========================================== */
+
+/* Header */
+.appointments-eyebrow {
+    font-size: 13px;
+}
+
+.appointments-header h2 {
+    font-size: 36px;
+}
+
+.appointments-header p {
+    font-size: 16px;
+}
+
+.appointment-primary-btn {
+    font-size: 15px;
+}
+
+/* Summary Cards */
+.appointment-summary-icon {
+    font-size: 20px;
+}
+
+.appointment-summary-card span {
+    font-size: 14px;
+}
+
+.appointment-summary-card h3 {
+    font-size: 29px;
+}
+
+.appointment-summary-card small {
+    font-size: 12px;
+}
+
+/* Section Headings */
+.appointment-section-heading h3 {
+    font-size: 21px;
+}
+
+.appointment-section-heading p {
+    font-size: 14px;
+}
+
+.appointment-text-btn {
+    font-size: 14px;
+}
+
+/* Upcoming Appointment Cards */
+.appointment-type-label {
+    font-size: 13px;
+}
+
+.appointment-status {
+    font-size: 12px;
+}
+
+.appointment-doctor-avatar {
+    font-size: 23px;
+}
+
+.appointment-doctor-info h4 {
+    font-size: 17px;
+}
+
+.appointment-doctor-info p {
+    font-size: 14px;
+}
+
+.appointment-doctor-info span {
+    font-size: 12px;
+}
+
+.appointment-date-box div {
+    font-size: 13px;
+}
+
+.appointment-location {
+    font-size: 13px;
+}
+
+.appointment-manage-btn {
+    font-size: 13px;
+}
+
+.appointment-icon-btn {
+    font-size: 15px;
+}
+
+/* Healthcare Services */
+.appointment-service-icon {
+    font-size: 21px;
+}
+
+.appointment-service-card h4 {
+    font-size: 17px;
+}
+
+.appointment-service-card p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.appointment-service-card button {
+    font-size: 13px;
+}
+
+/* Booking History Table */
+.appointment-history-table th {
+    font-size: 13px;
+}
+
+.appointment-history-table td {
+    font-size: 13px;
+}
+
+.appointment-history-service {
+    font-size: 13px;
+}
+
+.appointment-history-service i {
+    font-size: 16px;
+}
+
+.appointment-history-status {
+    font-size: 12px;
+}
+
+.appointment-history-table td button {
+    font-size: 12px;
+}
+
+/* Support Banner */
+.appointment-support-icon {
+    font-size: 21px;
+}
+
+.appointment-support-text h4 {
+    font-size: 16px;
+}
+
+.appointment-support-text p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.appointment-support-banner > button {
+    font-size: 13px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .appointments-header h2 {
+        font-size: 31px;
+    }
+
+    .appointments-header p {
+        font-size: 15px;
+    }
+
+    .appointment-section-heading h3 {
+        font-size: 19px;
+    }
+
+    .appointment-doctor-info h4 {
+        font-size: 16px;
+    }
+
+    .appointment-summary-card h3 {
+        font-size: 27px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .appointments-header h2 {
+        font-size: 27px;
+    }
+
+    .appointments-header p {
+        font-size: 14px;
+    }
+
+    .appointment-summary-card span {
+        font-size: 13px;
+    }
+
+    .appointment-summary-card h3 {
+        font-size: 25px;
+    }
+
+    .appointment-summary-card small {
+        font-size: 12px;
+    }
+
+    .appointment-section-heading h3 {
+        font-size: 18px;
+    }
+
+    .appointment-section-heading p {
+        font-size: 13px;
+    }
+
+    .appointment-doctor-info h4 {
+        font-size: 15px;
+    }
+
+    .appointment-doctor-info p {
+        font-size: 13px;
+    }
+
+    .appointment-doctor-info span {
+        font-size: 12px;
+    }
+
+    .appointment-date-box div {
+        font-size: 13px;
+    }
+
+    .appointment-service-card h4 {
+        font-size: 16px;
+    }
+
+    .appointment-service-card p {
+        font-size: 13px;
+    }
+
+    .appointment-history-table th,
+    .appointment-history-table td {
+        font-size: 12px;
+    }
+
+    .appointment-support-text h4 {
+        font-size: 15px;
+    }
+
+    .appointment-support-text p {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+            <!-- SECTION 4: Invoices & Billing View -->
+        
+<div class="client-page-view-panel" id="view-billing">
+
+    <section class="billing-dashboard">
+
+        <!-- Header -->
+        <div class="billing-header">
+            <div>
+                <span class="billing-eyebrow">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    FINANCIAL MANAGEMENT CENTER
+                </span>
+                <h2>Invoices & Billing</h2>
+                <p>Manage your healthcare payments, track invoices, and review insurance information.</p>
+            </div>
+
+            <button class="billing-download-all-btn"
+                onclick="window.location.href='404.html?target=download-all-invoices'">
+                <i class="fa-solid fa-download"></i>
+                Download Statements
+            </button>
+        </div>
+
+        <!-- Billing Summary -->
+        <div class="billing-summary-grid">
+
+            <div class="billing-summary-card">
+                <div class="billing-summary-top">
+                    <div class="billing-summary-icon teal">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <span class="billing-summary-label">Total Billed</span>
+                </div>
+                <h3>₹24,850</h3>
+                <p>Sample billing overview</p>
+            </div>
+
+            <div class="billing-summary-card">
+                <div class="billing-summary-top">
+                    <div class="billing-summary-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <span class="billing-summary-label">Amount Paid</span>
+                </div>
+                <h3>₹18,500</h3>
+                <p>Sample billing overview</p>
+            </div>
+
+            <div class="billing-summary-card">
+                <div class="billing-summary-top">
+                    <div class="billing-summary-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <span class="billing-summary-label">Outstanding</span>
+                </div>
+                <h3>₹6,350</h3>
+                <p>Sample pending balance</p>
+            </div>
+
+            <div class="billing-summary-card">
+                <div class="billing-summary-top">
+                    <div class="billing-summary-icon purple">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <span class="billing-summary-label">Total Invoices</span>
+                </div>
+                <h3>12</h3>
+                <p>Sample invoice count</p>
+            </div>
+
+        </div>
+
+        <!-- Outstanding Payment -->
+        <div class="billing-outstanding-card">
+
+            <div class="billing-outstanding-left">
+                <div class="billing-outstanding-icon">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+                <div>
+                    <span>PAYMENT ATTENTION</span>
+                    <h3>Outstanding Balance</h3>
+                    <p>You have a pending sample payment that requires attention.</p>
+                </div>
+            </div>
+
+            <div class="billing-outstanding-right">
+                <div class="billing-outstanding-amount">
+                    <small>Amount Due</small>
+                    <h2>₹6,350</h2>
+                </div>
+
+                <button onclick="window.location.href='404.html?target=make-payment'">
+                    Pay Now <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Invoice Section -->
+        <div class="billing-section-heading">
+            <div>
+                <h3>Recent Invoices</h3>
+                <p>Review and manage your healthcare billing records</p>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=all-invoices'">
+                View All <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Invoice Table -->
+        <div class="billing-invoice-container">
+
+            <table class="billing-invoice-table">
+                <thead>
+                    <tr>
+                        <th>Invoice Details</th>
+                        <th>Invoice Date</th>
+                        <th>Service</th>
+                        <th>Amount</th>
+                        <th>Payment Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <div class="billing-invoice-id">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <div>
+                                    <strong>INV-2026-001</strong>
+                                    <small>Invoice #001</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>28 Oct 2026</td>
+                        <td>Health Checkup</td>
+                        <td class="billing-amount">₹4,500</td>
+                        <td>
+                            <span class="billing-status paid">Paid</span>
+                        </td>
+                        <td>
+                            <div class="billing-action-buttons">
+                                <button aria-label="View invoice"
+                                    onclick="window.location.href='404.html?target=invoice-001'">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button aria-label="Download invoice"
+                                    onclick="window.location.href='404.html?target=download-invoice-001'">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="billing-invoice-id">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <div>
+                                    <strong>INV-2026-002</strong>
+                                    <small>Invoice #002</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>20 Oct 2026</td>
+                        <td>Blood Test</td>
+                        <td class="billing-amount">₹1,850</td>
+                        <td>
+                            <span class="billing-status pending">Pending</span>
+                        </td>
+                        <td>
+                            <div class="billing-action-buttons">
+                                <button aria-label="View invoice"
+                                    onclick="window.location.href='404.html?target=invoice-002'">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button aria-label="Pay invoice"
+                                    onclick="window.location.href='404.html?target=pay-invoice-002'">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="billing-invoice-id">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <div>
+                                    <strong>INV-2026-003</strong>
+                                    <small>Invoice #003</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>12 Oct 2026</td>
+                        <td>Doctor Consultation</td>
+                        <td class="billing-amount">₹1,200</td>
+                        <td>
+                            <span class="billing-status paid">Paid</span>
+                        </td>
+                        <td>
+                            <div class="billing-action-buttons">
+                                <button aria-label="View invoice"
+                                    onclick="window.location.href='404.html?target=invoice-003'">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button aria-label="Download invoice"
+                                    onclick="window.location.href='404.html?target=download-invoice-003'">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="billing-invoice-id">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <div>
+                                    <strong>INV-2026-004</strong>
+                                    <small>Invoice #004</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>05 Oct 2026</td>
+                        <td>Diagnostic Services</td>
+                        <td class="billing-amount">₹2,800</td>
+                        <td>
+                            <span class="billing-status overdue">Overdue</span>
+                        </td>
+                        <td>
+                            <div class="billing-action-buttons">
+                                <button aria-label="View invoice"
+                                    onclick="window.location.href='404.html?target=invoice-004'">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button aria-label="Pay invoice"
+                                    onclick="window.location.href='404.html?target=pay-invoice-004'">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- Payment and Insurance -->
+        <div class="billing-section-heading billing-secondary-heading">
+            <div>
+                <h3>Payment & Insurance</h3>
+                <p>Manage your preferred payment options and insurance details</p>
+            </div>
+        </div>
+
+        <div class="billing-details-grid">
+
+            <!-- Payment Methods -->
+            <div class="billing-detail-card">
+
+                <div class="billing-detail-header">
+                    <div class="billing-detail-icon teal">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <div>
+                        <h4>Payment Methods</h4>
+                        <p>Your preferred payment options</p>
+                    </div>
+                </div>
+
+                <div class="billing-payment-method">
+                    <div class="billing-payment-symbol">
+                        <i class="fa-brands fa-cc-visa"></i>
+                    </div>
+                    <div>
+                        <strong>Visa Card</strong>
+                        <span>•••• •••• •••• 4582</span>
+                    </div>
+                    <span class="billing-default-tag">Default</span>
+                </div>
+
+                <button class="billing-manage-btn"
+                    onclick="window.location.href='404.html?target=manage-payment-methods'">
+                    Manage Payment Methods
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+            <!-- Insurance -->
+            <div class="billing-detail-card">
+
+                <div class="billing-detail-header">
+                    <div class="billing-detail-icon blue">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <div>
+                        <h4>Medical Insurance</h4>
+                        <p>Your insurance verification overview</p>
+                    </div>
+                </div>
+
+                <div class="billing-insurance-info">
+                    <div>
+                        <span>Provider</span>
+                        <strong>Sample Insurance Provider</strong>
+                    </div>
+
+                    <div>
+                        <span>Policy Number</span>
+                        <strong>POL-XXXX-2026</strong>
+                    </div>
+
+                    <div>
+                        <span>Verification Status</span>
+                        <strong class="insurance-verified">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Verified
+                        </strong>
+                    </div>
+                </div>
+
+                <button class="billing-manage-btn"
+                    onclick="window.location.href='404.html?target=insurance-details'">
+                    View Insurance Details
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Billing Support -->
+        <div class="billing-support-banner">
+
+            <div class="billing-support-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <div class="billing-support-content">
+                <h4>Need help with billing?</h4>
+                <p>Our billing support team can help with invoices, payment issues, insurance claims, and transaction queries.</p>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=billing-support'">
+                Contact Support <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </div>
+
+    </section>
+</div>
+
+<style>
+    
+/* ==========================================
+   INVOICES & BILLING - CLIENT PORTAL
+========================================== */
+
+#view-billing {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.billing-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.billing-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.billing-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.billing-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.billing-header p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.billing-download-all-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 16px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.billing-download-all-btn:hover {
+    background: #00f0c2;
+}
+
+/* Summary Cards */
+
+.billing-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.billing-summary-card {
+    min-width: 0;
+    padding: 17px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.billing-summary-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.billing-summary-icon {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+.billing-summary-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.billing-summary-icon.green {
+    color: #6ee7a4;
+    background: #6ee7a41a;
+}
+
+.billing-summary-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.billing-summary-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.billing-summary-label {
+    color: #8da1a3;
+    font-size: 10px;
+}
+
+.billing-summary-card h3 {
+    margin: 0 0 5px;
+    color: #effaf8;
+    font-size: 23px;
+    font-weight: 750;
+}
+
+.billing-summary-card p {
+    margin: 0;
+    color: #718c8d;
+    font-size: 9px;
+}
+
+/* Outstanding Payment */
+
+.billing-outstanding-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background: linear-gradient(105deg, #2a2015, #171a19);
+    border: 1px solid #614525;
+    border-radius: 11px;
+}
+
+.billing-outstanding-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.billing-outstanding-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #ffb36a;
+    background: #ffb36a1c;
+    border-radius: 10px;
+    font-size: 19px;
+}
+
+.billing-outstanding-left span {
+    color: #ffbb78;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.billing-outstanding-left h3 {
+    margin: 5px 0;
+    color: #f5eee5;
+    font-size: 15px;
+}
+
+.billing-outstanding-left p {
+    margin: 0;
+    color: #b6a48e;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.billing-outstanding-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.billing-outstanding-amount small {
+    color: #c2ae95;
+    font-size: 9px;
+}
+
+.billing-outstanding-amount h2 {
+    margin: 5px 0 0;
+    color: #ffbf7c;
+    font-size: 23px;
+}
+
+.billing-outstanding-right button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 15px;
+    background: #ffb36a;
+    color: #28190b;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.billing-outstanding-right button:hover {
+    background: #ffc68e;
+}
+
+/* Section Headings */
+
+.billing-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.billing-section-heading h3 {
+    margin: 0 0 6px;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.billing-section-heading p {
+    margin: 0;
+    color: #82999b;
+    font-size: 11px;
+}
+
+.billing-section-heading > button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 0;
+    background: transparent;
+    color: #00e8c0;
+    border: 0;
+    font-size: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Invoice Table */
+
+.billing-invoice-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 30px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+    scrollbar-width: thin;
+    scrollbar-color: #24504c #071618;
+}
+
+.billing-invoice-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.billing-invoice-table th {
+    padding: 15px 17px;
+    background: #0a2021;
+    color: #82999b;
+    border-bottom: 1px solid #193436;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.billing-invoice-table td {
+    padding: 14px 17px;
+    color: #b8c9c7;
+    border-bottom: 1px solid #142b2d;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.billing-invoice-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.billing-invoice-table tbody tr:hover {
+    background: #0a2021;
+}
+
+.billing-invoice-id {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.billing-invoice-id > i {
+    color: #ff7777;
+    font-size: 17px;
+}
+
+.billing-invoice-id div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.billing-invoice-id strong {
+    color: #e5f2ef;
+    font-size: 10px;
+}
+
+.billing-invoice-id small {
+    color: #718c8d;
+    font-size: 9px;
+}
+
+.billing-amount {
+    color: #e8f6f2 !important;
+    font-weight: 750;
+}
+
+.billing-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 750;
+}
+
+.billing-status.paid {
+    color: #64e5c5;
+    background: #00d9b018;
+    border: 1px solid #20645b;
+}
+
+.billing-status.pending {
+    color: #ffc47f;
+    background: #ffb36a16;
+    border: 1px solid #704b2c;
+}
+
+.billing-status.overdue {
+    color: #ff9696;
+    background: #ff858518;
+    border: 1px solid #714040;
+}
+
+.billing-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.billing-action-buttons button {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.billing-action-buttons button:hover {
+    background: #153b39;
+}
+
+/* Payment & Insurance */
+
+.billing-secondary-heading {
+    margin-top: 5px;
+}
+
+.billing-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.billing-detail-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.billing-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.billing-detail-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    font-size: 17px;
+}
+
+.billing-detail-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.billing-detail-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.billing-detail-header h4 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.billing-detail-header p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+}
+
+/* Payment Method */
+
+.billing-payment-method {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin-bottom: 15px;
+    background: #0a2021;
+    border: 1px solid #193638;
+    border-radius: 8px;
+}
+
+.billing-payment-symbol {
+    width: 42px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    color: #8bbaff;
+    font-size: 27px;
+}
+
+.billing-payment-method > div:nth-child(2) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.billing-payment-method strong {
+    color: #e6f2ef;
+    font-size: 11px;
+}
+
+.billing-payment-method span {
+    color: #82999b;
+    font-size: 10px;
+}
+
+.billing-payment-method .billing-default-tag {
+    padding: 5px 8px;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border-radius: 5px;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+/* Insurance */
+
+.billing-insurance-info {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+    margin-bottom: 15px;
+    background: #0a2021;
+    border: 1px solid #193638;
+    border-radius: 8px;
+}
+
+.billing-insurance-info > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.billing-insurance-info span {
+    color: #82999b;
+    font-size: 10px;
+}
+
+.billing-insurance-info strong {
+    color: #dcebe7;
+    font-size: 10px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.billing-insurance-info .insurance-verified {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #64e5c5;
+}
+
+.billing-manage-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    padding: 11px 0 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #193436;
+    color: #00d9b0;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Support Banner */
+
+.billing-support-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background: linear-gradient(105deg, #092825, #07191b);
+    border: 1px solid #15534b;
+    border-radius: 11px;
+}
+
+.billing-support-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.billing-support-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.billing-support-content h4 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.billing-support-content p {
+    margin: 0;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.billing-support-banner > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 13px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.billing-support-banner > button:hover {
+    background: #00f0c2;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .billing-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-billing {
+        padding: 16px;
+    }
+
+    .billing-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .billing-download-all-btn {
+        width: 100%;
+    }
+
+    .billing-outstanding-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .billing-outstanding-right {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .billing-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .billing-support-banner {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .billing-support-content {
+        flex-basis: calc(100% - 60px);
+    }
+
+    .billing-support-banner > button {
+        width: 100%;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 480px) {
+    #view-billing {
+        padding: 12px;
+    }
+
+    .billing-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .billing-summary-card {
+        padding: 14px;
+    }
+
+    .billing-outstanding-card {
+        padding: 15px;
+    }
+
+    .billing-outstanding-right {
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .billing-outstanding-amount h2 {
+        font-size: 20px;
+    }
+
+    .billing-detail-card {
+        padding: 15px;
+    }
+
+    .billing-payment-method {
+        flex-wrap: wrap;
+    }
+
+    .billing-insurance-info > div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .billing-insurance-info strong {
+        text-align: left;
+    }
+
+    .billing-support-banner {
+        padding: 14px;
+    }
+}
+
+
+/* ==========================================
+   INVOICES & BILLING - INCREASED FONT SIZES
+========================================== */
+
+/* Header */
+.billing-eyebrow {
+    font-size: 13px;
+}
+
+.billing-header h2 {
+    font-size: 36px;
+}
+
+.billing-header p {
+    font-size: 16px;
+}
+
+.billing-download-all-btn {
+    font-size: 14px;
+}
+
+/* Summary Cards */
+.billing-summary-icon {
+    font-size: 19px;
+}
+
+.billing-summary-label {
+    font-size: 14px;
+}
+
+.billing-summary-card h3 {
+    font-size: 29px;
+}
+
+.billing-summary-card p {
+    font-size: 12px;
+}
+
+/* Outstanding Payment */
+.billing-outstanding-icon {
+    font-size: 22px;
+}
+
+.billing-outstanding-left span {
+    font-size: 12px;
+}
+
+.billing-outstanding-left h3 {
+    font-size: 20px;
+}
+
+.billing-outstanding-left p {
+    font-size: 14px;
+}
+
+.billing-outstanding-amount small {
+    font-size: 12px;
+}
+
+.billing-outstanding-amount h2 {
+    font-size: 28px;
+}
+
+.billing-outstanding-right button {
+    font-size: 13px;
+}
+
+/* Section Headings */
+.billing-section-heading h3 {
+    font-size: 21px;
+}
+
+.billing-section-heading p {
+    font-size: 14px;
+}
+
+.billing-section-heading > button {
+    font-size: 14px;
+}
+
+/* Invoice Table */
+.billing-invoice-table th {
+    font-size: 13px;
+}
+
+.billing-invoice-table td {
+    font-size: 13px;
+}
+
+.billing-invoice-id > i {
+    font-size: 19px;
+}
+
+.billing-invoice-id strong {
+    font-size: 13px;
+}
+
+.billing-invoice-id small {
+    font-size: 12px;
+}
+
+.billing-amount {
+    font-size: 14px !important;
+}
+
+.billing-status {
+    font-size: 12px;
+}
+
+.billing-action-buttons button {
+    font-size: 14px;
+}
+
+/* Payment & Insurance */
+.billing-detail-icon {
+    font-size: 20px;
+}
+
+.billing-detail-header h4 {
+    font-size: 17px;
+}
+
+.billing-detail-header p {
+    font-size: 13px;
+}
+
+/* Payment Method */
+.billing-payment-symbol {
+    font-size: 30px;
+}
+
+.billing-payment-method strong {
+    font-size: 14px;
+}
+
+.billing-payment-method span {
+    font-size: 13px;
+}
+
+.billing-payment-method .billing-default-tag {
+    font-size: 11px;
+}
+
+/* Insurance */
+.billing-insurance-info span {
+    font-size: 13px;
+}
+
+.billing-insurance-info strong {
+    font-size: 13px;
+}
+
+.billing-manage-btn {
+    font-size: 13px;
+}
+
+/* Support Banner */
+.billing-support-icon {
+    font-size: 21px;
+}
+
+.billing-support-content h4 {
+    font-size: 16px;
+}
+
+.billing-support-content p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.billing-support-banner > button {
+    font-size: 13px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .billing-header h2 {
+        font-size: 31px;
+    }
+
+    .billing-header p {
+        font-size: 15px;
+    }
+
+    .billing-section-heading h3 {
+        font-size: 19px;
+    }
+
+    .billing-summary-card h3 {
+        font-size: 27px;
+    }
+
+    .billing-outstanding-left h3 {
+        font-size: 18px;
+    }
+
+    .billing-outstanding-amount h2 {
+        font-size: 25px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .billing-header h2 {
+        font-size: 27px;
+    }
+
+    .billing-header p {
+        font-size: 14px;
+    }
+
+    .billing-summary-label {
+        font-size: 13px;
+    }
+
+    .billing-summary-card h3 {
+        font-size: 25px;
+    }
+
+    .billing-summary-card p {
+        font-size: 12px;
+    }
+
+    .billing-section-heading h3 {
+        font-size: 18px;
+    }
+
+    .billing-section-heading p {
+        font-size: 13px;
+    }
+
+    .billing-outstanding-left h3 {
+        font-size: 17px;
+    }
+
+    .billing-outstanding-left p {
+        font-size: 13px;
+    }
+
+    .billing-outstanding-amount h2 {
+        font-size: 22px;
+    }
+
+    .billing-outstanding-right button {
+        font-size: 12px;
+    }
+
+    .billing-invoice-table th,
+    .billing-invoice-table td {
+        font-size: 12px;
+    }
+
+    .billing-invoice-id strong {
+        font-size: 12px;
+    }
+
+    .billing-invoice-id small {
+        font-size: 11px;
+    }
+
+    .billing-detail-header h4 {
+        font-size: 16px;
+    }
+
+    .billing-payment-method strong {
+        font-size: 13px;
+    }
+
+    .billing-insurance-info span,
+    .billing-insurance-info strong {
+        font-size: 12px;
+    }
+
+    .billing-support-content h4 {
+        font-size: 15px;
+    }
+
+    .billing-support-content p {
+        font-size: 12px;
+    }
+}
+
+
+</style>
+
+            <!-- SECTION 5: Portal Settings View -->
+         
+<div class="client-page-view-panel" id="view-settings">
+
+    <section class="portal-settings-dashboard">
+
+        <!-- Header -->
+        <div class="portal-settings-header">
+            <div>
+                <span class="portal-settings-eyebrow">
+                    <i class="fa-solid fa-sliders"></i>
+                    ACCOUNT CONTROL CENTER
+                </span>
+                <h2>Portal Settings</h2>
+                <p>Manage your personal information, security preferences, notifications, and privacy controls.</p>
+            </div>
+
+            <div class="portal-settings-header-icon">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+
+        <!-- Account Overview -->
+        <div class="settings-profile-card">
+
+            <div class="settings-profile-left">
+                <div class="settings-profile-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="settings-profile-info">
+                    <span>YOUR ACCOUNT</span>
+                    <h3>Patient Account</h3>
+                    <p>patient@example.com</p>
+                    <div class="settings-profile-status">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Account Active
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="window.location.href='404.html?target=edit-personal-profile'">
+                <i class="fa-solid fa-pen"></i>
+                Edit Profile
+            </button>
+
+        </div>
+
+        <!-- Settings Layout -->
+        <div class="portal-settings-layout">
+
+            <!-- Main Settings -->
+            <div class="portal-settings-main">
+
+                <!-- Personal Information -->
+                <div class="portal-settings-card">
+
+                    <div class="portal-settings-card-header">
+                        <div class="portal-settings-card-icon teal">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+
+                        <div>
+                            <h3>Personal Information</h3>
+                            <p>Manage your basic account details</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-information-grid">
+
+                        <div class="settings-information-item">
+                            <label>Full Name</label>
+                            <strong>Patient Name</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Email Address</label>
+                            <strong>patient@example.com</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Mobile Number</label>
+                            <strong>+91 XXXXX XXXXX</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Date of Birth</label>
+                            <strong>DD / MM / YYYY</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="settings-card-action"
+                        onclick="window.location.href='404.html?target=update-personal-information'">
+                        Update Personal Information
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <!-- Login Security -->
+                <div class="portal-settings-card">
+
+                    <div class="portal-settings-card-header">
+                        <div class="portal-settings-card-icon blue">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div>
+                            <h3>Login & Security</h3>
+                            <p>Protect your account and manage authentication</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-security-list">
+
+                        <div class="settings-security-item">
+                            <div class="settings-security-info">
+                                <div class="settings-security-symbol">
+                                    <i class="fa-solid fa-lock"></i>
+                                </div>
+                                <div>
+                                    <strong>Password</strong>
+                                    <span>Last updated: Not available</span>
+                                </div>
+                            </div>
+
+                            <button onclick="window.location.href='404.html?target=change-password'">
+                                Change <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="settings-security-item">
+                            <div class="settings-security-info">
+                                <div class="settings-security-symbol">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                </div>
+                                <div>
+                                    <strong>Two-Factor Authentication</strong>
+                                    <span>Add an extra layer of account protection</span>
+                                </div>
+                            </div>
+
+                            <button onclick="window.location.href='404.html?target=two-factor-authentication'">
+                                Configure <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="settings-security-item">
+                            <div class="settings-security-info">
+                                <div class="settings-security-symbol">
+                                    <i class="fa-solid fa-laptop"></i>
+                                </div>
+                                <div>
+                                    <strong>Active Sessions</strong>
+                                    <span>Review devices accessing your account</span>
+                                </div>
+                            </div>
+
+                            <button onclick="window.location.href='404.html?target=active-sessions'">
+                                Manage <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Notification Preferences -->
+                <div class="portal-settings-card">
+
+                    <div class="portal-settings-card-header">
+                        <div class="portal-settings-card-icon purple">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+
+                        <div>
+                            <h3>Notification Preferences</h3>
+                            <p>Choose how you receive portal updates</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-notification-list">
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>Email Notifications</strong>
+                                <span>Receive invoices, reports, and account updates.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-email-toggle" checked>
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>SMS Notifications</strong>
+                                <span>Receive appointment reminders and payment alerts.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-sms-toggle" checked>
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>Appointment Reminders</strong>
+                                <span>Get reminders before scheduled consultations.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-appointment-toggle" checked>
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>Promotional Updates</strong>
+                                <span>Receive healthcare offers and service announcements.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-promotion-toggle">
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <button class="settings-card-action"
+                        onclick="window.location.href='404.html?target=save-notification-preferences'">
+                        Save Notification Preferences
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="portal-settings-card">
+
+                    <div class="portal-settings-card-header">
+                        <div class="portal-settings-card-icon orange">
+                            <i class="fa-solid fa-phone-volume"></i>
+                        </div>
+
+                        <div>
+                            <h3>Emergency Contact</h3>
+                            <p>Manage your designated emergency contact information</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-information-grid">
+
+                        <div class="settings-information-item">
+                            <label>Contact Name</label>
+                            <strong>Not Provided</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Relationship</label>
+                            <strong>Not Provided</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Contact Number</label>
+                            <strong>Not Provided</strong>
+                        </div>
+
+                        <div class="settings-information-item">
+                            <label>Contact Status</label>
+                            <strong class="settings-contact-status">
+                                <i class="fa-solid fa-circle-info"></i>
+                                Not Configured
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <button class="settings-card-action"
+                        onclick="window.location.href='404.html?target=edit-emergency-contact'">
+                        Update Emergency Contact
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="portal-settings-card">
+
+                    <div class="portal-settings-card-header">
+                        <div class="portal-settings-card-icon green">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <div>
+                            <h3>Privacy & Data Sharing</h3>
+                            <p>Control your information and data-sharing preferences</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-notification-list">
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>Health Data Sharing</strong>
+                                <span>Manage consent for sharing health information with authorized providers.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-health-data-toggle">
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="settings-notification-item">
+                            <div>
+                                <strong>Personalized Recommendations</strong>
+                                <span>Allow personalized healthcare suggestions based on your preferences.</span>
+                            </div>
+                            <label class="settings-toggle">
+                                <input type="checkbox" id="settings-recommendations-toggle" checked>
+                                <span class="settings-toggle-slider"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <button class="settings-card-action"
+                        onclick="window.location.href='404.html?target=privacy-and-consent-settings'">
+                        Manage Privacy Settings
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="portal-settings-sidebar">
+
+                <!-- Security Overview -->
+                <div class="settings-sidebar-card">
+
+                    <div class="settings-sidebar-heading">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <h3>Security Overview</h3>
+                    </div>
+
+                    <div class="settings-security-overview">
+                        <div class="settings-security-overview-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <h4>Account Protection</h4>
+                        <p>Review your account security configuration and authentication settings.</p>
+                    </div>
+
+                    <div class="settings-security-check">
+                        <span><i class="fa-solid fa-circle-check"></i> Account status</span>
+                        <strong>Active</strong>
+                    </div>
+
+                    <div class="settings-security-check">
+                        <span><i class="fa-solid fa-circle-info"></i> Two-factor setup</span>
+                        <strong>Review</strong>
+                    </div>
+
+                    <button onclick="window.location.href='404.html?target=security-center'">
+                        Open Security Center
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <!-- Account Management -->
+                <div class="settings-sidebar-card">
+
+                    <div class="settings-sidebar-heading">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <h3>Account Management</h3>
+                    </div>
+
+                    <div class="settings-account-links">
+
+                        <button onclick="window.location.href='404.html?target=download-personal-data'">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Download My Data
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <button onclick="window.location.href='404.html?target=account-activity'">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            Account Activity
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <button onclick="window.location.href='404.html?target=account-deactivation'">
+                            <i class="fa-solid fa-user-slash"></i>
+                            Deactivate Account
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Support -->
+                <div class="settings-sidebar-support">
+
+                    <div class="settings-support-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+
+                    <h3>Need Assistance?</h3>
+                    <p>Our support team can help you with account access, privacy, and portal settings.</p>
+
+                    <button onclick="window.location.href='404.html?target=settings-support'">
+                        Contact Support
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="settings-footer-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Your account preferences and personal information should be protected. Review your security and privacy settings regularly.</span>
+        </div>
+
+    </section>
+</div>
+
+<style>
+    
+/* ==========================================
+   PORTAL SETTINGS - CLIENT PORTAL
+========================================== */
+
+#view-settings {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.portal-settings-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.portal-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 23px;
+}
+
+.portal-settings-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.portal-settings-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.portal-settings-header p {
+    max-width: 650px;
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.portal-settings-header-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border: 1px solid #15534b;
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* Profile Card */
+
+.settings-profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 19px;
+    margin-bottom: 22px;
+    background: linear-gradient(110deg, #0b2827, #07191b);
+    border: 1px solid #19514a;
+    border-radius: 12px;
+}
+
+.settings-profile-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+.settings-profile-avatar {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c01a;
+    border: 1px solid #1c6659;
+    border-radius: 50%;
+    color: #00e8c0;
+    font-size: 24px;
+}
+
+.settings-profile-info > span {
+    color: #00e8c0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.settings-profile-info h3 {
+    margin: 5px 0;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.settings-profile-info p {
+    margin: 0 0 7px;
+    color: #8da1a3;
+    font-size: 11px;
+}
+
+.settings-profile-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64e5c5;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.settings-profile-card > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.settings-profile-card > button:hover {
+    background: #00f0c2;
+}
+
+/* Main Layout */
+
+.portal-settings-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    align-items: start;
+    gap: 18px;
+}
+
+.portal-settings-main {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+.portal-settings-sidebar {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* Settings Cards */
+
+.portal-settings-card,
+.settings-sidebar-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.portal-settings-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #183436;
+}
+
+.portal-settings-card-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.portal-settings-card-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.portal-settings-card-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.portal-settings-card-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.portal-settings-card-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.portal-settings-card-icon.green {
+    color: #6ee7a4;
+    background: #6ee7a41a;
+}
+
+.portal-settings-card-header h3 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.portal-settings-card-header p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+}
+
+/* Personal Information */
+
+.settings-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 17px;
+}
+
+.settings-information-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.settings-information-item label {
+    color: #82999b;
+    font-size: 10px;
+}
+
+.settings-information-item strong {
+    color: #dcebe7;
+    font-size: 11px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.settings-contact-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffbd79 !important;
+}
+
+/* Card Action */
+
+.settings-card-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 0 0;
+    background: transparent;
+    color: #00d9b0;
+    border: 0;
+    border-top: 1px solid #183436;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings-card-action:hover {
+    color: #00f0c2;
+}
+
+/* Security List */
+
+.settings-security-list {
+    display: grid;
+    gap: 0;
+    margin-bottom: 15px;
+}
+
+.settings-security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #142b2d;
+}
+
+.settings-security-item:first-child {
+    padding-top: 0;
+}
+
+.settings-security-item:last-child {
+    border-bottom: 0;
+}
+
+.settings-security-info {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.settings-security-symbol {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #73baff;
+    background: #73baff16;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.settings-security-info > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.settings-security-info strong {
+    color: #e4f0ee;
+    font-size: 11px;
+}
+
+.settings-security-info span {
+    color: #82999b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.settings-security-item > button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    padding: 8px 10px;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 6px;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+/* Notification Settings */
+
+.settings-notification-list {
+    display: grid;
+    gap: 0;
+    margin-bottom: 15px;
+}
+
+.settings-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 0;
+    border-bottom: 1px solid #142b2d;
+}
+
+.settings-notification-item:first-child {
+    padding-top: 0;
+}
+
+.settings-notification-item:last-child {
+    border-bottom: 0;
+}
+
+.settings-notification-item > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.settings-notification-item strong {
+    color: #e4f0ee;
+    font-size: 11px;
+}
+
+.settings-notification-item span:not(.settings-toggle-slider) {
+    color: #82999b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+/* Interactive Toggle */
+
+.settings-toggle {
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.settings-toggle input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.settings-toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #263c3d;
+    border: 1px solid #395252;
+    border-radius: 30px;
+    transition: 0.25s ease;
+}
+
+.settings-toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    top: 3px;
+    background: #a1b5b3;
+    border-radius: 50%;
+    transition: 0.25s ease;
+}
+
+.settings-toggle input:checked + .settings-toggle-slider {
+    background: #007f6a;
+    border-color: #00d9b0;
+}
+
+.settings-toggle input:checked + .settings-toggle-slider::before {
+    transform: translateX(18px);
+    background: #eafff9;
+}
+
+.settings-toggle input:focus-visible + .settings-toggle-slider {
+    outline: 2px solid #00e8c0;
+    outline-offset: 3px;
+}
+
+/* Sidebar Cards */
+
+.settings-sidebar-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #183436;
+}
+
+.settings-sidebar-heading > i {
+    color: #00e8c0;
+    font-size: 15px;
+}
+
+.settings-sidebar-heading h3 {
+    margin: 0;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.settings-security-overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+    text-align: center;
+}
+
+.settings-security-overview-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border: 1px solid #1c544b;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.settings-security-overview h4 {
+    margin: 0 0 7px;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.settings-security-overview p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-security-check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 0;
+    border-top: 1px solid #142b2d;
+}
+
+.settings-security-check span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #a8bfbb;
+    font-size: 9px;
+}
+
+.settings-security-check span i {
+    color: #00d9b0;
+}
+
+.settings-security-check strong {
+    color: #64e5c5;
+    font-size: 9px;
+}
+
+.settings-sidebar-card > button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 0 0;
+    margin-top: 7px;
+    background: transparent;
+    color: #00d9b0;
+    border: 0;
+    border-top: 1px solid #183436;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Account Links */
+
+.settings-account-links {
+    display: grid;
+    margin-top: 8px;
+}
+
+.settings-account-links button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    background: transparent;
+    color: #b9ccca;
+    border: 0;
+    border-bottom: 1px solid #142b2d;
+    font-size: 10px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings-account-links button:last-child {
+    border-bottom: 0;
+}
+
+.settings-account-links button > i:first-child {
+    width: 16px;
+    color: #00d9b0;
+}
+
+.settings-account-links button > i:last-child {
+    margin-left: auto;
+    color: #718c8d;
+    font-size: 9px;
+}
+
+.settings-account-links button:hover {
+    color: #00e8c0;
+}
+
+/* Support */
+
+.settings-sidebar-support {
+    padding: 19px;
+    background: linear-gradient(145deg, #0b2926, #07191b);
+    border: 1px solid #19534b;
+    border-radius: 11px;
+}
+
+.settings-support-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 13px;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border-radius: 9px;
+    font-size: 17px;
+}
+
+.settings-sidebar-support h3 {
+    margin: 0 0 7px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.settings-sidebar-support p {
+    margin: 0 0 14px;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-sidebar-support button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* Footer Note */
+
+.settings-footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-top: 19px;
+    background: #0a2021;
+    border: 1px solid #183436;
+    border-radius: 9px;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-footer-note i {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #00d9b0;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .portal-settings-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 13px;
+    }
+}
+
+@media (max-width: 900px) {
+    .portal-settings-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-settings-sidebar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .settings-sidebar-support {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-settings {
+        padding: 16px;
+    }
+
+    .portal-settings-header {
+        align-items: flex-start;
+    }
+
+    .settings-profile-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .settings-profile-card > button {
+        width: 100%;
+    }
+
+    .portal-settings-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-sidebar-support {
+        grid-column: auto;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 480px) {
+    #view-settings {
+        padding: 12px;
+    }
+
+    .portal-settings-header-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .settings-profile-card,
+    .portal-settings-card,
+    .settings-sidebar-card,
+    .settings-sidebar-support {
+        padding: 14px;
+    }
+
+    .settings-information-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .settings-security-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .settings-security-item > button {
+        align-self: flex-end;
+    }
+
+    .settings-notification-item {
+        gap: 10px;
+    }
+
+    .settings-notification-item strong {
+        font-size: 18px;
+    }
+
+    .settings-notification-item span:not(.settings-toggle-slider) {
+        font-size: 18px;
+    }
+}
+
+
+/* ==========================================
+   PORTAL SETTINGS - CLIENT PORTAL
+========================================== */
+
+#view-settings {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+    color: #e7f1f0;
+}
+
+.portal-settings-dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.portal-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 23px;
+}
+
+.portal-settings-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #00e8c0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.portal-settings-header h2 {
+    margin: 0 0 8px;
+    color: #f0fafa;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 750;
+}
+
+.portal-settings-header p {
+    max-width: 650px;
+    margin: 0;
+    color: #8da1a3;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.portal-settings-header-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border: 1px solid #15534b;
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* Profile Card */
+
+.settings-profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 19px;
+    margin-bottom: 22px;
+    background: linear-gradient(110deg, #0b2827, #07191b);
+    border: 1px solid #19514a;
+    border-radius: 12px;
+}
+
+.settings-profile-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 0;
+}
+
+.settings-profile-avatar {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #00e8c01a;
+    border: 1px solid #1c6659;
+    border-radius: 50%;
+    color: #00e8c0;
+    font-size: 24px;
+}
+
+.settings-profile-info > span {
+    color: #00e8c0;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.settings-profile-info h3 {
+    margin: 5px 0;
+    color: #edfafa;
+    font-size: 16px;
+}
+
+.settings-profile-info p {
+    margin: 0 0 7px;
+    color: #8da1a3;
+    font-size: 11px;
+}
+
+.settings-profile-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64e5c5;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.settings-profile-card > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.settings-profile-card > button:hover {
+    background: #00f0c2;
+}
+
+/* Main Layout */
+
+.portal-settings-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    align-items: start;
+    gap: 18px;
+}
+
+.portal-settings-main {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+.portal-settings-sidebar {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* Settings Cards */
+
+.portal-settings-card,
+.settings-sidebar-card {
+    min-width: 0;
+    padding: 19px;
+    background: #071618;
+    border: 1px solid #12282b;
+    border-radius: 11px;
+}
+
+.portal-settings-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #183436;
+}
+
+.portal-settings-card-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.portal-settings-card-icon.teal {
+    color: #00e8c0;
+    background: #00e8c01a;
+}
+
+.portal-settings-card-icon.blue {
+    color: #73baff;
+    background: #73baff1a;
+}
+
+.portal-settings-card-icon.purple {
+    color: #c49aff;
+    background: #c49aff1a;
+}
+
+.portal-settings-card-icon.orange {
+    color: #ffb36a;
+    background: #ffb36a1a;
+}
+
+.portal-settings-card-icon.green {
+    color: #6ee7a4;
+    background: #6ee7a41a;
+}
+
+.portal-settings-card-header h3 {
+    margin: 0 0 5px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.portal-settings-card-header p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+}
+
+/* Personal Information */
+
+.settings-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 17px;
+}
+
+.settings-information-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.settings-information-item label {
+    color: #82999b;
+    font-size: 10px;
+}
+
+.settings-information-item strong {
+    color: #dcebe7;
+    font-size: 11px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.settings-contact-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffbd79 !important;
+}
+
+/* Card Action */
+
+.settings-card-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 0 0;
+    background: transparent;
+    color: #00d9b0;
+    border: 0;
+    border-top: 1px solid #183436;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings-card-action:hover {
+    color: #00f0c2;
+}
+
+/* Security List */
+
+.settings-security-list {
+    display: grid;
+    gap: 0;
+    margin-bottom: 15px;
+}
+
+.settings-security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #142b2d;
+}
+
+.settings-security-item:first-child {
+    padding-top: 0;
+}
+
+.settings-security-item:last-child {
+    border-bottom: 0;
+}
+
+.settings-security-info {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.settings-security-symbol {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #73baff;
+    background: #73baff16;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.settings-security-info > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.settings-security-info strong {
+    color: #e4f0ee;
+    font-size: 11px;
+}
+
+.settings-security-info span {
+    color: #82999b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.settings-security-item > button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    padding: 8px 10px;
+    background: #10292a;
+    color: #00e8c0;
+    border: 1px solid #1d4545;
+    border-radius: 6px;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+/* Notification Settings */
+
+.settings-notification-list {
+    display: grid;
+    gap: 0;
+    margin-bottom: 15px;
+}
+
+.settings-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 0;
+    border-bottom: 1px solid #142b2d;
+}
+
+.settings-notification-item:first-child {
+    padding-top: 0;
+}
+
+.settings-notification-item:last-child {
+    border-bottom: 0;
+}
+
+.settings-notification-item > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.settings-notification-item strong {
+    color: #e4f0ee;
+    font-size: 11px;
+}
+
+.settings-notification-item span:not(.settings-toggle-slider) {
+    color: #82999b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+/* Interactive Toggle */
+
+.settings-toggle {
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.settings-toggle input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.settings-toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #263c3d;
+    border: 1px solid #395252;
+    border-radius: 30px;
+    transition: 0.25s ease;
+}
+
+.settings-toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    top: 3px;
+    background: #a1b5b3;
+    border-radius: 50%;
+    transition: 0.25s ease;
+}
+
+.settings-toggle input:checked + .settings-toggle-slider {
+    background: #007f6a;
+    border-color: #00d9b0;
+}
+
+.settings-toggle input:checked + .settings-toggle-slider::before {
+    transform: translateX(18px);
+    background: #eafff9;
+}
+
+.settings-toggle input:focus-visible + .settings-toggle-slider {
+    outline: 2px solid #00e8c0;
+    outline-offset: 3px;
+}
+
+/* Sidebar Cards */
+
+.settings-sidebar-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #183436;
+}
+
+.settings-sidebar-heading > i {
+    color: #00e8c0;
+    font-size: 15px;
+}
+
+.settings-sidebar-heading h3 {
+    margin: 0;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.settings-security-overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+    text-align: center;
+}
+
+.settings-security-overview-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border: 1px solid #1c544b;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.settings-security-overview h4 {
+    margin: 0 0 7px;
+    color: #eaf5f3;
+    font-size: 12px;
+}
+
+.settings-security-overview p {
+    margin: 0;
+    color: #82999b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-security-check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 0;
+    border-top: 1px solid #142b2d;
+}
+
+.settings-security-check span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #a8bfbb;
+    font-size: 9px;
+}
+
+.settings-security-check span i {
+    color: #00d9b0;
+}
+
+.settings-security-check strong {
+    color: #64e5c5;
+    font-size: 9px;
+}
+
+.settings-sidebar-card > button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 0 0;
+    margin-top: 7px;
+    background: transparent;
+    color: #00d9b0;
+    border: 0;
+    border-top: 1px solid #183436;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Account Links */
+
+.settings-account-links {
+    display: grid;
+    margin-top: 8px;
+}
+
+.settings-account-links button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    background: transparent;
+    color: #b9ccca;
+    border: 0;
+    border-bottom: 1px solid #142b2d;
+    font-size: 10px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.settings-account-links button:last-child {
+    border-bottom: 0;
+}
+
+.settings-account-links button > i:first-child {
+    width: 16px;
+    color: #00d9b0;
+}
+
+.settings-account-links button > i:last-child {
+    margin-left: auto;
+    color: #718c8d;
+    font-size: 9px;
+}
+
+.settings-account-links button:hover {
+    color: #00e8c0;
+}
+
+/* Support */
+
+.settings-sidebar-support {
+    padding: 19px;
+    background: linear-gradient(145deg, #0b2926, #07191b);
+    border: 1px solid #19534b;
+    border-radius: 11px;
+}
+
+.settings-support-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 13px;
+    color: #00e8c0;
+    background: #00e8c01a;
+    border-radius: 9px;
+    font-size: 17px;
+}
+
+.settings-sidebar-support h3 {
+    margin: 0 0 7px;
+    color: #eaf5f3;
+    font-size: 13px;
+}
+
+.settings-sidebar-support p {
+    margin: 0 0 14px;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-sidebar-support button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    background: #00d9b0;
+    color: #03201d;
+    border: 0;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* Footer Note */
+
+.settings-footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-top: 19px;
+    background: #0a2021;
+    border: 1px solid #183436;
+    border-radius: 9px;
+    color: #8da1a3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-footer-note i {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #00d9b0;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+    .portal-settings-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 13px;
+    }
+}
+
+@media (max-width: 900px) {
+    .portal-settings-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-settings-sidebar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .settings-sidebar-support {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    #view-settings {
+        padding: 16px;
+    }
+
+    .portal-settings-header {
+        align-items: flex-start;
+    }
+
+    .settings-profile-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .settings-profile-card > button {
+        width: 100%;
+    }
+
+    .portal-settings-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-sidebar-support {
+        grid-column: auto;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 480px) {
+    #view-settings {
+        padding: 12px;
+    }
+
+    .portal-settings-header-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .settings-profile-card,
+    .portal-settings-card,
+    .settings-sidebar-card,
+    .settings-sidebar-support {
+        padding: 14px;
+    }
+
+    .settings-information-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .settings-security-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .settings-security-item > button {
+        align-self: flex-end;
+    }
+
+    .settings-notification-item {
+        gap: 10px;
+    }
+
+    .settings-notification-item strong {
+        font-size: 10px;
+    }
+
+    .settings-notification-item span:not(.settings-toggle-slider) {
+        font-size: 9px;
+    }
+}
+
+/* PORTAL SETTINGS - LARGER FONT SIZE */
+
+#view-settings {
+    font-size: 16px;
+}
+
+.portal-settings-eyebrow {
+    font-size: 14px;
+}
+
+.portal-settings-header h2 {
+    font-size: 36px;
+}
+
+.portal-settings-header p {
+    font-size: 16px;
+}
+
+.settings-profile-info > span {
+    font-size: 13px;
+}
+
+.settings-profile-info h3 {
+    font-size: 22px;
+}
+
+.settings-profile-info p {
+    font-size: 15px;
+}
+
+.settings-profile-status {
+    font-size: 13px;
+}
+
+.settings-profile-card > button {
+    font-size: 14px;
+}
+
+.portal-settings-card-header h3 {
+    font-size: 19px;
+}
+
+.portal-settings-card-header p {
+    font-size: 14px;
+}
+
+.settings-information-item label {
+    font-size: 14px;
+}
+
+.settings-information-item strong {
+    font-size: 16px;
+}
+
+.settings-card-action {
+    font-size: 15px;
+}
+
+.settings-security-info strong {
+    font-size: 15px;
+}
+
+.settings-security-info span {
+    font-size: 13px;
+}
+
+.settings-security-item > button {
+    font-size: 13px;
+}
+
+.settings-notification-item strong {
+    font-size: 15px;
+}
+
+.settings-notification-item span:not(.settings-toggle-slider) {
+    font-size: 13px;
+}
+
+.settings-sidebar-heading h3 {
+    font-size: 17px;
+}
+
+.settings-security-overview h4 {
+    font-size: 16px;
+}
+
+.settings-security-overview p {
+    font-size: 14px;
+}
+
+.settings-security-check span,
+.settings-security-check strong {
+    font-size: 13px;
+}
+
+.settings-account-links button {
+    font-size: 14px;
+}
+
+.settings-sidebar-support h3 {
+    font-size: 17px;
+}
+
+.settings-sidebar-support p {
+    font-size: 14px;
+}
+
+.settings-sidebar-support button {
+    font-size: 14px;
+}
+
+.settings-footer-note {
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+    .portal-settings-header h2 {
+        font-size: 30px;
+    }
+
+    .portal-settings-header p {
+        font-size: 15px;
+    }
+
+    .portal-settings-card-header h3 {
+        font-size: 17px;
+    }
+
+    .settings-information-item strong {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portal-settings-header h2 {
+        font-size: 26px;
+    }
+
+    .portal-settings-header p {
+        font-size: 14px;
+    }
+
+    .portal-settings-card-header h3 {
+        font-size: 16px;
+    }
+
+    .settings-information-item label {
+        font-size: 13px;
+    }
+
+    .settings-information-item strong {
+        font-size: 14px;
+    }
+
+    .settings-notification-item strong,
+    .settings-security-info strong {
+        font-size: 14px;
+    }
+
+    .settings-notification-item span:not(.settings-toggle-slider),
+    .settings-security-info span {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+        </main>
+
+    </div>
+
+    <!-- Mobile Blurring Backdrop Shield -->
+    <div class="client-mobile-overlay-shield" id="clientOverlayNode"></div>
+
+   
+    <style>
+        :root {
+    --bg-clinical-dark: #050b0c;
+    --bg-canvas: #091315;
+    --bg-card-slate: #0e1e21;
+    --neon-emerald: #00e5c1;
+    --clinical-teal: #0a8491;
+    --coral-alert: #ff5c75;
+    --text-pure: #ffffff;
+    --text-dimmed: #94b2b5;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    --header-height: 70px;
+    --sidebar-width: 280px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.client-dashboard-frame {
+    background-color: var(--bg-canvas);
+    color: var(--text-pure);
+    font-family: var(--font-stack);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Navbar Configs */
+.client-top-navbar {
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--bg-clinical-dark);
+    border-bottom: 1px solid rgba(10, 132, 145, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-left-wing { display: flex; align-items: center; gap: 16px; }
+
+.client-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.brand-logo-asset { height: 32px; width: auto; border-radius: 6px; }
+.brand-text-label { font-size: 20px; font-weight: 700; color: var(--text-pure); letter-spacing: 0.5px; }
+.brand-text-label span { color: var(--neon-emerald); }
+.header-right-wing { display: flex; align-items: center; gap: 24px; }
+
+/* Notification Bell Indicator Link */
+.header-action-bell {
+    background: transparent;
+    border: none;
+    color: var(--text-dimmed);
+    cursor: pointer;
+    position: relative;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-action-bell svg { width: 22px; height: 22px; }
+
+.notification-indicator-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--coral-alert);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--coral-alert);
+}
+
+/* Client Identity Presentation Badges Group */
+.client-profile-capsule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 1px solid rgba(255,255,255,0.06);
+    padding-left: 20px;
+}
+
+.avatar-placeholder-circle {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--clinical-teal), #00bfa3);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 229, 193, 0.15);
+}
+
+.profile-text-labels { display: flex; flex-direction: column; }
+.welcome-micro-prefix { color: var(--text-dimmed); font-size: 11px; font-weight: 500; }
+.client-extracted-name { color: #ffffff; font-size: 14.5px; font-weight: 600; text-transform: capitalize; }
+
+/* Inner Layout Frame Stack Workspace */
+.client-workspace-container {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    margin-top: var(--header-height);
+    display: flex;
+    position: relative;
+}
+
+/* --- Sliding Sidebar Drawer Core Layout --- */
+.client-sidebar-drawer {
+    width: var(--sidebar-width);
+    height: 100%;
+    background-color: var(--bg-clinical-dark);
+    border-right: 1px solid rgba(10, 132, 145, 0.15);
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 999;
+}
+
+.sidebar-nav-tree {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px 16px;
+    justify-content: space-between;
+}
+
+.sidebar-links-group { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+/* Interactive Menu Sidebar Buttons Selection controllers */
+.sidebar-menu-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-dimmed);
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.sidebar-menu-btn:hover { background-color: rgba(10, 132, 145, 0.06); color: #ffffff; }
+
+.sidebar-menu-btn.active {
+    background-color: rgba(0, 229, 193, 0.08);
+    color: var(--neon-emerald);
+    border: 1px solid rgba(0, 229, 193, 0.15);
+}
+
+.sidebar-footer-action { border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px; }
+
+.btn-sidebar-logout {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 92, 117, 0.2);
+    color: var(--coral-alert);
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.btn-sidebar-logout:hover { background-color: rgba(255, 92, 117, 0.08); box-shadow: 0 0 12px rgba(255, 92, 117, 0.15); }
+
+/* --- Dynamic Viewports Canvas Panels Screen Layout --- */
+.client-main-canvas {
+    flex-grow: 1;
+    height: 100%;
+    padding: 40px;
+    overflow-y: auto;
+    background-color: var(--bg-canvas);
+}
+
+.client-page-view-panel { display: none; width: 100%; animation: canvasSlideUpFadeIn 0.4s ease forwards; }
+.client-page-view-panel.display-visible { display: block; }
+
+.testing-placeholder-card {
+    background-color: var(--bg-card-slate);
+    border: 1px solid rgba(10, 132, 145, 0.2);
+    border-radius: 16px;
+    padding: 45px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 1000px;
+}
+
+.card-meta-stamp {
+    display: inline-block;
+    background: rgba(10, 132, 145, 0.15);
+    color: var(--text-dimmed);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.view-section-title { color: #ffffff; font-size: 28px; font-weight: 700; margin-bottom: 14px; }
+.view-section-desc { color: var(--text-dimmed); font-size: 15.5px; line-height: 1.6; }
+
+/* --- Mobile Viewport Trigger Overlays Elements --- */
+.mobile-sidebar-hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.client-mobile-overlay-shield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(5, 11, 12, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 998;
+    transition: opacity 0.3s ease;
+}
+
+/* --- Mobile Screen Breakthrough Protocols --- */
+@media (max-width: 992px) {
+    .mobile-sidebar-hamburger { display: flex; }
+    .client-sidebar-drawer { position: fixed; top: var(--header-height); left: calc(-1 * var(--sidebar-width)); height: calc(100vh - var(--header-height)); }
+    .client-main-canvas { padding: 30px 20px; }
+    
+    body.sidebar-expanded .client-sidebar-drawer { transform: translateX(var(--sidebar-width)); }
+    body.sidebar-expanded .client-mobile-overlay-shield { opacity: 1; pointer-events: auto; }
+    
+    body.sidebar-expanded .mobile-sidebar-hamburger .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.sidebar-expanded .mobile-sidebar-hamburger .hamburger-line:nth-child(2) { opacity: 0; }
+    body.sidebar-expanded .mobile-sidebar-hamburger .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+@keyframes canvasSlideUpFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    // 1. Run automated name extraction on email id string
+    initializeClientProfileIdentity();
+    
+    // 2. Setup mobile sidebar trigger bindings hooks
+    initializeMobileSidebarDrawer();
+});
+
+/**
+ * 1. Client Identity Email Extraction Tracker Function
+ * Isolates name segment characters string standing before the email address domain
+ */
+function initializeClientProfileIdentity() {
+    const headerNameNode = document.getElementById("headerClientName");
+    const avatarInitialNode = document.getElementById("clientAvatarInitial");
+
+    // Static session testing value string model parameters
+    // Try modifying this parameter to test name parsing mappings dynamically
+    const sessionEmailMockAddress = "jeevi@gmail.com"; 
+
+    if (sessionEmailMockAddress && sessionEmailMockAddress.includes("@")) {
+        const extractedFirstName = sessionEmailMockAddress.split("@")[0];
+        
+        if (headerNameNode && avatarInitialNode) {
+            headerNameNode.textContent = extractedFirstName;
+            
+            const firstCharacterInitial = extractedFirstName.charAt(0);
+            avatarInitialNode.textContent = firstCharacterInitial;
+        }
+    }
+}
+
+/**
+ * 2. Client Views Switcher Controller Routine
+ * Swaps segment layout visibility cards instantly across active workspace panels
+ */
+function switchClientView(buttonElement, targetPanelId) {
+    const allMenuBtns = document.querySelectorAll(".sidebar-menu-btn");
+    allMenuBtns.forEach(btn => btn.classList.remove("active"));
+
+    buttonElement.classList.add("active");
+
+    const allPagePanels = document.querySelectorAll(".client-page-view-panel");
+    allPagePanels.forEach(panel => panel.classList.remove("display-visible"));
+
+    const targetCanvasesNode = document.getElementById(targetPanelId);
+    if (targetCanvasesNode) {
+        targetCanvasesNode.classList.add("display-visible");
+    }
+
+    if (document.body.classList.contains("sidebar-expanded")) {
+        document.body.classList.remove("sidebar-expanded");
+    }
+}
+
+/**
+ * 3. Mobile Hamburger Expansion Toggler Routing
+ */
+function initializeMobileSidebarDrawer() {
+    const hamburgerTrigger = document.getElementById("clientSidebarToggle");
+    const backgroundOverlay = document.getElementById("clientOverlayNode");
+
+    if (hamburgerTrigger && backgroundOverlay) {
+        const toggleMobileMenuDrawer = () => {
+            document.body.classList.toggle("sidebar-expanded");
+        };
+
+        hamburgerTrigger.addEventListener("click", toggleMobileMenuDrawer);
+        backgroundOverlay.addEventListener("click", toggleMobileMenuDrawer);
+    }
+}
+
+/**
+ * 4. Brand Logo Soft Reload Action Routine
+ */
+function refreshDashboardPortal() {
+    window.location.reload(); 
+}
+
+/**
+ * 5. Sign Out Secure Breakout Navigation Route
+ */
+function executeClientLogout() {
+    const confirmationResponse = confirm("Are you sure you want to securely log out of Stackly Care Console?");
+    if (confirmationResponse) {
+        console.warn("Terminating secure patient validation cookies tokens.");
+        window.location.href = "index.html"; // Navigate securely back onto primary home screen
+    }
+}
+
+function triggerBellAlert() {
+    alert("Stackly Care Ingestion Notice: All biometric validation pathways are verified. Zero anomalies pending review.");
+}
+
+    </script>
+</body>
+</html>

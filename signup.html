@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Mainframe Registration - Signup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- REGISTRATION CORE MATRIX WRAPPER -->
+  <main class="signup-main-wrapper">
+    <div class="signup-card-layout">
+      
+      <!-- LEFT DESIGN GRAPHIC FRAME PANEL -->
+      <section class="signup-branding-side">
+        <div class="brand-top-row">
+          <div class="brand-pill-tag">
+            <span class="pulse-tracker-dot"></span>
+            INITIALIZING SEQUENCING PORT
+          </div>
+          <div class="node-vector-badge">📡</div>
+        </div>
+
+        <div class="brand-center-content">
+          <h1 class="brand-headline">Create Your<br><span class="neon-teal-text">Diagnostic Blueprint.</span></h1>
+          <p class="brand-paragraph">
+            Join our decentralized preventive sequencing grid. Set up your personal matrix coordinate maps, calibrate real-time biomarker alerts, and unlock tailored clinical longevity reporting.
+          </p>
+        </div>
+
+        <div class="brand-media-frame">
+          <img src="https://unsplash.com" alt="Advanced DNA Sequence Imaging Diagnostics Monitor Interface" class="brand-showcase-image">
+        </div>
+
+        <!-- Custom Domain Footer Checklists -->
+        <div class="brand-features-checklist">
+          <span class="check-item">✓ Microfluidic Isolation</span>
+          <span class="check-item">✓ Core Telemetry Pipelines</span>
+          <span class="check-item">✓ Automated Pathology Assays</span>
+        </div>
+      </section>
+
+      <!-- RIGHT DATA ENTRY REGISTRATION FORM PANEL -->
+      <section class="signup-form-side">
+        <div class="form-scroll-container">
+          
+          <div class="top-nav-row">
+            <a href="login.html" class="back-login-link">&larr; Back to Login</a>
+          </div>
+          
+          <h2 class="form-main-heading">Create Account</h2>
+          <p class="form-subtext">Register your node account to configure dynamic health panels, historical biomarker tracking pipelines, and specialized clinic schedules.</p>
+
+          <form id="portal-signup-form" novalidate>
+            
+            <!-- Full Name Text Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">YOUR FULL NAME</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">👤</span>
+                <input type="text" id="signup-user-name" placeholder="Enter your full name..." autocomplete="off" required>
+              </div>
+            </div>
+
+            <!-- Email Text Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">EMAIL ADDRESS</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">✉️</span>
+                <input type="email" id="signup-user-email" placeholder="you@example.com" autocomplete="off" required>
+              </div>
+            </div>
+
+            <!-- Phone Number Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">10-DIGIT MOBILE NUMBER</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">📱</span>
+                <input type="text" id="signup-user-phone" placeholder="10-digit mobile number" maxlength="10" autocomplete="off" required>
+              </div>
+            </div>
+
+            <!-- Password Key Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">PASSWORD KEY</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">🔑</span>
+                <input type="password" id="signup-user-password" placeholder="Create a password" required>
+                <button type="button" class="toggle-visibility-btn" data-target="signup-user-password">👁️</button>
+              </div>
+            </div>
+
+            <!-- Confirm Password Key Field Element -->
+            <div class="input-element-block">
+              <label class="element-label">CONFIRM PASSWORD KEY</label>
+              <div class="interactive-input-container">
+                <span class="element-prefix-icon">🛡️</span>
+                <input type="password" id="signup-user-confirm" placeholder="Confirm your password" required>
+                <button type="button" class="toggle-visibility-btn" data-target="signup-user-confirm">👁️</button>
+              </div>
+            </div>
+
+            <!-- Real-time Status Analytics Verification Indicator Bar -->
+            <div id="signup-status-notifier" class="status-alert-bar state-waiting">
+              <span class="alert-indicator-dot"></span>
+              <span id="notifier-text-field">Please fill out all allocation matrix fields.</span>
+            </div>
+
+            <!-- Submit Sign Up Activation Action Button -->
+            <button type="submit" class="signup-submit-trigger-btn">SIGN UP &rarr;</button>
+
+            <!-- Conversion Navigation Segment -->
+            <p class="signup-login-prompt">
+              Already have an account? <a href="login.html" class="login-redirect-link">Log In</a>
+            </p>
+            <div class="return-home-wrapper">
+              <a href="/404" class="return-home-link">Return to Home</a>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+ 
+  <style>
+    /* Core Structural Tokens & Theme Variables Alignment */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark-core: #051315;
+  --panel-dark-fill: #091a1d;
+  --neon-teal-bright: #00f0c2;
+  --border-cyber-teal: #162f33;
+  --text-main-bright: #ffffff;
+  --text-muted-teal: #a4b7ba;
+  --input-box-bg: #0d2326;
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark-core);
+  color: var(--text-main-bright);
+  font-family: var(--font-system);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fullscreen Responsive Adaptive Main Matrix Layout Wrapper */
+.signup-main-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .signup-main-wrapper {
+    padding: 2.5rem;
+  }
+}
+
+.signup-card-layout {
+  width: 100%;
+  max-width: 1180px;
+  background-color: var(--panel-dark-fill);
+  border: 1px solid var(--border-cyber-teal);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 992px) {
+  .signup-card-layout {
+    grid-template-columns: 1fr 1.1fr;
+    min-height: 780px;
+  }
+}
+
+/* LEFT DESIGN BRANDING INFORMATION PANEL */
+.signup-branding-side {
+  background: linear-gradient(145deg, #06181b 0%, #030d0e 100%);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  border-bottom: 1px solid var(--border-cyber-teal);
+}
+
+@media (min-width: 992px) {
+  .signup-branding-side {
+    border-bottom: none;
+    border-right: 1px solid var(--border-cyber-teal);
+    padding: 3.5rem;
+  }
+}
+
+.brand-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 240, 194, 0.2);
+  background: rgba(0, 240, 194, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--neon-teal-bright);
+}
+
+.pulse-tracker-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon-teal-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--neon-teal-bright);
+}
+
+.node-vector-badge {
+  font-size: 1.25rem;
+  opacity: 0.8;
+}
+
+.brand-center-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brand-headline {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.neon-teal-text {
+  color: var(--neon-teal-bright);
+  text-shadow: 0 0 20px rgba(0, 240, 194, 0.25);
+}
+
+.brand-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted-teal);
+  max-w: 440px;
+}
+
+.brand-media-frame {
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 992px) {
+  .brand-media-frame {
+    height: 220px;
+  }
+}
+
+.brand-showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  filter: contrast(1.1) brightness(0.9);
+}
+
+.brand-features-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted-teal);
+}
+
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--neon-teal-bright);
+}
+
+/* RIGHT USER INTERACTION FORM SIDE PANEL */
+.signup-form-side {
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .signup-form-side {
+    padding: 3.5rem;
+  }
+}
+
+.form-scroll-container {
+  width: 100%;
+}
+
+.top-nav-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.back-login-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-muted-teal);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-login-link:hover {
+  color: var(--neon-teal-bright);
+}
+
+.form-main-heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.form-subtext {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted-teal);
+  margin-bottom: 2rem;
+}
+
+/* Form Input Control Arrays Components */
+.input-element-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+}
+
+.element-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-main-bright);
+  letter-spacing: 0.5px;
+}
+
+.interactive-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.element-prefix-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 0.95rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.interactive-input-container input {
+  width: 100%;
+  background-color: var(--input-box-bg);
+  border: 1px solid var(--border-cyber-teal);
+  border-radius: 12px;
+  padding: 0.95rem 1rem 0.95rem 2.75rem;
+  color: var(--text-main-bright);
+  font-size: 0.95rem;
+  font-family: var(--font-system);
+  transition: all 0.3s ease;
+}
+
+.interactive-input-container input:focus {
+  outline: none;
+  border-color: var(--neon-teal-bright);
+  box-shadow: 0 0 12px rgba(0, 240, 194, 0.15);
+}
+
+.toggle-visibility-btn {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted-teal);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* State Notification Tracker Alerts Layout Bar profiles */
+.status-alert-bar {
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.alert-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.state-waiting {
+  background-color: rgba(164, 183, 186, 0.05);
+  color: var(--text-muted-teal);
+  border: 1px solid rgba(164, 183, 186, 0.15);
+}
+.state-waiting .alert-indicator-dot { background-color: var(--text-muted-teal); }
+
+.state-error {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: #ff6b6b;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+.state-error .alert-indicator-dot { background-color: #ff6b6b; box-shadow: 0 0 8px #ff6b6b; }
+
+.state-success {
+  background-color: rgba(0, 240, 194, 0.08);
+  color: var(--neon-teal-bright);
+  border: 1px solid rgba(0, 240, 194, 0.25);
+}
+.state-success .alert-indicator-dot { background-color: var(--neon-teal-bright); box-shadow: 0 0 8px var(--neon-teal-bright); }
+
+/* Form Action Submission Buttons */
+.signup-submit-trigger-btn {
+  width: 100%;
+  background-color: #00a887;
+  color: var(--text-main-bright);
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-submit-trigger-btn:hover {
+  background-color: var(--neon-teal-bright);
+  color: var(--bg-dark-core);
+  box-shadow: 0 0 20px rgba(0, 240, 194, 0.3);
+}
+
+/* Footer elements redirects prompts toggles */
+.signup-login-prompt {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted-teal);
+  margin-top: 1.5rem;
+}
+
+.login-redirect-link {
+  color: var(--neon-teal-bright);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.return-home-wrapper {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.return-home-link {
+  font-size: 0.8rem;
+  color: var(--text-muted-teal);
+  text-decoration: underline;
+}
+.return-home-link:hover {
+  color: var(--neon-teal-bright);
+}
+
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const signupForm = document.getElementById("portal-signup-form");
+  const nameInput = document.getElementById("signup-user-name");
+  const emailInput = document.getElementById("signup-user-email");
+  const phoneInput = document.getElementById("signup-user-phone");
+  const passwordInput = document.getElementById("signup-user-password");
+  const confirmInput = document.getElementById("signup-user-confirm");
+  const notifierBox = document.getElementById("signup-status-notifier");
+  const notifierText = document.getElementById("notifier-text-field");
+
+  // State Change Notification Helper Tool
+  function clearAlertStatus(stateClass, promptString) {
+    notifierBox.className = "status-alert-bar " + stateClass;
+    notifierText.textContent = promptString;
+  }
+
+  // 1. DYNAMIC CHARACTER TYPE INPUT FILTERS
+  // Restrict numbers inside identification tokens
+  nameInput.addEventListener("input", () => {
+    const cursorPosition = nameInput.selectionStart;
+    const expressionsFiltered = nameInput.value.replace(/[0-9]/g, "");
+    
+    if (nameInput.value !== expressionsFiltered) {
+      nameInput.value = expressionsFiltered;
+      nameInput.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+      clearAlertStatus("state-error", "Clinical Identifier cells drop numeric parameters.");
+    }
+  });
+
+  // Restrict alphabetical sequences inside the Mobile array
+  phoneInput.addEventListener("input", () => {
+    const cursorPosition = phoneInput.selectionStart;
+    const expressionsFiltered = phoneInput.value.replace(/[^0-9]/g, "");
+    
+    if (phoneInput.value !== expressionsFiltered) {
+      phoneInput.value = expressionsFiltered;
+      phoneInput.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+      clearAlertStatus("state-error", "Mobile Handle tracks standard numeric integers alone.");
+    }
+  });
+
+  // 2. TOGGLE PASSWORD FIELD VISIBILITY MASKS
+  document.querySelectorAll(".toggle-visibility-btn").forEach(buttonNode => {
+    buttonNode.addEventListener("click", () => {
+      const fieldId = buttonNode.getAttribute("data-target");
+      const targetInput = document.getElementById(fieldId);
+      
+      if (targetInput.type === "password") {
+        targetInput.type = "text";
+        buttonNode.textContent = "🙈";
+      } else {
+        targetInput.type = "password";
+        buttonNode.textContent = "👁️";
+      }
+    });
+  });
+
+  // 3. MAIN FORM REGISTRATION DISPATCH LIFECYCLE
+  signupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const nameVal = nameInput.value.trim();
+    const emailVal = emailInput.value.trim();
+    const phoneVal = phoneInput.value.trim();
+    const passVal = passwordInput.value;
+    const confirmVal = confirmInput.value;
+
+    // A. Mandatory Blank Cell Field Verifications
+    if (!nameVal || !emailVal || !phoneVal || !passVal || !confirmVal) {
+      clearAlertStatus("state-error", "Please fill out all allocation matrix fields.");
+      return;
+    }
+
+    // B. Email Structural Layout Lookup Verification Check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailVal)) {
+      clearAlertStatus("state-error", "Invalid layout pattern: Define a structural diagnostic email inbox address.");
+      return;
+    }
+
+    // C. Phone Array String Length Validations Check
+    if (phoneVal.length !== 10) {
+      clearAlertStatus("state-error", "Mobile configuration strings require exactly 10 digital indices.");
+      return;
+    }
+
+    // D. Password Synchronization Identity Matching Check
+    if (passVal !== confirmVal) {
+      clearAlertStatus("state-error", "Mainframe encryption key mismatch: Keys must match exactly.");
+      return;
+    }
+
+    // E. Registration Confirmed Pipeline Loop Dispatch Action
+    clearAlertStatus("state-success", "Successfully registered! Initializing safe routing parameters to login.html...");
+    signupForm.reset();
+
+    // Stagger navigation route sequence smoothly to let success status render clearly
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1800);
+  });
+});
+
+  </script>
+</body>
+</html>
