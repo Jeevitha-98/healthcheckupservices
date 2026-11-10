@@ -177,7 +177,7 @@
         
         <!-- Brand Logo Element Frame (Refresh trigger enabled) -->
         <div class="brand-logo-frame" onclick="refreshPagePortal()" role="button" aria-label="Stackly Home & Refresh">
-            <img src="https://unsplash.com" alt="Stackly Health Logo" class="logo-asset">
+            <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="logo-asset">
             
         </div>
 
@@ -325,7 +325,7 @@ function triggerAuthFlow() {
         <div class="aperture-outer-ring">
           <div class="aperture-inner-mask">
             <!-- Main Content Image Element -->
-            <img src="https://unsplash.com" alt="Laboratory Operations Center Terminal" class="aperture-img">
+            <img src="./assests/medical screening.webp" alt="Laboratory Operations Center Terminal" class="aperture-img">
           </div>
           <!-- Tech HUD Overlays -->
           <div class="aperture-reticle-bracket tr"></div>
@@ -365,7 +365,7 @@ body {
 .contact-hero-section {
   background-color: var(--bg-dark);
   min-height: 100vh;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem;
   display: flex;
   align-items: center;
   position: relative;
@@ -374,7 +374,7 @@ body {
 
 @media (min-width: 768px) {
   .contact-hero-section {
-    padding: 6rem 2rem;
+    padding: 180px 2rem;
   }
 }
 
@@ -1155,95 +1155,166 @@ body {
 
   </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("biometric-form");
-  const nameInput = document.getElementById("user-name");
-  const phoneInput = document.getElementById("user-phone");
-  const emailInput = document.getElementById("user-email");
-  const ageInput = document.getElementById("user-age");
-  const trackerBox = document.getElementById("form-validation-tracker");
-  const trackerText = document.getElementById("tracker-text");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-  // Helper utility to alter verification telemetry prompt boxes instantly
-  function updateTrackerStatus(state, message) {
-    trackerBox.className = "validation-message-bar " + state;
-    trackerText.textContent = message;
-  }
+    const form = document.getElementById("biometric-form");
+    const nameInput = document.getElementById("user-name");
+    const phoneInput = document.getElementById("user-phone");
+    const emailInput = document.getElementById("user-email");
+    const ageInput = document.getElementById("user-age");
+    const trackerBox = document.getElementById("form-validation-tracker");
+    const trackerText = document.getElementById("tracker-text");
 
-  // 1. DATA INPUT FILTERS & REGEX SANITIZERS
-  // Reject structural numeric values inside identification tokens
-  nameInput.addEventListener("input", (e) => {
-    const savedPosition = nameInput.selectionStart;
-    const cleanValue = nameInput.value.replace(/[0-9]/g, "");
-    
-    if (nameInput.value !== cleanValue) {
-      nameInput.value = cleanValue;
-      nameInput.setSelectionRange(savedPosition - 1, savedPosition - 1);
-      updateTrackerStatus("status-error", "Clinical Identifier cannot incorporate structural numbers.");
+    // Helper function to update validation messages
+    function updateTrackerStatus(state, message) {
+        trackerBox.className = "validation-message-bar " + state;
+        trackerText.textContent = message;
     }
-  });
 
-  // Reject alpha structures inside numeric fields (Phone and Age elements)
-  [phoneInput, ageInput].forEach(inputNode => {
-    inputNode.addEventListener("input", (e) => {
-      const savedPosition = inputNode.selectionStart;
-      const cleanValue = inputNode.value.replace(/[^0-9+]/g, "");
-      
-      if (inputNode.value !== cleanValue) {
-        inputNode.value = cleanValue;
-        inputNode.setSelectionRange(savedPosition - 1, savedPosition - 1);
-        updateTrackerStatus("status-error", "Numeric parameter strings accept structural numbers alone.");
-      }
+    // 1. NAME INPUT FILTER
+    nameInput.addEventListener("input", () => {
+
+        const savedPosition = nameInput.selectionStart;
+        const cleanValue = nameInput.value.replace(/[0-9]/g, "");
+
+        if (nameInput.value !== cleanValue) {
+            nameInput.value = cleanValue;
+
+            const newPosition = Math.max(0, savedPosition - 1);
+            nameInput.setSelectionRange(newPosition, newPosition);
+
+            updateTrackerStatus(
+                "status-error",
+                "Clinical Identifier cannot contain numbers."
+            );
+        }
     });
-  });
 
-  // 2. SUBMISSION DISPATCH MANAGEMENT & SUB-VALIDATION
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    // 2. PHONE AND AGE INPUT FILTER
+    [phoneInput, ageInput].forEach(inputNode => {
 
-    // Check for completely blank properties values
-    if (!nameInput.value.trim() || !phoneInput.value.trim() || !emailInput.value.trim() || !ageInput.value.trim()) {
-      updateTrackerStatus("status-error", "Invalid configuration data: Please clear all empty input cells before launching request.");
-      return;
-    }
+        inputNode.addEventListener("input", () => {
 
-    // Basic regex authentication pass check for target inbox layers
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailInput.value.trim())) {
-      updateTrackerStatus("status-error", "Failed network packet lookup: Please declare a standardized email layout map.");
-      return;
-    }
+            const savedPosition = inputNode.selectionStart;
+            const cleanValue = inputNode.value.replace(/[^0-9]/g, "");
 
-    // Success confirmation execution path
-    updateTrackerStatus("status-success", "Telemetry stream authenticated. Dispatching diagnostic allocation matrix blueprint...");
-    form.reset();
-  });
+            if (inputNode.value !== cleanValue) {
+                inputNode.value = cleanValue;
 
-  // 3. ONE-BY-ONE DELAYED ENTRANCE VIEWPORT SCROLL ANIMATION
-  const cascadeCards = document.querySelectorAll(".cascade-item");
-  
-  function processScrollCascade() {
-    const windowBottomEdge = window.innerHeight * 0.88;
-    let visibleIndex = 0;
+                const newPosition = Math.max(0, savedPosition - 1);
+                inputNode.setSelectionRange(newPosition, newPosition);
 
-    cascadeCards.forEach((card) => {
-      const currentTopPos = card.getBoundingClientRect().top;
-      
-      if (currentTopPos < windowBottomEdge && !card.classList.contains("reveal-active")) {
-        // Assign a distinct progressive transition multiplier timestamp to each component card encountered
-        card.style.transitionDelay = `${visibleIndex * 0.22}s`;
-        card.classList.add("reveal-active");
-        visibleIndex++;
-      }
+                updateTrackerStatus(
+                    "status-error",
+                    "Please enter numbers only in phone and age fields."
+                );
+            }
+        });
     });
-  }
 
-  window.addEventListener("scroll", processScrollCascade);
-  processScrollCascade(); // Execute first cycle pass mapping calculation instantly upon rendering
+    // 3. FORM SUBMISSION AND VALIDATION
+    form.addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        // Prevent empty fields
+        if (
+            !nameInput.value.trim() ||
+            !phoneInput.value.trim() ||
+            !emailInput.value.trim() ||
+            !ageInput.value.trim()
+        ) {
+            updateTrackerStatus(
+                "status-error",
+                "Please fill in all required fields before submitting."
+            );
+            return;
+        }
+
+        // Validate name
+        if (!/^[A-Za-z\s.'-]+$/.test(nameInput.value.trim())) {
+            updateTrackerStatus(
+                "status-error",
+                "Please enter a valid name."
+            );
+            return;
+        }
+
+        // Validate phone number
+        if (!/^[0-9]{10}$/.test(phoneInput.value.trim())) {
+            updateTrackerStatus(
+                "status-error",
+                "Please enter a valid 10-digit mobile number."
+            );
+            return;
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(emailInput.value.trim())) {
+            updateTrackerStatus(
+                "status-error",
+                "Please enter a valid email address."
+            );
+            return;
+        }
+
+        // Validate age
+        const age = Number(ageInput.value.trim());
+
+        if (!Number.isInteger(age) || age < 1 || age > 120) {
+            updateTrackerStatus(
+                "status-error",
+                "Please enter a valid age between 1 and 120."
+            );
+            return;
+        }
+
+        // 4. SUCCESS - REDIRECT TO 404 PAGE
+        updateTrackerStatus(
+            "status-success",
+            "Request validated successfully. Redirecting..."
+        );
+
+        const submitButton = form.querySelector(".matrix-submit-btn");
+        submitButton.disabled = true;
+
+        setTimeout(() => {
+            window.location.href = "404.html";
+        }, 800);
+
+    });
+
+    // 5. SCROLL REVEAL ANIMATION
+    const cascadeCards = document.querySelectorAll(".cascade-item");
+
+    function processScrollCascade() {
+
+        const windowBottomEdge = window.innerHeight * 0.88;
+        let visibleIndex = 0;
+
+        cascadeCards.forEach((card) => {
+
+            const currentTopPos = card.getBoundingClientRect().top;
+
+            if (
+                currentTopPos < windowBottomEdge &&
+                !card.classList.contains("reveal-active")
+            ) {
+                card.style.transitionDelay = `${visibleIndex * 0.22}s`;
+                card.classList.add("reveal-active");
+                visibleIndex++;
+            }
+        });
+    }
+
+    window.addEventListener("scroll", processScrollCascade);
+    processScrollCascade();
+
 });
-
-  </script>
+</script>
 
     <!-- SECTION FIVE START: THE GRAPHIC RADAR MAP NAVIGATION -->
   <section class="map-navigation-section">
@@ -1264,7 +1335,7 @@ body {
         <div class="map-blueprint-frame">
           
           <!-- Tactical HUD Graphic Base Layer Image -->
-          <img src="https://unsplash.com" alt="Dark Tactical Navigation Mesh Base Grid Map Layout" class="map-blueprint-image">
+          <img src="./assests/map.webp" alt="Dark Tactical Navigation Mesh Base Grid Map Layout" class="map-blueprint-image">
           
           <!-- Inner Cyber Diagnostic Interface Elements Overlay -->
           <div class="map-hud-glare-shield"></div>
@@ -1281,7 +1352,7 @@ body {
             </p>
             
             <!-- Google Maps External Router Action Button -->
-            <a href="https://google.com" 
+            <a href="https://maps.app.goo.gl/1iUAJLxSuFhmkqeE8" 
                target="_blank" 
                rel="noopener noreferrer" 
                class="google-maps-trigger-btn">
@@ -1582,7 +1653,7 @@ body {
     
     <!-- Deep Layered Background Media Asset Frame -->
     <div class="subscribe-asset-background">
-        <img src="https://pexels.com" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
+        <img src="./assests/medical testing.webp" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
         <div class="subscribe-dark-shield"></div>
     </div>
 
@@ -1839,104 +1910,68 @@ body {
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     initializeSubscriptionGateEngine();
 });
 
 function initializeSubscriptionGateEngine() {
-    const subscribeForm = document.getElementById('stacklySubscribeForm');
-    const emailInput = document.getElementById('subscriberEmailInput');
-    const errorNotice = document.getElementById('fieldWarningNode');
+
+    const subscribeForm = document.getElementById("stacklySubscribeForm");
+    const emailInput = document.getElementById("subscriberEmailInput");
+    const errorNotice = document.getElementById("fieldWarningNode");
 
     if (!subscribeForm || !emailInput || !errorNotice) return;
 
-    // Remove any active error notice display while the user keys in text characters
-    emailInput.addEventListener('input', () => {
-        if (errorNotice.classList.contains('display-active')) {
-            errorNotice.classList.remove('display-active');
-            emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
-        }
+    const errorText = errorNotice.querySelector("span");
+
+    // Hide validation message while typing
+    emailInput.addEventListener("input", () => {
+        errorNotice.classList.remove("display-active");
+        emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
     });
 
-    subscribeForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Stop standard immediate page reload tracking parameters
+    // Form submission
+    subscribeForm.addEventListener("submit", (e) => {
+
+        e.preventDefault();
 
         const enteredValue = emailInput.value.trim();
 
-        // --- 1. Programmatic Field Completion Checks ---
+        // 1. Empty field validation
         if (enteredValue === "") {
-            // Field is completely empty
-            errorNotice.querySelector('span').innerText = "Please fill in the email field";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please fill in the email field";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // Basic structural email regex validation pattern
+        // 2. Email format validation
         const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!emailRegexPattern.test(enteredValue)) {
-            // Input string doesn't follow typical email address properties
-            errorNotice.querySelector('span').innerText = "Please enter a valid email address";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please enter a valid email address";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // --- 2. Valid Input Form Path: Fire secure medical 404 redirect overlay simulation loop ---
-        executeSecure404Redirect(enteredValue);
-        subscribeForm.reset(); // Clear memory values inside structural fields
+        // 3. Valid email - navigate directly to 404 page
+        window.location.href = "404.html";
+
     });
 }
-
-/**
- * Custom 404 Viewport Layer Launcher
- * Generates an absolute blocking layer over document body frames to safely mirror requested parameters
- */
-function executeSecure404Redirect(validatedEmailAddress) {
-    const fullScreen404Layer = document.createElement('div');
-    
-    // Core Layout Styling Definitions
-    Object.assign(fullScreen404Layer.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    fullScreen404Layer.innerHTML = `
-        <div style="max-width: 520px; background: #0e1e21; border: 1px solid #ff5c75; padding: 50px 40px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
-            <svg style="width: 56px; height: 56px; color: #ff5c75; margin-bottom: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 64px; font-weight: 800; color: #ff5c75; margin: 0 0 10px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 22px; color: #ffffff; margin-bottom: 15px; font-weight: 700;">Subscription Loop Encrypted</h3>
-            <p style="color: #7fa4a8; font-size: 14.5px; line-height: 1.6; margin-bottom: 30px;">The data verification portal path for [<strong>${validatedEmailAddress}</strong>] compiled successfully, but has completed a safety route onto a localized 404 security shield loop.</p>
-            <button id="close404PortalBtn" style="background: #00e5c1; color: #091315; border: none; padding: 14px 28px; font-size: 14px; font-weight: 700; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.2s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(fullScreen404Layer);
-    document.body.style.overflow = 'hidden'; // Lock root window scroll trackers completely
-
-    // Dismissal controller wire path
-    document.getElementById('close404PortalBtn').addEventListener('click', () => {
-        fullScreen404Layer.remove();
-        document.body.style.overflow = 'auto'; // Unlock root viewport elements
-    });
-}
-
 </script>
 
 <!-- Master Premium Footer Navigation Arena -->
@@ -1946,7 +1981,7 @@ function executeSecure404Redirect(validatedEmailAddress) {
         <!-- Column 1: Brand Info Column -->
         <div class="footer-column-cell brand-summary-cell">
             <div class="footer-logo-node" onclick="scrollToTopAndRefresh()" role="button" aria-label="Stackly Logo - Back to Top">
-                <img src="https://unsplash.com" alt="Stackly Health Logo" class="footer-logo-img">
+                <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="footer-logo-img">
                 
             </div>
             <p class="footer-brand-pitch">
@@ -2289,75 +2324,38 @@ function executeSecure404Redirect(validatedEmailAddress) {
 
 </style>
 
+
 <script>
     /**
- * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
- */
-function scrollToTopAndRefresh() {
-    if (window.scrollY === 0) {
-        window.location.reload(); 
-    } else {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+     * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
+     */
+    function scrollToTopAndRefresh() {
+        if (window.scrollY === 0) {
+            window.location.reload();
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
-        const refreshHandlerScrollCheck = () => {
-            if (window.scrollY === 0) {
-                window.removeEventListener('scroll', refreshHandlerScrollCheck);
-                window.location.reload();
-            }
-        };
-        window.addEventListener('scroll', refreshHandlerScrollCheck);
+            const refreshHandlerScrollCheck = () => {
+                if (window.scrollY === 0) {
+                    window.removeEventListener('scroll', refreshHandlerScrollCheck);
+                    window.location.reload();
+                }
+            };
+
+            window.addEventListener('scroll', refreshHandlerScrollCheck);
+        }
     }
-}
 
-/**
- * 2. 404 Security Simulation Overlay Shield Gate Routing Routine
- */
-function routeToErrorPortal(targetContextCode) {
-    console.warn(`Redirecting link token sequence safely down to fallback node path: [${targetContextCode}]`);
-
-    const secureErrorMask = document.createElement('div');
-    
-    Object.assign(secureErrorMask.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    secureErrorMask.innerHTML = `
-        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
-            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Diagnostic Sub-Route Locked</h3>
-            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference link parameter [<strong>${targetContextCode}</strong>] points to an offline diagnostic directory that is currently undergoing security audits.</p>
-            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.15s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(secureErrorMask);
-    document.body.style.overflow = 'hidden';
-
-    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
-        secureErrorMask.remove();
-        document.body.style.overflow = 'auto';
-    });
-}
-
+    /**
+     * 2. 404 Page Navigation Handler
+     */
+    function routeToErrorPortal(targetContextCode) {
+        window.location.href = '404.html';
+    }
 </script>
+
 </body>
 </html>

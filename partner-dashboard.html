@@ -20,17 +20,19 @@
             
             
             <div class="dashboard-brand-logo" onclick="refreshDashboardPortal()" role="button" aria-label="Stackly Home & Refresh">
-                <img src="https://unsplash.com" alt="Stackly Health Logo" class="brand-logo-asset">
+                <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="brand-logo-asset">
           
             </div>
         </div>
 
         <div class="header-right-wing">
             <!-- Alert Alert Notification Bell Node -->
-            <button class="header-action-bell" onclick="triggerBellAlert()" aria-label="View notifications">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                <span class="notification-indicator-dot"></span>
-            </button>
+          <button class="header-action-bell" onclick="window.location.href='404.html';" aria-label="View notifications">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path>
+    </svg>
+    <span class="notification-indicator-dot"></span>
+</button>
             
             <!-- Dynamic Partner User Profile Label Module -->
             <div class="partner-profile-capsule">
@@ -4543,15 +4545,144 @@ body.dashboard-body-frame {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* =========================================
+   RESPONSIVE DASHBOARD HEADER
+========================================= */
+
+/* Tablet and smaller screens */
+@media (max-width: 992px) {
+
+    .dashboard-top-navbar {
+        padding: 0 20px;
+        gap: 12px;
+    }
+
+    .header-left-wing {
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .dashboard-brand-logo {
+        min-width: 0;
+    }
+
+    .brand-logo-asset {
+        max-width: 140px;
+        height: 30px;
+        object-fit: contain;
+    }
+
+    .header-right-wing {
+        gap: 16px;
+        flex-shrink: 0;
+    }
+
+    .partner-profile-capsule {
+        gap: 9px;
+        padding-left: 12px;
+    }
+
+    .partner-extracted-name {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+
+    .dashboard-top-navbar {
+        height: var(--header-height);
+        padding: 0 14px;
+    }
+
+    .header-left-wing {
+        gap: 10px;
+    }
+
+    .mobile-sidebar-hamburger {
+        flex-shrink: 0;
+        padding: 5px;
+    }
+
+    .hamburger-line {
+        width: 20px;
+    }
+
+    .brand-logo-asset {
+        height: 27px;
+        max-width: 115px;
+    }
+
+    .header-right-wing {
+        gap: 10px;
+    }
+
+    .header-action-bell {
+        padding: 5px;
+        flex-shrink: 0;
+    }
+
+    .header-action-bell svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .partner-profile-capsule {
+        gap: 0;
+        padding-left: 10px;
+    }
+
+    .avatar-placeholder-circle {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .profile-text-labels {
+        display: none;
+    }
+}
+
+/* Extra-small mobile screens */
+@media (max-width: 380px) {
+
+    .dashboard-top-navbar {
+        padding: 0 10px;
+    }
+
+    .header-left-wing {
+        gap: 7px;
+    }
+
+    .brand-logo-asset {
+        height: 24px;
+        max-width: 100px;
+    }
+
+    .header-right-wing {
+        gap: 7px;
+    }
+
+    .avatar-placeholder-circle {
+        width: 31px;
+        height: 31px;
+    }
+
+    .partner-profile-capsule {
+        padding-left: 7px;
+    }
+}
     </style>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    // 1. Fire email parsing routing system upon portal boot-up initialization 
+    document.addEventListener("DOMContentLoaded", () => {
     initializePartnerProfileIdentity();
-    
-    // 2. Setup mobile responsive drawer interaction hooks
     initializeMobileSidebarDrawer();
+    restoreDashboardView();
 });
 
 /**
@@ -4587,29 +4718,52 @@ function initializePartnerProfileIdentity() {
  * Handles swapping target active segment cards panels instantly across layout viewport trees
  */
 function switchDashboardView(buttonElement, targetPanelId) {
-    // Collect references to all menu button items across sidebar link tree branches
+
     const allMenuBtns = document.querySelectorAll(".sidebar-menu-btn");
     allMenuBtns.forEach(btn => btn.classList.remove("active"));
 
-    // Apply active selection frame styling highlights to target click node track path
     buttonElement.classList.add("active");
 
-    // De-activate all existing page canvases rows inside display viewports
     const allPagePanels = document.querySelectorAll(".dashboard-page-view-panel");
     allPagePanels.forEach(panel => panel.classList.remove("display-visible"));
 
-    // Activate target element card block view cleanly
     const targetCanvasesNode = document.getElementById(targetPanelId);
+
     if (targetCanvasesNode) {
         targetCanvasesNode.classList.add("display-visible");
+
+        // Save the currently selected dashboard section
+        sessionStorage.setItem("stacklyActiveDashboardView", targetPanelId);
     }
 
-    // Auto-dismiss open mobile sidebar menu drawers seamlessly on item selection click actions
+    // Close mobile sidebar after selecting a section
     if (document.body.classList.contains("sidebar-expanded")) {
         document.body.classList.remove("sidebar-expanded");
     }
 }
 
+function restoreDashboardView() {
+
+    // Retrieve the previously selected dashboard section
+    const savedPanelId = sessionStorage.getItem("stacklyActiveDashboardView");
+
+    if (!savedPanelId) return;
+
+    const targetPanel = document.getElementById(savedPanelId);
+
+    if (!targetPanel) return;
+
+    // Find the sidebar button connected to the saved panel
+    const matchingButton = Array.from(
+        document.querySelectorAll(".sidebar-menu-btn")
+    ).find(button => {
+        return button.getAttribute("onclick")?.includes(savedPanelId);
+    });
+
+    if (matchingButton) {
+        switchDashboardView(matchingButton, savedPanelId);
+    }
+}
 /**
  * 3. Mobile Responsive Hamburger Action Interceptor
  * Controls sliding layout visibility blocks and mask layers overlays toggling metrics

@@ -177,7 +177,7 @@
         
         <!-- Brand Logo Element Frame (Refresh trigger enabled) -->
         <div class="brand-logo-frame" onclick="refreshPagePortal()" role="button" aria-label="Stackly Home & Refresh">
-            <img src="https://unsplash.com" alt="Stackly Health Logo" class="logo-asset">
+            <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="logo-asset">
             
         </div>
 
@@ -194,7 +194,9 @@
 
         <!-- Right Side Corner Authentication Anchor Action Block -->
         <div class="right-auth-corner">
-            <button class="btn-auth-portal" onclick="triggerAuthFlow()"><i class="fa-solid fa-user-shield"></i> Patient Login</button>
+            <button class="btn-auth-portal" onclick="window.location.href='login.html'">
+    <i class="fa-solid fa-user-shield"></i> Patient Login
+</button>
         </div>
 
         <!-- Interactive Mobile Hamburger Grid Vector Activation Node -->
@@ -268,7 +270,7 @@ function triggerAuthFlow() {
     
     <!-- Background Widescreen Asset Underlay -->
     <div class="packages-hero-ambient-layer">
-        <img src="https://pexels.com" alt="Stackly Automated Laboratory Core" class="packages-hero-bg-img">
+        <img src="./assests/checkup.webp" alt="Stackly Automated Laboratory Core" class="packages-hero-bg-img">
         <div class="packages-hero-dark-shield"></div>
     </div>
 
@@ -292,13 +294,16 @@ function triggerAuthFlow() {
             </p>
 
             <div class="packages-hero-actions-group">
-                <button class="btn-packages-hero-primary" onclick="routeToErrorPortal('custom-assay-builder')">
-                    Configure Custom Package
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <button class="btn-packages-hero-secondary" onclick="routeToErrorPortal('insurance-verification-vault')">
-                    Check Insurance Coverage
-                </button>
+               <button class="btn-packages-hero-primary" onclick="window.location.href='404.html'">
+    Configure Custom Package
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
+               <button class="btn-packages-hero-secondary" onclick="window.location.href='404.html'">
+    Check Insurance Coverage
+</button>
             </div>
         </div>
 
@@ -680,7 +685,7 @@ function routeToErrorPortal(targetContextCode) {
             <!-- Slab 1: Essential Health Check -->
             <div class="diagnostic-widescreen-slab">
                 <div class="slab-media-capsule">
-                    <img src="https://pexels.com" alt="Hematology Assay Pipelines" class="slab-panel-img">
+                    <img src="./assests/hemotology checkup list.webp" alt="Hematology Assay Pipelines" class="slab-panel-img">
                     <div class="slab-badge-overlay">Popular</div>
                 </div>
                 <div class="slab-content-core">
@@ -700,7 +705,7 @@ function routeToErrorPortal(targetContextCode) {
             <!-- Slab 2: Comprehensive Advanced Check -->
             <div class="diagnostic-widescreen-slab featured-slab">
                 <div class="slab-media-capsule">
-                    <img src="https://pexels.com" alt="Molecular Diagnostic Assays" class="slab-panel-img">
+                    <img src="./assests/molecular diagnostic.webp" alt="Molecular Diagnostic Assays" class="slab-panel-img">
                     <div class="slab-badge-overlay neon-badge">Best Value</div>
                 </div>
                 <div class="slab-content-core">
@@ -720,7 +725,7 @@ function routeToErrorPortal(targetContextCode) {
             <!-- Slab 3: Senior Citizen Special -->
             <div class="diagnostic-widescreen-slab">
                 <div class="slab-media-capsule">
-                    <img src="https://pexels.com" alt="Longevity Biological Monitoring" class="slab-panel-img">
+                    <img src="./assests/medical testing.webp" alt="Longevity Biological Monitoring" class="slab-panel-img">
                     <div class="slab-badge-overlay">Specialized</div>
                 </div>
                 <div class="slab-content-core">
@@ -1446,7 +1451,7 @@ function initializeTriptychArenaMechanics() {
         <div class="blueprint-left-media">
             <div class="blueprint-glow-backing"></div>
             <div class="blueprint-image-container">
-                <img src="https://pexels.com" alt="Stackly Automated Biomarker Screening Specialist" class="blueprint-asset-img">
+                <img src="./assests/medical screening.webp" alt="Stackly Automated Biomarker Screening Specialist" class="blueprint-asset-img">
                 
                 <!-- Floating Real-Time Analytics Indicator Pill -->
                 <div class="floating-analytics-badge">
@@ -1963,7 +1968,7 @@ function initializeCareBlueprintEngine() {
             <!-- Tier 1: Essential Health Check -->
             <div class="matrix-package-card">
                 <div class="card-media-header">
-                    <img src="https://pexels.com" alt="Laboratory Blood Sample Tubes" class="package-card-img">
+                    <img src="./assests/medical testing.webp" alt="Laboratory Blood Sample Tubes" class="package-card-img">
                     <div class="media-vignette-overlay"></div>
                     <span class="card-floating-badge">Popular</span>
                 </div>
@@ -1992,7 +1997,7 @@ function initializeCareBlueprintEngine() {
             <!-- Tier 2: Comprehensive Advanced Check -->
             <div class="matrix-package-card featured-matrix-card">
                 <div class="card-media-header">
-                    <img src="https://pexels.com" alt="Microfluidic Pathology Testing Equipment" class="package-card-img">
+                    <img src="./assests/ultra screening.webp" alt="Microfluidic Pathology Testing Equipment" class="package-card-img">
                     <div class="media-vignette-overlay"></div>
                     <span class="card-floating-badge neon-glow-badge">Best Value</span>
                 </div>
@@ -2020,7 +2025,7 @@ function initializeCareBlueprintEngine() {
             <!-- Tier 3: Senior Citizen Special -->
             <div class="matrix-package-card">
                 <div class="card-media-header">
-                    <img src="https://pexels.com" alt="Medical Infrastructure Patient Screening" class="package-card-img">
+                    <img src="./assests/medical screening.webp" alt="Medical Infrastructure Patient Screening" class="package-card-img">
                     <div class="media-vignette-overlay"></div>
                     <span class="card-floating-badge">Specialized</span>
                 </div>
@@ -2806,7 +2811,7 @@ function toggleFaqCard(buttonNode) {
     
     <!-- Deep Layered Background Media Asset Frame -->
     <div class="subscribe-asset-background">
-        <img src="https://pexels.com" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
+        <img src="./assests/checkup.webp" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
         <div class="subscribe-dark-shield"></div>
     </div>
 
@@ -3063,104 +3068,68 @@ function toggleFaqCard(buttonNode) {
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     initializeSubscriptionGateEngine();
 });
 
 function initializeSubscriptionGateEngine() {
-    const subscribeForm = document.getElementById('stacklySubscribeForm');
-    const emailInput = document.getElementById('subscriberEmailInput');
-    const errorNotice = document.getElementById('fieldWarningNode');
+
+    const subscribeForm = document.getElementById("stacklySubscribeForm");
+    const emailInput = document.getElementById("subscriberEmailInput");
+    const errorNotice = document.getElementById("fieldWarningNode");
 
     if (!subscribeForm || !emailInput || !errorNotice) return;
 
-    // Remove any active error notice display while the user keys in text characters
-    emailInput.addEventListener('input', () => {
-        if (errorNotice.classList.contains('display-active')) {
-            errorNotice.classList.remove('display-active');
-            emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
-        }
+    const errorText = errorNotice.querySelector("span");
+
+    // Hide validation message while typing
+    emailInput.addEventListener("input", () => {
+        errorNotice.classList.remove("display-active");
+        emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
     });
 
-    subscribeForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Stop standard immediate page reload tracking parameters
+    // Form submission
+    subscribeForm.addEventListener("submit", (e) => {
+
+        e.preventDefault();
 
         const enteredValue = emailInput.value.trim();
 
-        // --- 1. Programmatic Field Completion Checks ---
+        // 1. Empty field validation
         if (enteredValue === "") {
-            // Field is completely empty
-            errorNotice.querySelector('span').innerText = "Please fill in the email field";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please fill in the email field";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // Basic structural email regex validation pattern
+        // 2. Email format validation
         const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!emailRegexPattern.test(enteredValue)) {
-            // Input string doesn't follow typical email address properties
-            errorNotice.querySelector('span').innerText = "Please enter a valid email address";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please enter a valid email address";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // --- 2. Valid Input Form Path: Fire secure medical 404 redirect overlay simulation loop ---
-        executeSecure404Redirect(enteredValue);
-        subscribeForm.reset(); // Clear memory values inside structural fields
+        // 3. Valid email - navigate directly to 404 page
+        window.location.href = "404.html";
+
     });
 }
-
-/**
- * Custom 404 Viewport Layer Launcher
- * Generates an absolute blocking layer over document body frames to safely mirror requested parameters
- */
-function executeSecure404Redirect(validatedEmailAddress) {
-    const fullScreen404Layer = document.createElement('div');
-    
-    // Core Layout Styling Definitions
-    Object.assign(fullScreen404Layer.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    fullScreen404Layer.innerHTML = `
-        <div style="max-width: 520px; background: #0e1e21; border: 1px solid #ff5c75; padding: 50px 40px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
-            <svg style="width: 56px; height: 56px; color: #ff5c75; margin-bottom: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 64px; font-weight: 800; color: #ff5c75; margin: 0 0 10px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 22px; color: #ffffff; margin-bottom: 15px; font-weight: 700;">Subscription Loop Encrypted</h3>
-            <p style="color: #7fa4a8; font-size: 14.5px; line-height: 1.6; margin-bottom: 30px;">The data verification portal path for [<strong>${validatedEmailAddress}</strong>] compiled successfully, but has completed a safety route onto a localized 404 security shield loop.</p>
-            <button id="close404PortalBtn" style="background: #00e5c1; color: #091315; border: none; padding: 14px 28px; font-size: 14px; font-weight: 700; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.2s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(fullScreen404Layer);
-    document.body.style.overflow = 'hidden'; // Lock root window scroll trackers completely
-
-    // Dismissal controller wire path
-    document.getElementById('close404PortalBtn').addEventListener('click', () => {
-        fullScreen404Layer.remove();
-        document.body.style.overflow = 'auto'; // Unlock root viewport elements
-    });
-}
-
 </script>
 
 <!-- Master Premium Footer Navigation Arena -->
@@ -3170,7 +3139,7 @@ function executeSecure404Redirect(validatedEmailAddress) {
         <!-- Column 1: Brand Info Column -->
         <div class="footer-column-cell brand-summary-cell">
             <div class="footer-logo-node" onclick="scrollToTopAndRefresh()" role="button" aria-label="Stackly Logo - Back to Top">
-                <img src="https://unsplash.com" alt="Stackly Health Logo" class="footer-logo-img">
+                <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="footer-logo-img">
                 
             </div>
             <p class="footer-brand-pitch">
@@ -3513,75 +3482,38 @@ function executeSecure404Redirect(validatedEmailAddress) {
 
 </style>
 
+
 <script>
     /**
- * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
- */
-function scrollToTopAndRefresh() {
-    if (window.scrollY === 0) {
-        window.location.reload(); 
-    } else {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+     * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
+     */
+    function scrollToTopAndRefresh() {
+        if (window.scrollY === 0) {
+            window.location.reload();
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
-        const refreshHandlerScrollCheck = () => {
-            if (window.scrollY === 0) {
-                window.removeEventListener('scroll', refreshHandlerScrollCheck);
-                window.location.reload();
-            }
-        };
-        window.addEventListener('scroll', refreshHandlerScrollCheck);
+            const refreshHandlerScrollCheck = () => {
+                if (window.scrollY === 0) {
+                    window.removeEventListener('scroll', refreshHandlerScrollCheck);
+                    window.location.reload();
+                }
+            };
+
+            window.addEventListener('scroll', refreshHandlerScrollCheck);
+        }
     }
-}
 
-/**
- * 2. 404 Security Simulation Overlay Shield Gate Routing Routine
- */
-function routeToErrorPortal(targetContextCode) {
-    console.warn(`Redirecting link token sequence safely down to fallback node path: [${targetContextCode}]`);
-
-    const secureErrorMask = document.createElement('div');
-    
-    Object.assign(secureErrorMask.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    secureErrorMask.innerHTML = `
-        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
-            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Diagnostic Sub-Route Locked</h3>
-            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference link parameter [<strong>${targetContextCode}</strong>] points to an offline diagnostic directory that is currently undergoing security audits.</p>
-            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.15s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(secureErrorMask);
-    document.body.style.overflow = 'hidden';
-
-    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
-        secureErrorMask.remove();
-        document.body.style.overflow = 'auto';
-    });
-}
-
+    /**
+     * 2. 404 Page Navigation Handler
+     */
+    function routeToErrorPortal(targetContextCode) {
+        window.location.href = '404.html';
+    }
 </script>
+
 </body>
 </html>

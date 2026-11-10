@@ -20,17 +20,19 @@
             
             
             <div class="client-brand-logo" onclick="refreshDashboardPortal()" role="button" aria-label="Stackly Home & Refresh">
-                <img src="https://unsplash.com" alt="Stackly Health Logo" class="brand-logo-asset">
+                <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="brand-logo-asset">
               
             </div>
         </div>
 
         <div class="header-right-wing">
             <!-- Alert Notification Bell -->
-            <button class="header-action-bell" onclick="triggerBellAlert()" aria-label="View notifications">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                <span class="notification-indicator-dot"></span>
-            </button>
+            <button class="header-action-bell" onclick="window.location.href='404.html'" aria-label="View notifications">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path>
+    </svg>
+    <span class="notification-indicator-dot"></span>
+</button>
             
             <!-- Dynamic Client Profile Name Module -->
             <div class="client-profile-capsule">
@@ -7594,15 +7596,143 @@ body.client-dashboard-frame {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* =========================================
+   CLIENT DASHBOARD HEADER - RESPONSIVE
+========================================= */
+
+/* Tablets and smaller laptops */
+@media (max-width: 992px) {
+    .client-top-navbar {
+        padding: 0 20px;
+        gap: 12px;
+    }
+
+    .header-left-wing {
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .client-brand-logo {
+        min-width: 0;
+    }
+
+    .brand-logo-asset {
+        max-width: 140px;
+        height: 30px;
+        object-fit: contain;
+    }
+
+    .header-right-wing {
+        gap: 16px;
+        flex-shrink: 0;
+    }
+
+    .client-profile-capsule {
+        gap: 9px;
+        min-width: 0;
+    }
+
+    .client-extracted-name {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 600px) {
+    .client-top-navbar {
+        padding: 0 14px;
+        gap: 8px;
+    }
+
+    .header-left-wing {
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .mobile-sidebar-hamburger {
+        flex-shrink: 0;
+        padding: 5px;
+    }
+
+    .hamburger-line {
+        width: 20px;
+    }
+
+    .brand-logo-asset {
+        height: 27px;
+        max-width: 115px;
+    }
+
+    .header-right-wing {
+        gap: 10px;
+    }
+
+    .header-action-bell {
+        padding: 5px;
+        flex-shrink: 0;
+    }
+
+    .header-action-bell svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .client-profile-capsule {
+        gap: 0;
+        padding-left: 10px;
+        flex-shrink: 0;
+    }
+
+    .avatar-placeholder-circle {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .profile-text-labels {
+        display: none;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 380px) {
+    .client-top-navbar {
+        padding: 0 10px;
+    }
+
+    .header-left-wing {
+        gap: 7px;
+    }
+
+    .brand-logo-asset {
+        height: 24px;
+        max-width: 100px;
+    }
+
+    .header-right-wing {
+        gap: 7px;
+    }
+
+    .avatar-placeholder-circle {
+        width: 31px;
+        height: 31px;
+    }
+
+    .client-profile-capsule {
+        padding-left: 7px;
+    }
+}
     </style>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    // 1. Run automated name extraction on email id string
+    document.addEventListener("DOMContentLoaded", () => {
     initializeClientProfileIdentity();
-    
-    // 2. Setup mobile sidebar trigger bindings hooks
     initializeMobileSidebarDrawer();
+    restoreClientDashboardView();
 });
 
 /**
@@ -7634,6 +7764,7 @@ function initializeClientProfileIdentity() {
  * Swaps segment layout visibility cards instantly across active workspace panels
  */
 function switchClientView(buttonElement, targetPanelId) {
+
     const allMenuBtns = document.querySelectorAll(".sidebar-menu-btn");
     allMenuBtns.forEach(btn => btn.classList.remove("active"));
 
@@ -7643,12 +7774,44 @@ function switchClientView(buttonElement, targetPanelId) {
     allPagePanels.forEach(panel => panel.classList.remove("display-visible"));
 
     const targetCanvasesNode = document.getElementById(targetPanelId);
+
     if (targetCanvasesNode) {
         targetCanvasesNode.classList.add("display-visible");
+
+        // Save the currently selected client dashboard section
+        sessionStorage.setItem("stacklyActiveClientView", targetPanelId);
     }
 
+    // Close mobile sidebar after selecting a section
     if (document.body.classList.contains("sidebar-expanded")) {
         document.body.classList.remove("sidebar-expanded");
+    }
+}
+
+function restoreClientDashboardView() {
+
+    // Get the previously selected dashboard section
+    const savedPanelId = sessionStorage.getItem("stacklyActiveClientView");
+
+    if (!savedPanelId) return;
+
+    const targetPanel = document.getElementById(savedPanelId);
+
+    if (!targetPanel || !targetPanel.classList.contains("client-page-view-panel")) {
+        sessionStorage.removeItem("stacklyActiveClientView");
+        return;
+    }
+
+    // Find the sidebar button associated with the saved panel
+    const matchingButton = Array.from(
+        document.querySelectorAll(".sidebar-menu-btn")
+    ).find(button => {
+        const onclickValue = button.getAttribute("onclick") || "";
+        return onclickValue.includes(savedPanelId);
+    });
+
+    if (matchingButton) {
+        switchClientView(matchingButton, savedPanelId);
     }
 }
 

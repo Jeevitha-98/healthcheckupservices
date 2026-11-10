@@ -176,7 +176,7 @@
         
         <!-- Brand Logo Element Frame (Refresh trigger enabled) -->
         <div class="brand-logo-frame" onclick="refreshPagePortal()" role="button" aria-label="Stackly Home & Refresh">
-            <img src="https://unsplash.com" alt="Stackly Health Logo" class="logo-asset">
+            <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="logo-asset">
             
         </div>
 
@@ -193,7 +193,9 @@
 
         <!-- Right Side Corner Authentication Anchor Action Block -->
         <div class="right-auth-corner">
-            <button class="btn-auth-portal" onclick="triggerAuthFlow()"><i class="fa-solid fa-user-shield"></i> Patient Login</button>
+            <button class="btn-auth-portal" onclick="window.location.href='login.html'">
+    <i class="fa-solid fa-user-shield"></i> Patient Login
+</button>
         </div>
 
         <!-- Interactive Mobile Hamburger Grid Vector Activation Node -->
@@ -267,7 +269,7 @@ function triggerAuthFlow() {
     <!-- Background Video Layer Matrix -->
     <div class="video-ambient-layer">
         <video autoplay loop muted playsinline class="bg-video-element">
-            <source src="https://mixkit.co" type="video/mp4">
+            <source src="./assests/health checkup video 2.mp4" type="video/mp4">
         </video>
         <div class="video-dark-shield"></div>
     </div>
@@ -295,14 +297,25 @@ function triggerAuthFlow() {
             </p>
 
             <div class="hero-action-buttons-group">
-                <button class="btn-hero-primary" onclick="scrollToBooking()">
-                    Book Appointment 
-                    <svg class="svg-btn-asset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                </button>
-                <button class="btn-hero-secondary" onclick="scrollToServices()">
-                    Our Services 
-                    <svg class="svg-btn-asset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                </button>
+               <button class="btn-hero-primary" onclick="window.location.href='404.html'">
+    Book Appointment 
+    <svg class="svg-btn-asset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+    </svg>
+</button>
+               <button class="btn-hero-secondary" onclick="window.location.href='404.html'">
+    Our Services 
+    <svg class="svg-btn-asset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+</button>
             </div>
 
         </div>
@@ -952,10 +965,10 @@ function initializeFeatureSwapper() {
             <div class="matrix-backing-glow"></div>
             <div class="image-frame-container primary-frame">
                 <!-- Switched to highly stable medical screening placeholders -->
-                <img src="https://pexels.com" alt="Advanced Clinical Operations Room" class="about-asset-img">
+                <img src="./assests/ultra screening.webp" alt="Advanced Clinical Operations Room" class="about-asset-img">
             </div>
             <div class="image-frame-container secondary-frame-overlay">
-                <img src="https://pexels.com" alt="Precision Molecular Laboratory Testing" class="about-asset-img">
+                <img src="./assests/medical testing.webp" alt="Precision Molecular Laboratory Testing" class="about-asset-img">
             </div>
             
             <!-- Float Interactive Statistics Badge Layer -->
@@ -991,13 +1004,16 @@ function initializeFeatureSwapper() {
 
             <!-- Core Call to Actions pointing to intentional fallback 404 error routes -->
             <div class="about-actions-group">
-                <button class="btn-about-cta cta-gradient" onclick="routeToErrorPortal('clinical-charter')">
-                    Read Our Charter
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <button class="btn-about-cta cta-outline" onclick="routeToErrorPortal('accreditation-vault')">
-                    View Accreditations
-                </button>
+               <button class="btn-about-cta cta-gradient" onclick="window.location.href='404.html'">
+    Read Our Charter
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
+              <button class="btn-about-cta cta-outline" onclick="window.location.href='404.html'">
+    View Accreditations
+</button>
             </div>
 
         </div>
@@ -1413,10 +1429,13 @@ function routeToErrorPortal(targetContextCode) {
             <h3 class="scroll-kinetic-services-title" id="kineticServicesTitle">
                 <span>Our</span> <span>Advanced</span> <span>Diagnostic</span> <span>&</span> <span>Care</span> <span class="accent-node">Specialties.</span>
             </h3>
-            <button class="btn-view-all-services" onclick="routeToErrorPortal('all-specialties')">
-                View All Modalities 
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
+           <button class="btn-view-all-services" onclick="window.location.href='404.html'">
+    View All Modalities 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-arrow-right">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
         </div>
 
         <!-- Translucent interactive cards matrix -->
@@ -1429,10 +1448,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">General Medicine</h4>
                 <p class="service-card-desc">Comprehensive internal clinical care assessment protocols for all age metrics.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('gen-medicine')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+                <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 2: Cardiology -->
@@ -1442,10 +1464,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">Cardiology</h4>
                 <p class="service-card-desc">Advanced cardiac rhythm profiling and high-accuracy diagnostic imaging screenings.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('cardiology')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+             <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 3: Pediatrics -->
@@ -1455,10 +1480,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">Pediatrics</h4>
                 <p class="service-card-desc">Gentle, ultra-precise developmental monitoring and specialized pediatric panels.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('pediatrics')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+              <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 4: Orthopedics -->
@@ -1468,10 +1496,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">Orthopedics</h4>
                 <p class="service-card-desc">Bone, joint structure pathology maps and automated skeletal risk indicators.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('orthopedics')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+              <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 5: Dermatology -->
@@ -1481,10 +1512,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">Dermatology</h4>
                 <p class="service-card-desc">Dermal molecular indexing, skin health markers, and dynamic tissue scanning.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('dermatology')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+           <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 6: Laboratory -->
@@ -1494,10 +1528,13 @@ function routeToErrorPortal(targetContextCode) {
                 </div>
                 <h4 class="service-card-title">Laboratory</h4>
                 <p class="service-card-desc">High-precision microfluidic hematology, automation pathology, and biometrics assays.</p>
-                <button class="btn-card-learn-more" onclick="routeToErrorPortal('laboratory')">
-                    Learn More 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+            <button class="btn-card-learn-more" onclick="window.location.href='404.html'">
+    Learn More 
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-micro-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
         </div>
@@ -1793,7 +1830,7 @@ function initializeServicesSectionMechanics() {
             <div class="diff-glow-backing"></div>
             <div class="diff-image-frame">
                 <!-- Stable medical infrastructure asset replacement -->
-                <img src="https://pexels.com" alt="Stackly Smart Laboratory Checkup Center Reception" class="diff-panel-img">
+                <img src="./assests/checkup.webp" alt="Stackly Smart Laboratory Checkup Center Reception" class="diff-panel-img">
                 
                 <!-- Video Trigger Overlay Element Box -->
                 <div class="media-activation-trigger" onclick="routeToErrorPortal('facility-tour-video')">
@@ -1801,7 +1838,9 @@ function initializeServicesSectionMechanics() {
                     <div class="trigger-icon-nest">
                         <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                     </div>
-                    <span class="trigger-label-text">Watch Facility Tour</span>
+                  <span class="trigger-label-text" onclick="window.location.href='404.html'" style="cursor: pointer;">
+    Watch Facility Tour
+</span>
                 </div>
             </div>
         </div>
@@ -2265,7 +2304,7 @@ function initializeWhyChooseMechanics() {
     
     <!-- Deep Layered Static Asset Background Frame -->
     <div class="ribbon-asset-background">
-        <img src="https://pexels.com" alt="Stackly Diagnostics Cleanroom Architecture" class="ribbon-backing-img">
+        <img src="./assests/medical theme.webp" alt="Stackly Diagnostics Cleanroom Architecture" class="ribbon-backing-img">
         <div class="ribbon-dark-shield"></div>
     </div>
 
@@ -2285,10 +2324,13 @@ function initializeWhyChooseMechanics() {
                 Secure a comprehensive laboratory tracking path today. Take control of your cellular health vectors via ultra-precision diagnostic mapping.
             </p>
             <div class="ribbon-control-buttons">
-                <button class="btn-ribbon-action action-glow" onclick="routeToErrorPortal('premium-screening-slot')">
-                    Initialize Diagnostic Profile
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+               <button class="btn-ribbon-action action-glow" onclick="window.location.href='404.html'">
+    Initialize Diagnostic Profile
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
         </div>
 
@@ -2515,7 +2557,9 @@ function initializeCtaRibbonMechanics() {
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path><path d="M21 21v-2a4 4 0 0 0-3-3.87"></path><path d="M21 3a4 4 0 0 1 0 7.75"></path><path d="M14 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
                     </div>
                     
-                    <button class="btn-hub-action-card" onclick="routeToErrorPortal('packages-catalog')">View Packages</button>
+                  <button class="btn-hub-action-card" onclick="window.location.href='404.html'">
+    View Packages
+</button>
                 </div>
             </div>
 
@@ -2532,8 +2576,9 @@ function initializeCtaRibbonMechanics() {
                         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> 24/7 Expert Support</li>
                     </ul>
                     
-                    <button class="btn-hub-action-card secondary-outline" onclick="routeToErrorPortal('charter-details')">Learn More</button>
-                </div>
+                   <button class="btn-hub-action-card secondary-outline" onclick="window.location.href='404.html'">
+    Learn More
+</button> </div>
             </div>
 
             <!-- Card 3: Direct Appointment Scheduling Trigger -->
@@ -2548,8 +2593,9 @@ function initializeCtaRibbonMechanics() {
                     </div>
 
                     <!-- Background color removed -->
-                    <button class="btn-hub-action-card transparent-emerald-outline" onclick="routeToErrorPortal('slot-booking-gateway')">Book Now</button>
-                </div>
+                   <button class="btn-hub-action-card transparent-emerald-outline" onclick="window.location.href='404.html'">
+    Book Now
+</button> </div>
             </div>
 
             <!-- Card 4: 24/7 Emergency Care Node -->
@@ -2565,8 +2611,9 @@ function initializeCtaRibbonMechanics() {
                     </div>
 
                     <!-- Background color removed -->
-                    <button class="btn-hub-action-card transparent-emergency-outline" onclick="routeToErrorPortal('emergency-hotline-node')">Get Help Now</button>
-                </div>
+                   <button class="btn-hub-action-card transparent-emergency-outline" onclick="window.location.href='404.html'">
+    Get Help Now
+</button> </div>
             </div>
 
         </div>
@@ -2866,9 +2913,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Primary Care</h4>
                 <p class="care-card-desc">Routine check-ups, chronic care, and overall wellness monitoring profiles.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('primary-care')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+               <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 2: Preventive Care -->
@@ -2879,9 +2930,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Preventive Care</h4>
                 <p class="care-card-desc">Screenings, vaccines, and personalized laboratory prevention health plans.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('preventive-care')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+                <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 3: Pediatrics -->
@@ -2892,9 +2947,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Pediatrics</h4>
                 <p class="care-card-desc">Comprehensive care structures for infants, children, and growing adolescents.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('pediatrics')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+              <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 4: Women's Health -->
@@ -2905,9 +2964,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Women's Health</h4>
                 <p class="care-card-desc">Gynecological checkups, hormonal monitoring, and custom life-stage support assays.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('womens-health')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+              <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 5: Chronic Disease Management -->
@@ -2918,9 +2981,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Chronic Disease</h4>
                 <p class="care-card-desc">Diabetes, hypertension, asthma panels, and more—managed with clinical data insight.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('chronic-disease')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+               <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Card 6: Laboratory Services -->
@@ -2931,9 +2998,13 @@ function initializeActionHubMechanics() {
                 </div>
                 <h4 class="care-card-title">Laboratory Services</h4>
                 <p class="care-card-desc">On-site microfluidic lab pathways for fast, high-precision health results.</p>
-                <button class="btn-care-redirect" onclick="routeToErrorPortal('lab-services')">
-                    Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+              <button class="btn-care-redirect" onclick="window.location.href='404.html'">
+    Learn More
+    <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
         </div>
@@ -3210,10 +3281,13 @@ function initializeComprehensiveCareMechanics() {
             <!-- Upper Meta Row Alignment -->
             <div class="console-meta-header">
                 <span class="meta-tag-label">Meet Our Doctors</span>
-                <button class="btn-console-global" onclick="routeToErrorPortal('all-clinicians')">
-                    View All Doctors 
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
+             <button class="btn-console-global" onclick="window.location.href='404.html'">
+    View All Doctors
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-arrow">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
             </div>
 
             <!-- Profile Cards Matrix Grid (2 Columns as per reference layout) -->
@@ -3229,7 +3303,7 @@ function initializeComprehensiveCareMechanics() {
                         <span class="doctor-specialty">Family Medicine</span>
                         <div class="doctor-experience-tag">15+ Years Experience</div>
                         <p class="doctor-desc-micro">Dedicated to building lifelong relationships with patients and families through diagnostic preventative models.</p>
-                        <button class="btn-profile-redirect" onclick="routeToErrorPortal('dr-james-carter')">
+                        <button class="btn-profile-redirect" onclick="window.location.href='404.html'">
                             Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
@@ -3245,7 +3319,7 @@ function initializeComprehensiveCareMechanics() {
                         <span class="doctor-specialty">Pediatrics</span>
                         <div class="doctor-experience-tag">12+ Years Experience</div>
                         <p class="doctor-desc-micro">Passionate about adolescent health indicators, child physical development tracking, and early health screenings.</p>
-                        <button class="btn-profile-redirect" onclick="routeToErrorPortal('dr-sophia-patel')">
+                        <button class="btn-profile-redirect" onclick="window.location.href='404.html'">
                             Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
@@ -3261,7 +3335,7 @@ function initializeComprehensiveCareMechanics() {
                         <span class="doctor-specialty">Women's Health</span>
                         <div class="doctor-experience-tag">14+ Years Experience</div>
                         <p class="doctor-desc-micro">Expert supporting gynecological pathology maps, hormonal balance tracking, and critical life-stage assistance.</p>
-                        <button class="btn-profile-redirect" onclick="routeToErrorPortal('dr-laura-mitchell')">
+                        <button class="btn-profile-redirect" onclick="window.location.href='404.html'">
                             Learn More <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
@@ -3277,7 +3351,7 @@ function initializeComprehensiveCareMechanics() {
                         <span class="doctor-specialty">Internal Medicine</span>
                         <div class="doctor-experience-tag">10+ Years Experience</div>
                         <p class="doctor-desc-micro">Specialized focus on pathology identification, metabolic disease management, and complex chronic care.</p>
-                        <button class="btn-profile-redirect" onclick="routeToErrorPortal('dr-michael-lee')">
+                        <button class="btn-profile-redirect" onclick="window.location.href='404.html'">
                             Learn Profile <svg class="svg-micro-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
@@ -4464,7 +4538,7 @@ function initializeTestimonialsSectionMechanics() {
     
     <!-- Deep Layered Background Media Asset Frame -->
     <div class="subscribe-asset-background">
-        <img src="https://pexels.com" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
+        <img src="./assests/checkup.webp" alt="Stackly Cleanroom Operations Data Deck" class="subscribe-backing-img">
         <div class="subscribe-dark-shield"></div>
     </div>
 
@@ -4490,7 +4564,7 @@ function initializeTestimonialsSectionMechanics() {
                         <span>Please fill in the email field</span>
                     </div>
                 </div>
-                <button type="submit" class="btn-subscribe-submit">
+             <button type="submit" class="btn-subscribe-submit">
                     Sync Intelligence
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
@@ -4721,104 +4795,68 @@ function initializeTestimonialsSectionMechanics() {
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     initializeSubscriptionGateEngine();
 });
 
 function initializeSubscriptionGateEngine() {
-    const subscribeForm = document.getElementById('stacklySubscribeForm');
-    const emailInput = document.getElementById('subscriberEmailInput');
-    const errorNotice = document.getElementById('fieldWarningNode');
+
+    const subscribeForm = document.getElementById("stacklySubscribeForm");
+    const emailInput = document.getElementById("subscriberEmailInput");
+    const errorNotice = document.getElementById("fieldWarningNode");
 
     if (!subscribeForm || !emailInput || !errorNotice) return;
 
-    // Remove any active error notice display while the user keys in text characters
-    emailInput.addEventListener('input', () => {
-        if (errorNotice.classList.contains('display-active')) {
-            errorNotice.classList.remove('display-active');
-            emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
-        }
+    const errorText = errorNotice.querySelector("span");
+
+    // Hide validation message while typing
+    emailInput.addEventListener("input", () => {
+        errorNotice.classList.remove("display-active");
+        emailInput.style.borderColor = "rgba(10, 132, 145, 0.3)";
     });
 
-    subscribeForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Stop standard immediate page reload tracking parameters
+    // Form submission
+    subscribeForm.addEventListener("submit", (e) => {
+
+        e.preventDefault();
 
         const enteredValue = emailInput.value.trim();
 
-        // --- 1. Programmatic Field Completion Checks ---
+        // 1. Empty field validation
         if (enteredValue === "") {
-            // Field is completely empty
-            errorNotice.querySelector('span').innerText = "Please fill in the email field";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please fill in the email field";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // Basic structural email regex validation pattern
+        // 2. Email format validation
         const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!emailRegexPattern.test(enteredValue)) {
-            // Input string doesn't follow typical email address properties
-            errorNotice.querySelector('span').innerText = "Please enter a valid email address";
-            errorNotice.classList.add('display-active');
+
+            errorText.textContent = "Please enter a valid email address";
+
+            errorNotice.classList.add("display-active");
+
             emailInput.style.borderColor = "var(--coral-alert)";
+
             emailInput.focus();
+
             return;
         }
 
-        // --- 2. Valid Input Form Path: Fire secure medical 404 redirect overlay simulation loop ---
-        executeSecure404Redirect(enteredValue);
-        subscribeForm.reset(); // Clear memory values inside structural fields
+        // 3. Valid email - navigate directly to 404 page
+        window.location.href = "404.html";
+
     });
 }
-
-/**
- * Custom 404 Viewport Layer Launcher
- * Generates an absolute blocking layer over document body frames to safely mirror requested parameters
- */
-function executeSecure404Redirect(validatedEmailAddress) {
-    const fullScreen404Layer = document.createElement('div');
-    
-    // Core Layout Styling Definitions
-    Object.assign(fullScreen404Layer.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    fullScreen404Layer.innerHTML = `
-        <div style="max-width: 520px; background: #0e1e21; border: 1px solid #ff5c75; padding: 50px 40px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
-            <svg style="width: 56px; height: 56px; color: #ff5c75; margin-bottom: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 64px; font-weight: 800; color: #ff5c75; margin: 0 0 10px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 22px; color: #ffffff; margin-bottom: 15px; font-weight: 700;">Subscription Loop Encrypted</h3>
-            <p style="color: #7fa4a8; font-size: 14.5px; line-height: 1.6; margin-bottom: 30px;">The data verification portal path for [<strong>${validatedEmailAddress}</strong>] compiled successfully, but has completed a safety route onto a localized 404 security shield loop.</p>
-            <button id="close404PortalBtn" style="background: #00e5c1; color: #091315; border: none; padding: 14px 28px; font-size: 14px; font-weight: 700; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.2s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(fullScreen404Layer);
-    document.body.style.overflow = 'hidden'; // Lock root window scroll trackers completely
-
-    // Dismissal controller wire path
-    document.getElementById('close404PortalBtn').addEventListener('click', () => {
-        fullScreen404Layer.remove();
-        document.body.style.overflow = 'auto'; // Unlock root viewport elements
-    });
-}
-
 </script>
 
 <!-- Master Premium Footer Navigation Arena -->
@@ -4828,7 +4866,7 @@ function executeSecure404Redirect(validatedEmailAddress) {
         <!-- Column 1: Brand Info Column -->
         <div class="footer-column-cell brand-summary-cell">
             <div class="footer-logo-node" onclick="scrollToTopAndRefresh()" role="button" aria-label="Stackly Logo - Back to Top">
-                <img src="https://unsplash.com" alt="Stackly Health Logo" class="footer-logo-img">
+                <img src="./assests/health checkup logo.webp" alt="Stackly Health Logo" class="footer-logo-img">
                 
             </div>
             <p class="footer-brand-pitch">
@@ -4836,19 +4874,19 @@ function executeSecure404Redirect(validatedEmailAddress) {
             </p>
             <!-- SVG Vector Social Icons -->
             <div class="footer-social-row">
-                <a href="#404" onclick="routeToErrorPortal('social-instagram')" class="social-icon-vector" aria-label="Instagram">
+                <a href="404.html" onclick="routeToErrorPortal('social-instagram')" class="social-icon-vector" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <a href="#404" onclick="routeToErrorPortal('social-facebook')" class="social-icon-vector" aria-label="Facebook">
+                <a href="404.html" onclick="routeToErrorPortal('social-facebook')" class="social-icon-vector" aria-label="Facebook">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
-                <a href="#404" onclick="routeToErrorPortal('social-x')" class="social-icon-vector" aria-label="X Twitter">
+                <a href="404.html" onclick="routeToErrorPortal('social-x')" class="social-icon-vector" aria-label="X Twitter">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16z M4 20l6.768-6.768M20 4l-6.768 6.768"></path></svg>
                 </a>
-                <a href="#404" onclick="routeToErrorPortal('social-linkedin')" class="social-icon-vector" aria-label="LinkedIn">
+                <a href="404.html" onclick="routeToErrorPortal('social-linkedin')" class="social-icon-vector" aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 </a>
-                <a href="#404" onclick="routeToErrorPortal('social-youtube')" class="social-icon-vector" aria-label="YouTube">
+                <a href="404.html" onclick="routeToErrorPortal('social-youtube')" class="social-icon-vector" aria-label="YouTube">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                 </a>
             </div>
@@ -4858,10 +4896,10 @@ function executeSecure404Redirect(validatedEmailAddress) {
         <div class="footer-column-cell links-list-cell">
             <h4 class="footer-heading-label">Checkup Packages</h4>
             <ul class="footer-nav-links-stack">
-                <li><a href="#404" onclick="routeToErrorPortal('pkg-essential')">Essential Health Check</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('pkg-comprehensive')">Comprehensive Advanced</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('pkg-senior')">Senior Citizen Panels</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('pkg-cardiac')">Bespoke Cardiac Risk</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('pkg-essential')">Essential Health Check</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('pkg-comprehensive')">Comprehensive Advanced</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('pkg-senior')">Senior Citizen Panels</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('pkg-cardiac')">Bespoke Cardiac Risk</a></li>
             </ul>
         </div>
 
@@ -4869,10 +4907,10 @@ function executeSecure404Redirect(validatedEmailAddress) {
         <div class="footer-column-cell links-list-cell">
             <h4 class="footer-heading-label">Clinical Support</h4>
             <ul class="footer-nav-links-stack">
-                <li><a href="#404" onclick="routeToErrorPortal('support-lab-parameters')">Assay Parameters</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('support-report-tracking')">Report Tracking Nodes</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('support-faq')">Patient Help & FAQ</a></li>
-                <li><a href="#404" onclick="routeToErrorPortal('support-accreditation')">Lab Certifications</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('support-lab-parameters')">Assay Parameters</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('support-report-tracking')">Report Tracking Nodes</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('support-faq')">Patient Help & FAQ</a></li>
+                <li><a href="404.html" onclick="routeToErrorPortal('support-accreditation')">Lab Certifications</a></li>
             </ul>
         </div>
 
@@ -5171,75 +5209,38 @@ function executeSecure404Redirect(validatedEmailAddress) {
 
 </style>
 
+
 <script>
     /**
- * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
- */
-function scrollToTopAndRefresh() {
-    if (window.scrollY === 0) {
-        window.location.reload(); 
-    } else {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+     * 1. Brand Logo Back-To-Top Smooth Scroll & Refresh Action Handler
+     */
+    function scrollToTopAndRefresh() {
+        if (window.scrollY === 0) {
+            window.location.reload();
+        } else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
-        const refreshHandlerScrollCheck = () => {
-            if (window.scrollY === 0) {
-                window.removeEventListener('scroll', refreshHandlerScrollCheck);
-                window.location.reload();
-            }
-        };
-        window.addEventListener('scroll', refreshHandlerScrollCheck);
+            const refreshHandlerScrollCheck = () => {
+                if (window.scrollY === 0) {
+                    window.removeEventListener('scroll', refreshHandlerScrollCheck);
+                    window.location.reload();
+                }
+            };
+
+            window.addEventListener('scroll', refreshHandlerScrollCheck);
+        }
     }
-}
 
-/**
- * 2. 404 Security Simulation Overlay Shield Gate Routing Routine
- */
-function routeToErrorPortal(targetContextCode) {
-    console.warn(`Redirecting link token sequence safely down to fallback node path: [${targetContextCode}]`);
-
-    const secureErrorMask = document.createElement('div');
-    
-    Object.assign(secureErrorMask.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#050b0c',
-        color: '#ffffff',
-        fontFamily: "'Segoe UI', Tahoma, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: '1000000',
-        textAlign: 'center',
-        padding: '20px',
-        boxSizing: 'border-box'
-    });
-
-    secureErrorMask.innerHTML = `
-        <div style="max-width: 500px; background: #0e1e21; border: 1px solid #ff5c75; padding: 45px 35px; border-radius: 18px; box-shadow: 0 25px 50px rgba(0,0,0,0.65);">
-            <svg style="width: 60px; height: 60px; color: #ff5c75; margin-bottom: 22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            <h1 style="font-size: 56px; font-weight: 800; color: #ff5c75; margin: 0 0 8px 0; letter-spacing: -1px;">404</h1>
-            <h3 style="font-size: 20px; color: #ffffff; margin-bottom: 14px; font-weight: 700;">Diagnostic Sub-Route Locked</h3>
-            <p style="color: #7fa4a8; font-size: 14px; line-height: 1.55; margin-bottom: 25px;">The reference link parameter [<strong>${targetContextCode}</strong>] points to an offline diagnostic directory that is currently undergoing security audits.</p>
-            <button id="dismissSecureMaskBtn" style="background: #00e5c1; color: #091315; border: none; padding: 12px 26px; font-size: 14px; font-weight: 700; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,229,193,0.25); transition: transform 0.15s ease;">Return to Control Panel</button>
-        </div>
-    `;
-
-    document.body.appendChild(secureErrorMask);
-    document.body.style.overflow = 'hidden';
-
-    document.getElementById('dismissSecureMaskBtn').addEventListener('click', () => {
-        secureErrorMask.remove();
-        document.body.style.overflow = 'auto';
-    });
-}
-
+    /**
+     * 2. 404 Page Navigation Handler
+     */
+    function routeToErrorPortal(targetContextCode) {
+        window.location.href = '404.html';
+    }
 </script>
+
 </body>
 </html>
